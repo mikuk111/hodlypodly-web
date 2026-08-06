@@ -2,760 +2,712 @@
 <html lang="sk">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Hodlypodly — Bitcoin v mojich rukách</title>
 <meta name="description" content="Porozumejte Bitcoinu a spravujte svoj kapitál s istotou. Súkromne. Bezpečne. Suverénne.">
+<meta name="theme-color" content="#fbfbfd">
 <link rel="icon" type="image/png" href="assets/logo-orange.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
-  --vermilion:#F04E23;
-  --vermilion-deep:#D5401A;
-  --ink:#0B0C0D;
-  --deep:#04222B;
-  --paper:#FFFFFF;
-  --mist:#EDEDEB;
-  --text:#161719;
-  --text-soft:#4E5257;
-  --radius:14px;
-  --tile-radius:22px;
-  --max:1160px;
-  --font:'Figtree',-apple-system,'Avenir Next','Helvetica Neue',sans-serif;
+  --canvas:#fbfbfd; --paper:#f5f5f7; --ink:#1d1d1f; --gray:#6e6e73; --hair:#d2d2d7;
+  --night:#0b0c0d; --ivorydk:#f5f5f7;
+  --vermilion:#F04E23; --amber:#F0A23A;
+  --grad:linear-gradient(92deg,var(--vermilion) 0%,#F17A2C 55%,var(--amber) 100%);
+  --sans:"Manrope",-apple-system,"SF Pro Display","Helvetica Neue",system-ui,sans-serif;
+  --r:1.75rem;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{font-family:var(--font);color:var(--text);background:var(--paper);line-height:1.6;-webkit-font-smoothing:antialiased}
-img{max-width:100%;display:block}
-a{color:inherit;text-decoration:none}
-.wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+body{background:var(--canvas);color:var(--ink);font-family:var(--sans);font-weight:400;line-height:1.55;overflow-x:hidden;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+::selection{background:#fcd9c9;color:#5a2210}
+img,video{display:block;max-width:100%}
+a{color:inherit}
+.grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
 
-/* ---------- Buttons ---------- */
-.btn{display:inline-block;background:var(--vermilion);color:#fff;font-weight:700;font-size:1.02rem;
-  padding:.95em 1.9em;border-radius:10px;border:none;cursor:pointer;
-  transition:transform .25s cubic-bezier(.2,.7,.3,1),box-shadow .25s,background .25s;
-  box-shadow:0 6px 24px rgba(240,78,35,.28)}
-.btn:hover{background:var(--vermilion-deep);transform:translateY(-2px);box-shadow:0 10px 32px rgba(240,78,35,.38)}
+/* ---------- buttons ---------- */
+.btn{display:inline-flex;align-items:center;gap:.4em;background:var(--grad);color:#2a0e02;font-weight:700;
+  font-size:.98rem;padding:.9em 1.8em;border-radius:999px;border:none;cursor:pointer;text-decoration:none;
+  transition:transform .3s cubic-bezier(.2,.7,.2,1),box-shadow .3s}
+.btn:hover{transform:scale(1.045);box-shadow:0 12px 30px rgba(240,78,35,.32)}
 .btn:focus-visible{outline:3px solid var(--vermilion);outline-offset:3px}
-.btn-ghost{background:transparent;color:var(--text);border:1.5px solid #C9C9C6;box-shadow:none}
-.btn-ghost:hover{background:#F5F5F3;border-color:#9A9A96;box-shadow:none}
-.btn-note{display:block;font-size:.85rem;color:var(--text-soft);margin-top:.7em}
-.on-dark .btn-note{color:rgba(255,255,255,.75)}
+.btn-ghost{background:transparent;color:var(--ink);border:1.5px solid var(--hair);box-shadow:none}
+.btn-ghost:hover{background:rgba(0,0,0,.04);transform:none;box-shadow:none}
+.on-dark .btn-ghost{color:#fff;border-color:rgba(255,255,255,.3)}
+.on-dark .btn-ghost:hover{background:rgba(255,255,255,.08)}
+.btn-note{display:block;font-size:.83rem;color:var(--gray);margin-top:.8em}
+.on-dark .btn-note{color:rgba(245,245,247,.65)}
 
-/* ---------- Header ---------- */
-header{position:fixed;inset:0 0 auto 0;z-index:60;padding:20px 0;
-  transition:background .4s,backdrop-filter .4s,padding .4s}
-header.solid{background:rgba(255,255,255,.86);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
-  padding:12px 0;box-shadow:0 1px 0 rgba(0,0,0,.06)}
-.nav{display:flex;align-items:center;justify-content:space-between}
-.nav .logo{height:30px}
-.nav .logo-w{position:absolute}
-header.solid .logo-w{opacity:0}
-header:not(.solid) .logo-o{opacity:0}
-.nav-links{display:flex;gap:26px;font-weight:600;font-size:.95rem;color:#fff;transition:color .4s}
-header.solid .nav-links{color:var(--text)}
-.nav-links a{opacity:.85;transition:opacity .2s}
-.nav-links a:hover{opacity:1}
-@media(max-width:820px){.nav-links{display:none}}
+/* ---------- nav: glass pill ---------- */
+nav{position:fixed;top:0;left:0;right:0;z-index:60;display:flex;align-items:center;justify-content:space-between;
+  gap:1rem;padding:.9rem clamp(1.2rem,4vw,3rem);transition:background .45s ease}
+nav::before{content:"";position:absolute;inset:0;backdrop-filter:saturate(1.8) blur(18px);-webkit-backdrop-filter:saturate(1.8) blur(18px);
+  background:rgba(251,251,253,0);transition:background .45s ease;pointer-events:none}
+nav.solid::before{background:rgba(251,251,253,.72)}
+nav.on-dark.solid::before{background:rgba(11,12,13,.55)}
+nav>*{position:relative}
+.brand{display:flex;align-items:center;gap:.5rem;text-decoration:none}
+.brand img{height:26px;transition:opacity .3s}
+.brand .lw{position:absolute}
+nav.solid .lw{opacity:0}
+nav:not(.solid) .lo{opacity:0}
+.navlinks{display:flex;gap:.2rem;align-items:center;border:1px solid rgba(0,0,0,.08);background:rgba(251,251,253,.55);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-radius:999px;padding:.3rem;transition:background .45s,border-color .45s}
+nav.on-dark .navlinks{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.14)}
+.navlinks a{font-size:.8rem;font-weight:600;color:#424245;text-decoration:none;padding:.42rem .95rem;border-radius:999px;transition:color .3s,background .3s}
+.navlinks a:hover{background:rgba(0,0,0,.06);color:var(--ink)}
+nav.on-dark .navlinks a{color:rgba(245,245,247,.8)}
+nav.on-dark .navlinks a:hover{background:rgba(255,255,255,.12);color:#fff}
+.nav-cta{display:inline-flex;align-items:center;background:var(--grad);color:#2a0e02!important;border-radius:999px;
+  padding:.55rem 1.15rem;font-weight:700;font-size:.8rem;text-decoration:none;transition:transform .25s,box-shadow .25s}
+.nav-cta:hover{transform:scale(1.05);box-shadow:0 8px 26px rgba(240,78,35,.35)}
+@media(max-width:820px){.navlinks{display:none}}
 
-/* ---------- SCRUB SECTIONS (generic) ---------- */
-.scrub{position:relative;background:var(--deep)}
+/* ---------- scrub sections ---------- */
+.scrub{position:relative;background:var(--night)}
 .scrub-sticky{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
-.sc-media{position:absolute;inset:0}
-.sc-media video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .8s}
-.sc-media video.on{opacity:1}
-.sc-poster{position:absolute;inset:0}
-.poster-hero{background:
-  radial-gradient(120% 90% at 70% 0%,rgba(240,120,35,.30),transparent 55%),
-  radial-gradient(90% 80% at 20% 100%,rgba(6,60,72,.9),transparent 60%),
-  linear-gradient(180deg,#06333F 0%,#04222B 55%,#02161C 100%)}
-.poster-coin{background:
-  radial-gradient(70% 60% at 50% 55%,rgba(240,110,35,.28),transparent 60%),
-  linear-gradient(180deg,#111213 0%,#050506 100%)}
-.poster-ascent{background:
-  radial-gradient(120% 80% at 50% 0%,rgba(250,160,60,.38),transparent 55%),
-  linear-gradient(180deg,#0A4552 0%,#04222B 70%,#02161C 100%)}
-.sc-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(2,18,23,.5) 0%,rgba(2,18,23,.12) 35%,rgba(2,18,23,.12) 60%,rgba(2,18,23,.66) 100%)}
-.scrub-coin .sc-shade{background:linear-gradient(180deg,rgba(0,0,0,.45),rgba(0,0,0,.1) 40%,rgba(0,0,0,.55))}
-.sc-phase{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;
-  text-align:center;color:#fff;padding:0 24px;opacity:0;transform:translateY(26px);will-change:opacity,transform;pointer-events:none}
-.sc-phase .h1{font-size:clamp(2.2rem,5.4vw,4.4rem);font-weight:800;line-height:1.12;letter-spacing:-0.02em;max-width:18ch}
-.sc-phase .h2s{font-size:clamp(1.8rem,4vw,3.2rem);font-weight:800;line-height:1.15;letter-spacing:-0.018em;max-width:20ch}
-.sc-phase .sub{font-size:clamp(1.05rem,1.8vw,1.4rem);font-weight:500;color:rgba(255,255,255,.85);margin-top:1.1em;max-width:40ch}
-.sc-phase .btn{margin-top:2em}
-.sc-phase .accent{color:var(--vermilion)}
-.sc-phase .logo-mark{height:40px;margin-bottom:2em}
-.scroll-hint{position:absolute;bottom:34px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.65);
-  font-size:.82rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;display:flex;flex-direction:column;align-items:center;gap:10px;transition:opacity .5s}
-.scroll-hint::after{content:'';width:1.5px;height:38px;background:linear-gradient(180deg,rgba(255,255,255,.7),transparent);
-  animation:hint 2s ease-in-out infinite}
-@keyframes hint{0%,100%{transform:scaleY(.4);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}}
+.scrub-sticky video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .6s}
+.scrub-sticky video.on{opacity:1}
+.scrub-poster{position:absolute;inset:0}
+.poster-hero{background:radial-gradient(120% 90% at 70% 0%,rgba(240,120,35,.28),transparent 55%),radial-gradient(90% 80% at 20% 100%,rgba(6,60,72,.85),transparent 60%),linear-gradient(180deg,#0c2b33 0%,#0b1618 55%,#050708 100%)}
+.poster-coin{background:radial-gradient(70% 60% at 50% 55%,rgba(240,110,35,.26),transparent 60%),linear-gradient(180deg,#111213 0%,#050506 100%)}
+.poster-ascent{background:radial-gradient(120% 80% at 50% 0%,rgba(250,160,60,.34),transparent 55%),linear-gradient(180deg,#123038 0%,#0b1618 70%,#050708 100%)}
+.scrub-veil{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(5,7,8,.4),rgba(5,7,8,0) 28%,rgba(5,7,8,.1) 55%,rgba(5,7,8,.72) 82%);pointer-events:none}
+.msg{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;
+  text-align:center;padding:0 clamp(1.4rem,6vw,6rem) clamp(5.5rem,14vh,9.5rem);color:var(--ivorydk);opacity:0;
+  will-change:transform,opacity;pointer-events:none}
+.msg .tag{font-size:.78rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(245,245,247,.72);margin-bottom:1.2rem}
+.msg h1,.msg .big{font-weight:800;letter-spacing:-.035em;line-height:1.04;font-size:clamp(2.2rem,6.2vw,4.6rem);max-width:17ch;text-wrap:balance;text-shadow:0 2px 34px rgba(0,0,0,.5)}
+.msg p{margin-top:1.1rem;max-width:52ch;font-size:clamp(.98rem,1.4vw,1.2rem);color:rgba(245,245,247,.9);text-wrap:balance;text-shadow:0 1px 20px rgba(0,0,0,.55)}
+.msg .accent{color:var(--amber)}
+.scroll-hint{position:absolute;left:50%;bottom:1.7rem;transform:translateX(-50%);z-index:5;font-size:.72rem;
+  font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:rgba(245,245,247,.65);animation:bob 2.4s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,8px)}}
 
-/* ---------- Sections base ---------- */
-section{padding:110px 0}
-.eyebrow{display:inline-block;font-size:.8rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--vermilion);margin-bottom:1.2em}
-h2{font-size:clamp(1.7rem,3.4vw,2.5rem);font-weight:800;line-height:1.2;letter-spacing:-0.015em}
-h2 .soft{color:var(--text-soft);font-weight:600}
+/* ---------- light sections ---------- */
+section.light{padding:clamp(5.5rem,11vw,9rem) clamp(1.4rem,6vw,6rem)}
+.narrow{max-width:1120px;margin:0 auto}
 .center{text-align:center}
-.lead{font-size:1.12rem;color:var(--text-soft);max-width:62ch}
-.center .lead{margin:1.2em auto 0}
+.eyebrow{font-size:.8rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--vermilion);margin-bottom:1.2rem}
+h2{font-weight:800;letter-spacing:-.03em;line-height:1.08;font-size:clamp(1.9rem,5vw,3.4rem);max-width:24ch;text-wrap:balance;margin:0 auto .9rem}
+.lead{color:var(--gray);font-size:clamp(1.02rem,1.5vw,1.22rem);max-width:62ch;margin:0 auto;text-wrap:balance}
+.lead b{color:var(--ink);font-weight:600}
 
-/* reveal on scroll */
-.rv{opacity:0;transform:translateY(34px);transition:opacity .9s cubic-bezier(.2,.65,.3,1),transform .9s cubic-bezier(.2,.65,.3,1)}
-.rv.in{opacity:1;transform:none}
-.rv-d1{transition-delay:.12s}.rv-d2{transition-delay:.24s}.rv-d3{transition-delay:.36s}
-
-/* ---------- Problém ---------- */
-.problem-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:center;margin-top:64px}
-.card-orange{background:var(--vermilion);color:#fff;border-radius:var(--radius);padding:44px 40px;
-  box-shadow:0 24px 60px rgba(240,78,35,.30)}
-.card-orange p{margin-bottom:1.4em}
+/* problem card */
+.problem-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:2.6rem;align-items:center;margin-top:3.6rem;text-align:left}
+.card-orange{background:var(--grad);color:#fff;border-radius:var(--r);padding:2.6rem 2.4rem;box-shadow:0 24px 60px rgba(240,78,35,.26)}
+.card-orange p{margin-bottom:1.3em}
 .card-orange p:last-child{margin-bottom:0}
-.card-orange strong{display:block;font-weight:800;font-size:1.06rem;margin-bottom:.2em}
-.card-orange span{color:rgba(255,255,255,.88)}
-.problem-side{font-size:clamp(1.3rem,2.2vw,1.7rem);font-weight:700;line-height:1.35;letter-spacing:-0.01em}
-@media(max-width:880px){.problem-grid{grid-template-columns:1fr;gap:40px}}
+.card-orange strong{display:block;font-weight:800;font-size:1.04rem;margin-bottom:.2em}
+.card-orange span{color:rgba(255,255,255,.9)}
+.problem-side{font-size:clamp(1.25rem,2.1vw,1.6rem);font-weight:700;line-height:1.35;letter-spacing:-.01em}
+@media(max-width:880px){.problem-grid{grid-template-columns:1fr;gap:2rem}}
 
-/* ---------- BENTO ---------- */
-.bento{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:190px;gap:18px;margin-top:64px}
-.tile{border-radius:var(--tile-radius);padding:32px;position:relative;overflow:hidden;display:flex;flex-direction:column;
-  justify-content:flex-end;background:var(--mist);transition:transform .45s cubic-bezier(.2,.7,.3,1),box-shadow .45s}
-.tile:hover{transform:translateY(-5px);box-shadow:0 24px 60px rgba(0,0,0,.14)}
-.tile h3{font-size:1.25rem;font-weight:800;letter-spacing:-0.01em;line-height:1.25}
-.tile p{color:var(--text-soft);font-size:.94rem;margin-top:.4em}
-.tile .t-eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--vermilion);margin-bottom:auto}
-.tile .t-link{margin-top:1.1em;font-weight:700;font-size:.92rem;color:var(--vermilion)}
-.tile .t-link::after{content:' →';transition:margin .2s}
-.tile:hover .t-link::after{margin-left:4px}
-.tile-2w{grid-column:span 2}
-.tile-2h{grid-row:span 2}
-.tile img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
-.tile .over{position:relative;z-index:2}
-.tile-dark{background:var(--deep);color:#fff}
-.tile-dark p{color:rgba(255,255,255,.78)}
-.tile-dark h3{color:#fff}
-.tile-orange{background:var(--vermilion);color:#fff;box-shadow:0 16px 44px rgba(240,78,35,.3)}
-.tile-orange p{color:rgba(255,255,255,.88)}
-.tile-orange .t-eyebrow{color:#fff;opacity:.85}
-.tile-orange .t-link{color:#fff}
-.tile-img::before{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,transparent 35%,rgba(0,0,0,.68))}
-.tile-img h3,.tile-img p{color:#fff;position:relative;z-index:2}
-.tile-img p{color:rgba(255,255,255,.85)}
-.tile-price{font-size:2.2rem;font-weight:800;letter-spacing:-0.02em;line-height:1}
-.tile-price small{font-size:.95rem;font-weight:600;color:var(--text-soft);text-decoration:line-through;margin-right:.4em}
-.tile-badge{position:absolute;top:24px;right:24px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);
-  color:#fff;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.45em 1em;border-radius:99px;z-index:2}
-.tile-logo{align-items:center;justify-content:center;background:#0B0C0D}
-.tile-logo img{height:44px}
-.socials{display:flex;gap:12px;margin-top:1em}
-.socials a{width:38px;height:38px;border-radius:50%;border:1.5px solid rgba(255,255,255,.4);display:flex;
-  align-items:center;justify-content:center;font-size:.72rem;font-weight:800;letter-spacing:.02em;transition:background .2s,border-color .2s}
+/* ---------- bento tiles ---------- */
+.bento{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:200px;gap:1rem;margin-top:3.6rem;text-align:left}
+.tile{position:relative;border-radius:var(--r);overflow:hidden;background:var(--paper);
+  transition:transform .4s cubic-bezier(.2,.7,.2,1),box-shadow .4s;text-decoration:none;color:inherit;display:block}
+.tile:hover{transform:scale(1.015);box-shadow:0 24px 60px rgba(0,0,0,.12);z-index:2}
+.tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.tile-badge{position:absolute;top:1.3rem;right:1.3rem;z-index:2;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.28);
+  color:#fff;font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.4em .9em;border-radius:999px}
+.tile .shade{position:absolute;inset:0;z-index:1;background:linear-gradient(to top,rgba(0,0,0,.65),transparent 55%)}
+.tile-cap{position:relative;z-index:2;padding:1.6rem;height:100%;display:flex;flex-direction:column;justify-content:flex-end}
+.tile-cap .tv{font-weight:800;letter-spacing:-.03em;font-size:clamp(1.5rem,2.2vw,2rem);line-height:1.05}
+.tile-cap h3{font-size:1.05rem;font-weight:800;letter-spacing:-.015em;line-height:1.25}
+.tile-cap p{font-size:.86rem;margin-top:.35rem;opacity:.85}
+.tile.img h3,.tile.img p{color:#fff}
+.tile.plain{padding:1.7rem;display:flex;flex-direction:column;justify-content:flex-end}
+.tile.plain h3{color:var(--ink)}
+.tile.plain p{color:var(--gray)}
+.tile.dark{background:var(--night)}
+.tile.dark .tile-cap h3,.tile.dark .tv{color:#fff}
+.tile.dark .tile-cap p{color:rgba(245,245,247,.68)}
+.tile.grad{background:var(--grad)}
+.tile.grad .tile-cap h3,.tile.grad .tv{color:#fff}
+.tile.grad .tile-cap p{color:rgba(255,255,255,.88)}
+.tile.t-2x2{grid-column:span 2;grid-row:span 2}
+.tile.t-2x1{grid-column:span 2}
+.t-link{margin-top:.9rem;font-weight:700;font-size:.86rem}
+.t-link::after{content:" →";transition:margin .2s}
+.tile:hover .t-link::after{margin-left:5px}
+.socials{display:flex;gap:.6rem;margin-top:.9rem}
+.socials a{width:2.2rem;height:2.2rem;border-radius:50%;border:1.5px solid rgba(255,255,255,.4);display:flex;
+  align-items:center;justify-content:center;font-size:.66rem;font-weight:800;color:#fff;text-decoration:none;transition:background .2s,border-color .2s}
 .socials a:hover{background:var(--vermilion);border-color:var(--vermilion)}
-@media(max-width:980px){.bento{grid-template-columns:repeat(2,1fr);grid-auto-rows:180px}}
-@media(max-width:560px){.bento{grid-template-columns:1fr;grid-auto-rows:auto}.tile{min-height:180px}.tile-2h{grid-row:span 1}.tile-2w{grid-column:span 1}}
+@media(max-width:980px){.bento{grid-template-columns:repeat(2,1fr);grid-auto-rows:190px}}
+@media(max-width:540px){.bento{grid-template-columns:1fr;grid-auto-rows:210px}.tile.t-2x2,.tile.t-2x1{grid-column:span 1}.tile.t-2x2{grid-row:span 2}}
 
-/* ---------- O Robertovi ---------- */
-.about{background:var(--mist);border-radius:24px;overflow:hidden}
+/* ---------- about ---------- */
+.about{background:var(--paper);border-radius:calc(var(--r)*1.25);overflow:hidden}
 .about-grid{display:grid;grid-template-columns:1fr 1fr;align-items:stretch}
-.about-text{padding:72px 64px;display:flex;flex-direction:column;justify-content:center}
-.about-text p{margin-bottom:1.15em;color:var(--text-soft)}
-.about-text p strong{color:var(--text)}
-.about-sign{margin-top:1.2em;font-weight:700;line-height:1.45}
-.about-sign small{display:block;font-weight:600;color:var(--text-soft)}
-.about-photo{position:relative;min-height:520px}
+.about-text{padding:4.6rem 4rem;display:flex;flex-direction:column;justify-content:center;text-align:left}
+.about-text p{margin-bottom:1.1em;color:var(--gray)}
+.about-text p strong{color:var(--ink)}
+.about-sign{margin-top:1.1em;font-weight:700;line-height:1.45;color:var(--ink)!important}
+.about-sign small{display:block;font-weight:600;color:var(--gray)}
+.about-photo{position:relative;min-height:480px}
 .about-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 18%}
-@media(max-width:880px){.about-grid{grid-template-columns:1fr}.about-text{padding:48px 32px}.about-photo{min-height:420px}}
+@media(max-width:880px){.about-grid{grid-template-columns:1fr}.about-text{padding:3rem 2rem}.about-photo{min-height:380px}}
 
-/* ---------- Story video ---------- */
-.story-frame{position:relative;border-radius:var(--radius);overflow:hidden;margin-top:56px;aspect-ratio:16/9;
-  box-shadow:0 30px 80px rgba(0,0,0,.22);background:#111;display:block}
-.story-frame img{width:100%;height:100%;object-fit:cover;object-position:center 30%;opacity:.92}
+/* ---------- story video ---------- */
+.story-frame{position:relative;border-radius:calc(var(--r)*1.25);overflow:hidden;margin-top:3.6rem;aspect-ratio:16/9;
+  box-shadow:0 30px 80px rgba(0,0,0,.18);background:#111;display:block}
+.story-frame img{width:100%;height:100%;object-fit:cover;object-position:center 30%;opacity:.9}
 .story-play{position:absolute;inset:0;display:flex;align-items:flex-end;justify-content:center;padding-bottom:9%;
-  background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,.35))}
-.story-badge{background:var(--vermilion);color:#fff;font-weight:700;font-size:clamp(1rem,2vw,1.5rem);
-  padding:.7em 1.6em;border-radius:8px;box-shadow:0 12px 36px rgba(0,0,0,.35)}
+  background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,.4))}
+.story-badge{background:var(--grad);color:#fff;font-weight:700;font-size:clamp(1rem,2vw,1.4rem);padding:.75em 1.6em;
+  border-radius:999px;box-shadow:0 12px 36px rgba(0,0,0,.3)}
 
-/* ---------- Webinár ---------- */
-.webinar{background:var(--deep);color:#fff;position:relative;overflow:hidden}
-.webinar::before{content:'';position:absolute;inset:0;
-  background:radial-gradient(110% 80% at 85% 8%,rgba(240,110,35,.22),transparent 55%),
-             radial-gradient(80% 70% at 8% 95%,rgba(10,80,95,.55),transparent 60%);pointer-events:none}
-.webinar .wrap{position:relative}
+/* ---------- webinár ---------- */
+.webinar{background:var(--night);color:#fff;position:relative;overflow:hidden;border-radius:calc(var(--r)*1.25)}
+.webinar::before{content:'';position:absolute;inset:0;background:radial-gradient(110% 80% at 85% 8%,rgba(240,110,35,.2),transparent 55%),radial-gradient(80% 70% at 8% 95%,rgba(240,162,58,.14),transparent 60%);pointer-events:none}
+.webinar-in{position:relative;padding:4.2rem clamp(1.8rem,4vw,4.5rem)}
 .webinar h2{color:#fff}
-.webinar .lead{color:rgba(255,255,255,.82)}
-.web-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:64px;margin-top:60px;align-items:center}
-.web-list{list-style:none;display:flex;flex-direction:column;gap:18px}
-.web-list li{display:flex;gap:16px;align-items:flex-start;font-size:1.05rem;color:rgba(255,255,255,.92)}
-.web-list li::before{content:'';flex:0 0 10px;height:10px;border-radius:50%;background:var(--vermilion);margin-top:.55em;
-  box-shadow:0 0 0 5px rgba(240,78,35,.18)}
-.web-cta{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:var(--radius);
-  padding:40px 36px;backdrop-filter:blur(6px);text-align:center}
-.web-cta p{color:rgba(255,255,255,.8);margin-bottom:1.6em}
-@media(max-width:880px){.web-grid{grid-template-columns:1fr;gap:44px}}
+.webinar .lead{color:rgba(245,245,247,.78)}
+.web-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:3.2rem;margin-top:3rem;align-items:center;text-align:left}
+.web-list{list-style:none;display:flex;flex-direction:column;gap:1rem}
+.web-list li{display:flex;gap:.9rem;align-items:flex-start;font-size:1.02rem;color:rgba(245,245,247,.92)}
+.web-list li::before{content:'';flex:0 0 9px;height:9px;border-radius:50%;background:var(--grad);margin-top:.5em;box-shadow:0 0 0 4px rgba(240,78,35,.18)}
+.web-cta{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:var(--r);padding:2.2rem 2rem;backdrop-filter:blur(6px);text-align:center}
+.web-cta p{color:rgba(245,245,247,.75);margin-bottom:1.5em}
+@media(max-width:880px){.web-grid{grid-template-columns:1fr;gap:2.4rem}}
 
-/* ---------- Kurz ---------- */
-.course-card{background:var(--mist);border-radius:22px;padding:64px;margin-top:56px;
-  display:grid;grid-template-columns:1.4fr .8fr;gap:56px;align-items:center}
-.course-card h3{font-size:clamp(1.4rem,2.6vw,1.9rem);font-weight:800;letter-spacing:-0.01em;line-height:1.25}
-.course-card .sub{color:var(--text-soft);margin-top:.5em}
-.course-points{margin-top:2em;display:flex;flex-direction:column;gap:1.1em}
+/* ---------- kurz ---------- */
+.course-card{background:var(--paper);border-radius:calc(var(--r)*1.25);padding:3.6rem;margin-top:3.6rem;
+  display:grid;grid-template-columns:1.4fr .8fr;gap:3rem;align-items:center;text-align:left}
+.course-card h3{font-size:clamp(1.35rem,2.4vw,1.8rem);font-weight:800;letter-spacing:-.015em;line-height:1.25}
+.course-card .sub{color:var(--gray);margin-top:.5em}
+.course-points{margin-top:1.8em;display:flex;flex-direction:column;gap:1em}
 .course-points strong{display:block}
-.course-points span{color:var(--text-soft)}
-.price-box{text-align:center;background:#fff;border-radius:var(--radius);padding:40px 32px;box-shadow:0 16px 44px rgba(0,0,0,.08)}
-.price-old{color:var(--text-soft);text-decoration:line-through;font-size:1.2rem;font-weight:600}
-.price-now{font-size:3rem;font-weight:800;letter-spacing:-0.02em;line-height:1.1}
-.price-dph{font-size:.85rem;color:var(--text-soft);margin:.4em 0 1.6em}
-.price-note{font-size:.85rem;color:var(--text-soft);margin-top:1.4em;line-height:1.5}
-@media(max-width:880px){.course-card{grid-template-columns:1fr;padding:44px 32px}}
+.course-points span{color:var(--gray)}
+.price-box{text-align:center;background:#fff;border-radius:var(--r);padding:2.2rem 1.8rem;box-shadow:0 16px 44px rgba(0,0,0,.07)}
+.price-old{color:var(--gray);text-decoration:line-through;font-size:1.15rem;font-weight:600}
+.price-now{font-weight:800;letter-spacing:-.03em;font-size:2.8rem;line-height:1.1}
+.price-dph{font-size:.83rem;color:var(--gray);margin:.4em 0 1.5em}
+.price-note{font-size:.82rem;color:var(--gray);margin-top:1.3em;line-height:1.5}
+@media(max-width:880px){.course-card{grid-template-columns:1fr;padding:2.6rem 2rem}}
 
-/* ---------- Testimonials ---------- */
-.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px}
-.testi{background:#fff;border:1px solid #E3E3E0;border-radius:var(--radius);padding:32px 28px;
-  display:flex;flex-direction:column;gap:20px;transition:transform .3s,box-shadow .3s}
-.testi:hover{transform:translateY(-4px);box-shadow:0 18px 44px rgba(0,0,0,.09)}
-.testi p{color:var(--text-soft);font-size:.98rem}
+/* ---------- testimonials ---------- */
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:3.6rem;text-align:left}
+.testi{background:var(--paper);border-radius:var(--r);padding:1.9rem 1.7rem;display:flex;flex-direction:column;gap:1.2rem;
+  transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s}
+.testi:hover{transform:translateY(-5px);box-shadow:0 20px 46px rgba(0,0,0,.08)}
+.testi p{color:var(--gray);font-size:.96rem}
 .testi strong{font-weight:700}
-.testi strong small{display:block;font-weight:600;color:var(--text-soft);font-size:.85rem}
+.testi strong small{display:block;font-weight:600;color:var(--gray);font-size:.83rem}
 @media(max-width:880px){.testi-grid{grid-template-columns:1fr}}
 
 /* ---------- FAQ ---------- */
-.faq{max-width:760px;margin:56px auto 0}
-.faq details{border-bottom:1px solid #E3E3E0;padding:6px 0}
-.faq summary{cursor:pointer;font-weight:700;font-size:1.05rem;padding:18px 40px 18px 0;position:relative;list-style:none}
+.faq{max-width:760px;margin:3.4rem auto 0;text-align:left}
+.faq details{border-bottom:1px solid var(--hair);padding:.4rem 0}
+.faq summary{cursor:pointer;font-weight:700;font-size:1.03rem;padding:1.1rem 2.4rem 1.1rem 0;position:relative;list-style:none}
 .faq summary::-webkit-details-marker{display:none}
-.faq summary::after{content:'+';position:absolute;right:4px;top:50%;transform:translateY(-50%);
+.faq summary::after{content:'+';position:absolute;right:.2rem;top:50%;transform:translateY(-50%);
   font-size:1.5rem;font-weight:400;color:var(--vermilion);transition:transform .3s}
 .faq details[open] summary::after{transform:translateY(-50%) rotate(45deg)}
-.faq .a{padding:0 0 22px;color:var(--text-soft)}
+.faq .a{padding:0 0 1.3rem;color:var(--gray)}
 
-/* ---------- Komunita ---------- */
-.community .lead{margin-top:1.4em}
-.community-photo{margin-top:56px;border-radius:22px;overflow:hidden;box-shadow:0 30px 70px rgba(0,0,0,.16)}
-.community-photo img{width:100%;height:460px;object-fit:cover;object-position:center 30%}
-@media(max-width:700px){.community-photo img{height:320px}}
+/* ---------- manifest ---------- */
+.claim{font-weight:700;letter-spacing:-.025em;line-height:1.22;font-size:clamp(1.5rem,3.2vw,2.4rem);max-width:26ch;margin:0 auto;color:rgba(245,245,247,.65);text-wrap:balance}
+.claim b{color:#fff;font-weight:700}
 
-/* ---------- Final CTA ---------- */
-.final{background:var(--mist);text-align:center}
-.final small{display:block;margin-top:1.4em;color:var(--text-soft)}
+/* ---------- horizontal rail: krátke pohľady ---------- */
+.hscroll{position:relative;background:var(--canvas)}
+.hs-sticky{position:sticky;top:0;height:100vh;height:100svh;display:flex;flex-direction:column;justify-content:center;
+  gap:clamp(1.6rem,3.5vh,2.4rem);overflow:hidden;padding:4rem 0 2.2rem}
+.hs-head{text-align:center;padding:0 clamp(1.4rem,6vw,6rem)}
+.hrail{display:flex;gap:1.1rem;padding:0 10vw;align-items:stretch;will-change:transform}
+.hcard{flex:0 0 clamp(230px,24vw,290px);background:#fff;border:1px solid var(--hair);border-radius:var(--r);
+  overflow:hidden;box-shadow:0 14px 36px rgba(0,0,0,.05);display:flex;flex-direction:column;text-align:left}
+.hcard img{width:100%;aspect-ratio:4/3;object-fit:cover}
+.hcard .hbody{padding:1.3rem 1.3rem 1.5rem}
+.hcard .views{display:inline-block;background:var(--grad);color:#fff;font-size:.7rem;font-weight:700;padding:.3em .8em;border-radius:999px;margin-bottom:.7em}
+.hcard h3{font-size:.98rem;font-weight:700;letter-spacing:-.01em;line-height:1.35}
+.hprog{height:3px;width:min(420px,60vw);margin:0 auto;background:var(--hair);border-radius:2px;overflow:hidden}
+.hprog i{display:block;height:100%;background:var(--grad);transform:scaleX(0);transform-origin:left}
+@media (prefers-reduced-motion: reduce){
+  .hscroll{height:auto!important}
+  .hs-sticky{position:static;height:auto}
+  .hrail{overflow-x:auto;transform:none!important;-webkit-overflow-scrolling:touch;padding-bottom:1rem}
+  .hprog{display:none}
+}
+@media(max-width:640px){.hcard{flex-basis:74vw}}
 
-/* ---------- Footer ---------- */
-footer{background:var(--ink);color:#B9BBBD;padding:72px 0 40px;font-size:.92rem}
-.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:44px}
-.foot-brand img{height:32px;margin-bottom:20px}
-.foot-brand p{line-height:1.55}
-.foot-brand .claim{color:#fff;font-weight:700}
-footer h4{color:#fff;font-size:.95rem;font-weight:700;margin-bottom:16px}
-.foot-col a{display:block;margin-bottom:10px;opacity:.8;transition:opacity .2s}
-.foot-col a:hover{opacity:1}
-.foot-legal{border-top:1px solid rgba(255,255,255,.12);margin-top:56px;padding-top:28px;
-  display:flex;justify-content:space-between;gap:32px;font-size:.8rem;color:#8B8E90;flex-wrap:wrap}
-.foot-legal a{text-decoration:underline;margin-right:14px}
-@media(max-width:880px){.foot-grid{grid-template-columns:1fr 1fr}}
-@media(max-width:560px){.foot-grid{grid-template-columns:1fr}.foot-legal{flex-direction:column}}
+/* ---------- komunita ---------- */
+.community-photo{margin-top:3.6rem;border-radius:calc(var(--r)*1.25);overflow:hidden;box-shadow:0 30px 70px rgba(0,0,0,.14)}
+.community-photo img{width:100%;height:440px;object-fit:cover;object-position:center 30%}
+@media(max-width:700px){.community-photo img{height:300px}}
 
-/* ---------- Reduced motion ---------- */
+/* ---------- final cta + contact ---------- */
+.contact{background:var(--night);color:var(--ivorydk);padding:clamp(5rem,10vw,8rem) clamp(1.4rem,6vw,6rem);text-align:center;border-radius:calc(var(--r)*1.25)}
+.contact h2{color:#fff}
+.contact .lead{color:rgba(245,245,247,.72)}
+.contact .btn{margin-top:2rem}
+
+footer{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;padding:3rem clamp(1.4rem,6vw,6rem) 2rem;color:var(--gray);font-size:.82rem}
+footer .fnote{max-width:640px;line-height:1.6}
+footer .flinks a{text-decoration:underline;margin-right:.9rem}
+
+/* ---------- reveal ---------- */
+.rv{opacity:0;transform:translateY(26px);transition:opacity .9s cubic-bezier(.2,.65,.2,1),transform .9s cubic-bezier(.2,.65,.2,1)}
+.rv.in{opacity:1;transform:none}
+.rv-d1{transition-delay:.1s}.rv-d2{transition-delay:.2s}.rv-d3{transition-delay:.3s}
+
+section+section{margin-top:0}
+.section-pad{padding:0 clamp(1.4rem,6vw,6rem)}
+
 @media (prefers-reduced-motion: reduce){
   .rv{opacity:1;transform:none;transition:none}
-  .scroll-hint::after{animation:none}
+  .scroll-hint{animation:none}
   html{scroll-behavior:auto}
-  .scrub{height:auto!important}
-  .scrub-sticky{position:relative;height:100vh}
-  .sc-phase{opacity:1!important;transform:none!important}
-  .sc-phase:not([data-t^="0."]):not(.rm-keep){display:none}
-  .rm-keep{display:flex!important}
+  .msg{position:static;opacity:1;transform:none;padding:4rem clamp(1.4rem,6vw,6rem)}
+  .scrub-sticky{height:auto;position:static}
 }
 </style>
 </head>
 <body>
 
-<header id="header">
-  <div class="wrap nav">
-    <a href="#" aria-label="Hodlypodly">
-      <img class="logo logo-w" src="assets/logo-white.png" alt="Hodlypodly">
-      <img class="logo logo-o" src="assets/logo-orange.png" alt="">
-    </a>
-    <nav class="nav-links">
-      <a href="#ekosystem">Kurzy</a>
-      <a href="#webinar">Webinár</a>
-      <a href="#komunita">Komunita</a>
-      <a href="#robert">O nás</a>
-      <a href="#kontakt">Kontakt</a>
-    </nav>
+<nav id="nav" class="on-dark">
+  <a class="brand" href="#top">
+    <img class="lw" src="assets/logo-white.png" alt="Hodlypodly">
+    <img class="lo" src="assets/logo-orange.png" alt="">
+  </a>
+  <div class="navlinks">
+    <a href="#ekosystem">Kurzy</a>
+    <a href="#webinar">Webinár</a>
+    <a href="#pohlady">Obsah</a>
+    <a href="#robert">O nás</a>
+    <a href="#kontakt">Kontakt</a>
   </div>
-</header>
+  <a class="nav-cta" href="#webinar">Začať zadarmo</a>
+</nav>
 
-<!-- ============ SCRUB 1 · HERO (korytnačka) ============ -->
-<div class="scrub on-dark" id="hero" data-scrub data-video="assets/hero-scrub.mp4" style="height:420vh">
+<!-- ======== SCRUB 1 · HERO ======== -->
+<div class="scrub" id="top" data-scrub data-len="440" data-src="assets/hero-scrub.mp4">
   <div class="scrub-sticky">
-    <div class="sc-media">
-      <div class="sc-poster poster-hero"></div>
-      <video muted playsinline preload="none"></video>
-    </div>
-    <div class="sc-shade"></div>
+    <div class="scrub-poster poster-hero"></div>
+    <video muted playsinline preload="none"></video>
+    <div class="scrub-veil"></div>
 
-    <div class="sc-phase rm-keep" data-t="0,0.02,0.24,0.34">
-      <h1 class="h1">Bitcoin v mojich rukách.</h1>
+    <div class="msg">
+      <p class="big">Bitcoin v mojich rukách.</p>
     </div>
-    <div class="sc-phase" data-t="0.30,0.40,0.58,0.68">
-      <p class="h1">Súkromne. Bezpečne.<br>Suverénne.</p>
+    <div class="msg">
+      <p class="big">Súkromne. Bezpečne.<br>Suverénne.</p>
     </div>
-    <div class="sc-phase" data-t="0.64,0.76,1.01,1.02">
-      <p class="h2s">Porozumejte Bitcoinu a spravujte<br>svoj kapitál s istotou.</p>
-      <a class="btn" href="#webinar">Začať správne s Bitcoinom</a>
+    <div class="msg">
+      <p class="big" style="font-size:clamp(1.7rem,3.6vw,2.9rem)">Porozumejte Bitcoinu a spravujte<br>svoj kapitál s istotou.</p>
+      <a class="btn" href="#webinar" style="margin-top:1.8rem">Začať správne s Bitcoinom</a>
       <span class="btn-note">Bezplatný úvodný webinár.</span>
     </div>
 
-    <div class="scroll-hint sc-hint">Skrolujte</div>
+    <div class="scroll-hint">Skrolujte</div>
   </div>
 </div>
 
-<!-- ============ PROBLÉM ============ -->
-<section>
-  <div class="wrap">
-    <div class="center rv">
-      <h2>Dnešný finančný systém mení pravidlá.<br><span class="soft">Nie vždy vo váš prospech.</span></h2>
+<!-- ======== PROBLÉM ======== -->
+<section class="light">
+  <div class="narrow center rv">
+    <span class="eyebrow">Prečo teraz</span>
+    <h2>Dnešný finančný systém mení pravidlá. <span style="color:var(--gray);font-weight:600">Nie vždy vo váš prospech.</span></h2>
+  </div>
+  <div class="narrow problem-grid">
+    <div class="card-orange rv">
+      <p><strong>Inflácia postupne znižuje kúpnu silu peňazí.</strong>
+      <span>Aj keď rastú príjmy, hodnota kapitálu môže klesať.</span></p>
+      <p><strong>Finančný systém určuje pravidlá prístupu k peniazom.</strong>
+      <span>Limity, regulácie či zmrazenie účtov nie sú len teória.</span></p>
+      <p><strong>Skutočné vlastníctvo znamená kontrolu.</strong>
+      <span>Nie každý majetok dnes poskytuje slobodu rozhodovať.</span></p>
     </div>
-    <div class="problem-grid">
-      <div class="card-orange rv">
-        <p><strong>Inflácia postupne znižuje kúpnu silu peňazí.</strong>
-        <span>Aj keď rastú príjmy, hodnota kapitálu môže klesať.</span></p>
-        <p><strong>Finančný systém určuje pravidlá prístupu k peniazom.</strong>
-        <span>Limity, regulácie či zmrazenie účtov nie sú len teória.</span></p>
-        <p><strong>Skutočné vlastníctvo znamená kontrolu.</strong>
-        <span>Nie každý majetok dnes poskytuje slobodu rozhodovať.</span></p>
-      </div>
-      <p class="problem-side rv rv-d1">Rastie záujem o kapitál, ktorý môže byť skutočne vo vašich rukách.</p>
-    </div>
+    <p class="problem-side rv rv-d1">Rastie záujem o kapitál, ktorý môže byť skutočne vo vašich rukách.</p>
   </div>
 </section>
 
-<!-- ============ SCRUB 2 · MINCA (vlastníctvo) ============ -->
-<div class="scrub scrub-coin on-dark" data-scrub data-video="assets/coin-scrub.mp4" style="height:360vh;background:#050506">
+<!-- ======== SCRUB 2 · MINCA ======== -->
+<div class="scrub" data-scrub data-len="360" data-src="assets/coin-scrub.mp4" style="background:#050506">
   <div class="scrub-sticky">
-    <div class="sc-media">
-      <div class="sc-poster poster-coin"></div>
-      <video muted playsinline preload="none"></video>
-    </div>
-    <div class="sc-shade"></div>
+    <div class="scrub-poster poster-coin"></div>
+    <video muted playsinline preload="none"></video>
+    <div class="scrub-veil"></div>
 
-    <div class="sc-phase rm-keep" data-t="0,0.03,0.26,0.36">
-      <p class="h2s">Nákup Bitcoinu je len začiatok.</p>
-    </div>
-    <div class="sc-phase" data-t="0.32,0.42,0.60,0.70">
-      <p class="h2s">Rozhoduje spôsob,<br>akým ho <span class="accent">držíte</span>.</p>
-    </div>
-    <div class="sc-phase" data-t="0.66,0.78,1.01,1.02">
-      <p class="h2s">Skutočné vlastníctvo<br>znamená kontrolu.</p>
-      <p class="sub">Vo vlastných rukách. Pod vlastnou kontrolou. Bez sprostredkovateľov.</p>
+    <div class="msg"><p class="big">Nákup Bitcoinu je len začiatok.</p></div>
+    <div class="msg"><p class="big">Rozhoduje spôsob,<br>akým ho <span class="accent">držíte</span>.</p></div>
+    <div class="msg">
+      <p class="big">Skutočné vlastníctvo<br>znamená kontrolu.</p>
+      <p>Vo vlastných rukách. Pod vlastnou kontrolou. Bez sprostredkovateľov.</p>
     </div>
   </div>
 </div>
 
-<!-- ============ BENTO · EKOSYSTÉM ============ -->
-<section id="ekosystem">
-  <div class="wrap">
-    <div class="center rv">
-      <span class="eyebrow">Čo je Hodlypodly</span>
-      <h2>Jedna cesta. Všetko, čo na ňu potrebujete.</h2>
-      <p class="lead">Od prvého porozumenia až po dlhodobú istotu — vzdelávanie, nástroje a komunita v jednom prostredí.</p>
-    </div>
-
-    <div class="bento">
-      <!-- Webinár: veľká tmavá dlaždica -->
-      <a class="tile tile-dark tile-2w tile-2h rv" href="#webinar">
-        <span class="tile-badge">Zadarmo</span>
-        <span class="t-eyebrow">Začnite tu · Online webinár</span>
-        <div>
-          <h3>Ako mať kapitál skutočne vo vlastných rukách v ére Bitcoinu.</h3>
-          <p>60 minút o správnom držaní Bitcoinu, najčastejších chybách a dlhodobom premýšľaní. V menšej skupine, s priestorom na otázky.</p>
-          <span class="t-link">Rezervovať miesto</span>
-        </div>
-      </a>
-
-      <!-- Kurz -->
-      <a class="tile tile-2h rv rv-d1" href="#kurz">
-        <span class="t-eyebrow">Prvý kurz</span>
-        <div>
-          <h3>Bitcoin od nuly</h3>
-          <p>Začnite bez chaosu a chýb. Bezpečný nákup a držanie, krok za krokom.</p>
-          <p class="tile-price" style="margin-top:.8em"><small>197 €</small>147 €</p>
-          <span class="t-link">Viac o kurze</span>
-        </div>
-      </a>
-
-      <!-- Hardvér / bezpečnosť: obrázková -->
-      <div class="tile tile-img rv rv-d2">
-        <img class="bg" src="assets/tile-wallet.jpg" alt="" loading="lazy">
-        <h3>Bezpečné držanie</h3>
-        <p>Hardvérové peňaženky prakticky a zrozumiteľne.</p>
-      </div>
-
-      <!-- Komunita: oranžová -->
-      <a class="tile tile-orange rv rv-d1" href="#komunita">
-        <span class="t-eyebrow">Komunita</span>
-        <div>
-          <h3>Hodler · Sovereign · Citadel</h3>
-          <p>Prostredie pre ľudí, ktorí premýšľajú dlhodobo.</p>
-          <span class="t-link">Preskúmať</span>
-        </div>
-      </a>
-
-      <!-- Robert foto -->
-      <div class="tile tile-img tile-2h rv rv-d2">
-        <img class="bg" src="assets/robert-kosela.jpg" alt="Robert Molnár" loading="lazy" style="object-position:center 15%">
-        <h3>Robert Molnár</h3>
-        <p>Konzultant a zakladateľ. Bitcoinu sa venuje od roku 2019.</p>
-      </div>
-
-      <!-- Konzultácie -->
-      <div class="tile rv">
-        <span class="t-eyebrow">1:1</span>
-        <div>
-          <h3>Konzultácie</h3>
-          <p>Individuálny pohľad na vašu situáciu a ciele.</p>
-        </div>
-      </div>
-
-      <!-- Obsah / sociálne siete -->
-      <div class="tile tile-dark tile-2w rv rv-d1">
-        <span class="t-eyebrow">Krátke pohľady na Bitcoin</span>
-        <div>
-          <h3>Vzdelávanie pokračuje aj mimo kurzu.</h3>
-          <p>Obsah publikujeme priebežne.</p>
-          <div class="socials">
-            <a href="#" aria-label="YouTube">YT</a>
-            <a href="#" aria-label="Instagram">IG</a>
-            <a href="#" aria-label="TikTok">TT</a>
-            <a href="#" aria-label="Facebook">FB</a>
-            <a href="#" aria-label="LinkedIn">IN</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Textúra panciera: brand -->
-      <div class="tile tile-img rv rv-d2">
-        <img class="bg" src="assets/tile-shell.jpg" alt="" loading="lazy">
-        <h3>Pokoj. Trpezlivosť.<br>Dlhý horizont.</h3>
-      </div>
-    </div>
+<!-- ======== BENTO · EKOSYSTÉM ======== -->
+<section class="light" id="ekosystem">
+  <div class="narrow center rv">
+    <span class="eyebrow">Čo je Hodlypodly</span>
+    <h2>Jedna cesta. Všetko, čo na ňu potrebujete.</h2>
+    <p class="lead">Od prvého porozumenia až po dlhodobú istotu — vzdelávanie, nástroje a komunita v jednom prostredí.</p>
   </div>
-</section>
 
-<!-- ============ O ROBERTOVI ============ -->
-<section id="robert" style="padding-top:0">
-  <div class="wrap">
-    <div class="about rv">
-      <div class="about-grid">
-        <div class="about-text">
-          <span class="eyebrow">Kto stojí za Hodlypodly</span>
-          <p><strong>Bitcoinu sa venujem od roku 2019.</strong></p>
-          <p><strong>Bitcoin ma zaujal nie ako investičný trend,</strong> ale ako technologická zmena v spôsobe, akým ľudia vlastnia a chránia svoj kapitál.</p>
-          <p><strong>Po rokoch podnikania a práce s financiami som si uvedomil,</strong> že väčšina ľudí nemá nad svojím majetkom takú kontrolu, akú si myslí.</p>
-          <p><strong>Hodlypodly vzniklo s cieľom priniesť pokojný, zrozumiteľný a strategický pohľad na Bitcoin.</strong></p>
-          <p>Ukazujeme, ako Bitcoin správne kúpiť, držať a spravovať tak, aby sa stal súčasťou dlhodobej ochrany kapitálu.</p>
-          <p class="about-sign">Robert Molnár, Konzultant<br>Hodlypodly<br><small>Bitcoin v mojich rukách.</small></p>
-        </div>
-        <div class="about-photo">
-          <img src="assets/robert-stolicka.jpg" alt="Robert Molnár" loading="lazy">
+  <div class="narrow bento">
+    <a class="tile dark t-2x1 rv" href="#webinar">
+      <div class="tile-cap">
+        <span class="t-link" style="color:var(--amber);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700">Začnite tu · Zadarmo</span>
+        <h3 style="margin-top:.5rem">Ako mať kapitál skutočne vo vlastných rukách v ére Bitcoinu.</h3>
+        <p>60 minút, priestor na otázky.</p>
+      </div>
+    </a>
+
+    <a class="tile plain t-2x2 rv rv-d1" href="#kurz">
+      <span style="font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--vermilion)">Prvý kurz</span>
+      <div class="tv" style="margin-top:.6rem">Bitcoin od nuly</div>
+      <p style="color:var(--gray);margin-top:.4rem">Začnite bez chaosu a chýb. Bezpečný nákup a držanie, krok za krokom.</p>
+      <p style="margin-top:1rem"><span style="color:var(--gray);text-decoration:line-through;font-weight:600">197 €</span> <strong style="font-size:1.5rem;font-weight:800">147 €</strong></p>
+      <span class="t-link" style="color:var(--vermilion)">Viac o kurze</span>
+    </a>
+
+    <a class="tile img rv rv-d2" href="#robert">
+      <img src="assets/tile-wallet.jpg" alt="">
+      <div class="shade"></div>
+      <div class="tile-cap"><h3>Bezpečné držanie</h3><p>Hardvérové peňaženky prakticky.</p></div>
+    </a>
+
+    <a class="tile grad rv rv-d1" href="#pohlady">
+      <div class="tile-cap">
+        <span style="font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;opacity:.9">Komunita</span>
+        <h3 style="margin-top:.5rem">Hodler · Sovereign · Citadel</h3>
+        <span class="t-link">Preskúmať</span>
+      </div>
+    </a>
+
+    <a class="tile img t-2x2 rv rv-d2" href="#robert">
+      <img src="assets/robert-kosela.jpg" alt="Robert Molnár" style="object-position:center 15%">
+      <div class="shade"></div>
+      <div class="tile-cap"><h3>Robert Molnár</h3><p>Konzultant a zakladateľ. Bitcoinu sa venuje od roku 2019.</p></div>
+    </a>
+
+    <div class="tile plain rv">
+      <span style="font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--vermilion)">1:1</span>
+      <h3 style="margin-top:.6rem">Konzultácie</h3>
+      <p style="color:var(--gray);margin-top:.3rem">Individuálny pohľad na vašu situáciu.</p>
+    </div>
+
+    <div class="tile dark t-2x1 rv rv-d1">
+      <div class="tile-cap">
+        <span style="font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--amber)">Krátke pohľady na Bitcoin</span>
+        <h3 style="margin-top:.5rem">Vzdelávanie pokračuje aj mimo kurzu.</h3>
+        <div class="socials">
+          <a href="#" aria-label="YouTube">YT</a><a href="#" aria-label="Instagram">IG</a>
+          <a href="#" aria-label="TikTok">TT</a><a href="#" aria-label="Facebook">FB</a><a href="#" aria-label="LinkedIn">IN</a>
         </div>
       </div>
     </div>
-  </div>
-</section>
 
-<!-- ============ STORY VIDEO ============ -->
-<section style="padding-top:0">
-  <div class="wrap">
-    <div class="center rv">
-      <h2>Prečo som založil Hodlypodly?<br><span class="soft">Moja cesta k finančnej suverenite.</span></h2>
-    </div>
-    <a class="story-frame rv rv-d1" href="#" aria-label="Prehrať video: Moja cesta k finančnej suverenite">
-      <img src="assets/robert-zem.jpg" alt="" loading="lazy">
-      <div class="story-play"><span class="story-badge">Moja cesta k finančnej suverenite ▸</span></div>
+    <a class="tile img rv rv-d2" href="#robert">
+      <img src="assets/tile-shell.jpg" alt="">
+      <div class="shade"></div>
+      <div class="tile-cap"><h3>Pokoj. Trpezlivosť.<br>Dlhý horizont.</h3></div>
     </a>
   </div>
 </section>
 
-<!-- ============ WEBINÁR ============ -->
-<section class="webinar on-dark" id="webinar">
-  <div class="wrap">
-    <div class="rv">
-      <span class="eyebrow">Bezplatný online webinár</span>
-      <h2>Ako mať kapitál skutočne vo vlastných rukách v ére digitálnych peňazí.</h2>
-      <p class="lead">Bezplatný online webinár o tom, ako správne držať Bitcoin, vyhnúť sa chybám a premýšľať v dlhodobom horizonte. Pre ľudí, ktorí chcú porozumieť Bitcoinu bez špekulácií.</p>
-    </div>
-    <div class="web-grid">
-      <div class="rv rv-d1">
-        <h4 style="font-weight:800;font-size:1.1rem;margin-bottom:1.2em">Na webinári sa dozviete:</h4>
-        <ul class="web-list">
-          <li>Prečo samotný nákup Bitcoinu nestačí</li>
-          <li>Najčastejšie chyby, ktoré robia začiatočníci</li>
-          <li>Ako premýšľať o bezpečnom držaní kapitálu</li>
-          <li>Čo znamená mať Bitcoin skutočne vo vlastných rukách</li>
-        </ul>
-        <p style="margin-top:2em;color:rgba(255,255,255,.7)">Bitcoin nie je len technológia ani investičný trend.<br>Predstavuje zmenu v tom, ako môže jednotlivec vlastniť a spravovať svoj kapitál.</p>
+<!-- ======== O ROBERTOVI ======== -->
+<section class="light" id="robert">
+  <div class="narrow about rv">
+    <div class="about-grid">
+      <div class="about-text">
+        <span class="eyebrow">Kto stojí za Hodlypodly</span>
+        <p><strong>Bitcoinu sa venujem od roku 2019.</strong></p>
+        <p><strong>Bitcoin ma zaujal nie ako investičný trend,</strong> ale ako technologická zmena v spôsobe, akým ľudia vlastnia a chránia svoj kapitál.</p>
+        <p><strong>Po rokoch podnikania a práce s financiami som si uvedomil,</strong> že väčšina ľudí nemá nad svojím majetkom takú kontrolu, akú si myslí.</p>
+        <p><strong>Hodlypodly vzniklo s cieľom priniesť pokojný, zrozumiteľný a strategický pohľad na Bitcoin.</strong></p>
+        <p>Ukazujeme, ako Bitcoin správne kúpiť, držať a spravovať tak, aby sa stal súčasťou dlhodobej ochrany kapitálu.</p>
+        <p class="about-sign">Robert Molnár, Konzultant<br>Hodlypodly<br><small>Bitcoin v mojich rukách.</small></p>
       </div>
-      <div class="web-cta rv rv-d2">
-        <p>Webinár prebieha v menšej skupine, aby bol zachovaný priestor pre otázky a diskusiu.</p>
-        <a class="btn" href="#registracia">Zaregistrovať sa na bezplatný webinár</a>
-        <span class="btn-note">Kapacita je limitovaná kvôli priestoru na otázky.</span>
+      <div class="about-photo">
+        <img src="assets/robert-stolicka.jpg" alt="Robert Molnár" loading="lazy">
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============ KURZ ============ -->
-<section id="kurz">
-  <div class="wrap">
-    <div class="center rv"><span class="eyebrow">Prvý kurz</span></div>
-    <div class="course-card rv">
-      <div>
-        <h3>Bitcoin od nuly — Začnite bez chaosu a chýb.</h3>
-        <p class="sub">Online kurz pre ľudí, ktorí chcú pochopiť Bitcoin a naučiť sa ho bezpečne kúpiť a držať.</p>
-        <div class="course-points">
-          <p><strong>Pochopíte, čo Bitcoin skutočne je</strong><span>bez technického balastu a zbytočného hypu.</span></p>
-          <p><strong>Naučíte sa bezpečne kúpiť a držať Bitcoin</strong><span>Krok za krokom, prakticky a zrozumiteľne.</span></p>
-          <p><strong>Získate pokoj pri správe kapitálu</strong><span>Dlhodobý prístup namiesto špekulácií.</span></p>
+<!-- ======== STORY VIDEO ======== -->
+<section class="light" style="padding-top:0">
+  <div class="narrow center rv">
+    <h2>Prečo som založil Hodlypodly? <span style="color:var(--gray);font-weight:600">Moja cesta k finančnej suverenite.</span></h2>
+  </div>
+  <a class="narrow story-frame rv rv-d1" href="#" aria-label="Prehrať video: Moja cesta k finančnej suverenite">
+    <img src="assets/robert-zem.jpg" alt="" loading="lazy">
+    <div class="story-play"><span class="story-badge">Moja cesta k finančnej suverenite ▸</span></div>
+  </a>
+</section>
+
+<!-- ======== WEBINÁR ======== -->
+<section class="light" id="webinar">
+  <div class="narrow webinar rv">
+    <div class="webinar-in">
+      <span class="eyebrow">Bezplatný online webinár</span>
+      <h2 style="max-width:none">Ako mať kapitál skutočne vo vlastných rukách v ére digitálnych peňazí.</h2>
+      <p class="lead" style="margin:0">Bezplatný online webinár o tom, ako správne držať Bitcoin, vyhnúť sa chybám a premýšľať v dlhodobom horizonte.</p>
+      <div class="web-grid">
+        <div>
+          <h4 style="font-weight:800;font-size:1.05rem;margin-bottom:1.1em">Na webinári sa dozviete:</h4>
+          <ul class="web-list">
+            <li>Prečo samotný nákup Bitcoinu nestačí</li>
+            <li>Najčastejšie chyby, ktoré robia začiatočníci</li>
+            <li>Ako premýšľať o bezpečnom držaní kapitálu</li>
+            <li>Čo znamená mať Bitcoin skutočne vo vlastných rukách</li>
+          </ul>
+        </div>
+        <div class="web-cta">
+          <p>Webinár prebieha v menšej skupine, aby bol zachovaný priestor pre otázky a diskusiu.</p>
+          <a class="btn" href="#registracia">Zaregistrovať sa na webinár</a>
+          <span class="btn-note">Kapacita je limitovaná.</span>
         </div>
       </div>
-      <div class="price-box">
-        <span class="price-old">197 €</span>
-        <div class="price-now">147 €</div>
-        <p class="price-dph">Ceny sú s DPH.</p>
-        <a class="btn" href="#" style="width:100%">Kúpiť kurz</a>
-        <a class="btn btn-ghost" href="#" style="width:100%;margin-top:12px">Viac o kurze</a>
-        <p class="price-note">Prvá edícia kurzu v zvýhodnenej cene je určená pre obmedzený počet účastníkov výmenou za spätnú väzbu a referenciu.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ======== KURZ ======== -->
+<section class="light" id="kurz" style="padding-top:0">
+  <div class="narrow center rv"><span class="eyebrow">Prvý kurz</span></div>
+  <div class="narrow course-card rv">
+    <div>
+      <h3>Bitcoin od nuly — Začnite bez chaosu a chýb.</h3>
+      <p class="sub">Online kurz pre ľudí, ktorí chcú pochopiť Bitcoin a naučiť sa ho bezpečne kúpiť a držať.</p>
+      <div class="course-points">
+        <p><strong>Pochopíte, čo Bitcoin skutočne je</strong><span>bez technického balastu a zbytočného hypu.</span></p>
+        <p><strong>Naučíte sa bezpečne kúpiť a držať Bitcoin</strong><span>Krok za krokom, prakticky a zrozumiteľne.</span></p>
+        <p><strong>Získate pokoj pri správe kapitálu</strong><span>Dlhodobý prístup namiesto špekulácií.</span></p>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- ============ TESTIMONIALS ============ -->
-<section style="padding-top:0">
-  <div class="wrap">
-    <div class="center rv">
-      <h2>Dôvera tých, čo už začali</h2>
-      <p class="lead">Reálne skúsenosti ľudí, ktorí sa rozhodli pochopiť Bitcoin a prevziať kontrolu nad svojím kapitálom.</p>
-    </div>
-    <div class="testi-grid">
-      <div class="testi rv"><p>„Dlho som váhala, či sa dať cestou Bitcoinu. Až Robert ma presvedčil, ukázal mi ako Bitcoin bezpečne vlastniť bez burzy či brokera."</p><strong>Dominika<small>podnikateľka</small></strong></div>
-      <div class="testi rv rv-d1"><p>„Po Bitcoine som už dlho pokukoval, ale nemal som odvahu začať. Skontaktoval som Roberta a on mi ukázal správne spôsoby držania Bitcoinu. Dokonca ma naučil aj BTC pôžičky."</p><strong>Juraj<small>manažér</small></strong></div>
-      <div class="testi rv rv-d2"><p>„Začala som 64 ročná, ale chcela som deťom zanechať niečo, čo si udrží hodnotu. A tak som sa nechala viesť Robertom a jeho komunitou. Postupne som získala istotu."</p><strong>Renata<small>učiteľka</small></strong></div>
+    <div class="price-box">
+      <span class="price-old">197 €</span>
+      <div class="price-now">147 €</div>
+      <p class="price-dph">Ceny sú s DPH.</p>
+      <a class="btn" href="#" style="width:100%;justify-content:center">Kúpiť kurz</a>
+      <a class="btn btn-ghost" href="#" style="width:100%;justify-content:center;margin-top:.7rem">Viac o kurze</a>
+      <p class="price-note">Prvá edícia v zvýhodnenej cene je určená pre obmedzený počet účastníkov.</p>
     </div>
   </div>
 </section>
 
-<!-- ============ FAQ ============ -->
-<section style="padding-top:0">
-  <div class="wrap">
-    <div class="center rv"><h2>Otázky pred prvým krokom</h2></div>
-    <div class="faq rv">
-      <details><summary>Je kurz vhodný pre úplných začiatočníkov?</summary><p class="a">Áno. Kurz je navrhnutý pre ľudí, ktorí s Bitcoinom ešte nemajú skúsenosť alebo si nie sú istí, či postupujú správne.</p></details>
-      <details><summary>Potrebujem technické znalosti?</summary><p class="a">Nie. Všetko je vysvetlené zrozumiteľne a prakticky.</p></details>
-      <details><summary>Je kurz investičné poradenstvo?</summary><p class="a">Nie. Kurz je zameraný na vzdelávanie a pochopenie práce s Bitcoinom, nie na poskytovanie investičných odporúčaní.</p></details>
-      <details><summary>Kedy získam prístup ku kurzu?</summary><p class="a">Prístup získate po sprístupnení prvej edície kurzu. Presný dátum je uvedený na stránke kurzu.</p></details>
-      <details><summary>Ako dlho budem mať prístup?</summary><p class="a">Kurz je dostupný dlhodobo bez časového obmedzenia.</p></details>
-      <details><summary>Čo ak už Bitcoin mám?</summary><p class="a">Ak držíte Bitcoin na burze alebo prostredníctvom finančných služieb napr. banky, vysvetlíme si postupy, ktoré umožňujú bezpečnejšie a samostatné vlastníctvo.</p></details>
-      <details><summary>Je kurz vhodný aj pre starších?</summary><p class="a">Áno. Kurz je navrhnutý tak, aby bol zrozumiteľný bez ohľadu na vek či technické skúsenosti.</p></details>
-      <details><summary>Aké ďalšie náklady sú spojené so správnym držaním Bitcoinu?</summary><p class="a">Na bezpečné držanie Bitcoinu je vhodné používať hardvérovú peňaženku. V kurze si vysvetlíme princípy výberu vhodného riešenia aj jeho praktické používanie. Okrem toho je potrebná samotná investícia do Bitcoinu, ktorej výšku si každý účastník určuje individuálne podľa svojej finančnej situácie a cieľov.</p></details>
-    </div>
+<!-- ======== TESTIMONIALS ======== -->
+<section class="light" style="padding-top:0">
+  <div class="narrow center rv">
+    <h2>Dôvera tých, čo už začali</h2>
+    <p class="lead">Reálne skúsenosti ľudí, ktorí sa rozhodli pochopiť Bitcoin a prevziať kontrolu nad svojím kapitálom.</p>
+  </div>
+  <div class="narrow testi-grid">
+    <div class="testi rv"><p>„Dlho som váhala, či sa dať cestou Bitcoinu. Až Robert ma presvedčil, ukázal mi ako Bitcoin bezpečne vlastniť bez burzy či brokera."</p><strong>Dominika<small>podnikateľka</small></strong></div>
+    <div class="testi rv rv-d1"><p>„Po Bitcoine som už dlho pokukoval, ale nemal som odvahu začať. Skontaktoval som Roberta a on mi ukázal správne spôsoby držania Bitcoinu. Dokonca ma naučil aj BTC pôžičky."</p><strong>Juraj<small>manažér</small></strong></div>
+    <div class="testi rv rv-d2"><p>„Začala som 64 ročná, ale chcela som deťom zanechať niečo, čo si udrží hodnotu. A tak som sa nechala viesť Robertom a jeho komunitou. Postupne som získala istotu."</p><strong>Renata<small>učiteľka</small></strong></div>
   </div>
 </section>
 
-<!-- ============ SCRUB 3 · MANIFEST (výstup k hladine) ============ -->
-<div class="scrub on-dark" data-scrub data-video="assets/ascent-scrub.mp4" style="height:380vh">
+<!-- ======== FAQ ======== -->
+<section class="light" style="padding-top:0">
+  <div class="narrow center rv"><h2>Otázky pred prvým krokom</h2></div>
+  <div class="faq rv">
+    <details><summary>Je kurz vhodný pre úplných začiatočníkov?</summary><p class="a">Áno. Kurz je navrhnutý pre ľudí, ktorí s Bitcoinom ešte nemajú skúsenosť alebo si nie sú istí, či postupujú správne.</p></details>
+    <details><summary>Potrebujem technické znalosti?</summary><p class="a">Nie. Všetko je vysvetlené zrozumiteľne a prakticky.</p></details>
+    <details><summary>Je kurz investičné poradenstvo?</summary><p class="a">Nie. Kurz je zameraný na vzdelávanie a pochopenie práce s Bitcoinom, nie na poskytovanie investičných odporúčaní.</p></details>
+    <details><summary>Kedy získam prístup ku kurzu?</summary><p class="a">Prístup získate po sprístupnení prvej edície kurzu. Presný dátum je uvedený na stránke kurzu.</p></details>
+    <details><summary>Ako dlho budem mať prístup?</summary><p class="a">Kurz je dostupný dlhodobo bez časového obmedzenia.</p></details>
+    <details><summary>Čo ak už Bitcoin mám?</summary><p class="a">Ak držíte Bitcoin na burze alebo prostredníctvom finančných služieb napr. banky, vysvetlíme si postupy, ktoré umožňujú bezpečnejšie a samostatné vlastníctvo.</p></details>
+    <details><summary>Je kurz vhodný aj pre starších?</summary><p class="a">Áno. Kurz je navrhnutý tak, aby bol zrozumiteľný bez ohľadu na vek či technické skúsenosti.</p></details>
+    <details><summary>Aké ďalšie náklady sú spojené so správnym držaním Bitcoinu?</summary><p class="a">Na bezpečné držanie Bitcoinu je vhodné používať hardvérovú peňaženku. V kurze si vysvetlíme princípy výberu vhodného riešenia aj jeho praktické používanie. Okrem toho je potrebná samotná investícia do Bitcoinu, ktorej výšku si každý účastník určuje individuálne.</p></details>
+  </div>
+</section>
+
+<!-- ======== SCRUB 3 · MANIFEST ======== -->
+<div class="scrub" data-scrub data-len="380" data-src="assets/ascent-scrub.mp4">
   <div class="scrub-sticky">
-    <div class="sc-media">
-      <div class="sc-poster poster-ascent"></div>
-      <video muted playsinline preload="none"></video>
-    </div>
-    <div class="sc-shade"></div>
+    <div class="scrub-poster poster-ascent"></div>
+    <video muted playsinline preload="none"></video>
+    <div class="scrub-veil"></div>
 
-    <div class="sc-phase rm-keep" data-t="0,0.03,0.26,0.36">
-      <img class="logo-mark" src="assets/logo-white.png" alt="">
-      <p class="h2s">Bitcoin nie je len investícia.</p>
+    <div class="msg">
+      <img src="assets/logo-white.png" alt="" style="height:34px;margin-bottom:1.6rem">
+      <p class="big">Bitcoin nie je len investícia.</p>
     </div>
-    <div class="sc-phase" data-t="0.32,0.42,0.60,0.70">
-      <p class="h2s">Je to zmena spôsobu<br>vlastníctva kapitálu.</p>
-      <p class="sub">S dôrazom na dlhodobé vlastníctvo, kontrolu, súkromie a istotu.</p>
+    <div class="msg">
+      <p class="big">Je to zmena spôsobu<br>vlastníctva kapitálu.</p>
+      <p>S dôrazom na dlhodobé vlastníctvo, kontrolu, súkromie a istotu.</p>
     </div>
-    <div class="sc-phase" data-t="0.66,0.78,1.01,1.02">
-      <p class="h1">Bitcoin <span class="accent">v mojich</span> rukách.</p>
-      <a class="btn" href="#registracia">Začať správne s Bitcoinom</a>
+    <div class="msg">
+      <p class="big">Bitcoin <span class="accent">v mojich</span> rukách.</p>
+      <a class="btn" href="#registracia" style="margin-top:1.8rem">Začať správne s Bitcoinom</a>
     </div>
   </div>
 </div>
 
-<!-- ============ KOMUNITA ============ -->
-<section class="community" id="komunita">
-  <div class="wrap">
-    <div class="center rv">
-      <h2>Vzdelávanie je len prvý krok.<br><span class="soft">Komunita ľudí, ktorí chcú mať kapitál vo vlastných rukách.</span></h2>
-      <p class="lead">Hodlypodly nie je len online kurz. Je to dlhodobá cesta k pochopeniu a zodpovednému vlastníctvu kapitálu. Budujeme prostredie pre ľudí, ktorí chcú premýšľať strategicky, zdieľať skúsenosti a rásť v porozumení Bitcoinu.</p>
-      <p class="lead" style="margin-top:1em"><strong style="color:var(--text)">Bez tlaku, bez špekulácií.</strong> S dôrazom na pokoj, bezpečnosť a dlhodobý pohľad.</p>
-      <a class="btn btn-ghost rv rv-d1" href="#" style="margin-top:2.6em">Preskúmať komunitu</a>
+<!-- ======== HORIZONTAL RAIL · KRÁTKE POHĽADY ======== -->
+<div class="hscroll" id="pohlady" data-hscrub data-hlen="320">
+  <div class="hs-sticky">
+    <div class="hs-head rv">
+      <span class="eyebrow">Krátke pohľady na Bitcoin</span>
+      <h2>Vzdelávanie pokračuje aj mimo kurzu.</h2>
+      <p class="lead">Obsah publikujeme priebežne.</p>
     </div>
-    <div class="community-photo rv rv-d1">
-      <img src="assets/robert-profil.jpg" alt="Robert Molnár — Hodlypodly" loading="lazy" style="object-position:center 12%">
+    <div class="hrail" id="hrail">
+      <div class="hcard"><img src="assets/short-1.jpg" alt=""><div class="hbody"><span class="views">▸ 5 421</span><h3>3 veci, ktoré odhalia investičný podvod</h3></div></div>
+      <div class="hcard"><img src="assets/short-2.jpg" alt=""><div class="hbody"><span class="views">▸ 538</span><h3>Súkromie je vzácnejšie od januára 2026</h3></div></div>
+      <div class="hcard"><img src="assets/short-3.jpg" alt=""><div class="hbody"><span class="views">▸ 8 268</span><h3>Podvod, ktorý môjho známeho pripravil o desiatky tisíc</h3></div></div>
+      <div class="hcard"><img src="assets/short-4.jpg" alt=""><div class="hbody"><span class="views">▸ 931</span><h3>Váhate, či kúpiť Bitcoin?</h3></div></div>
+      <div class="hcard"><img src="assets/short-5.jpg" alt=""><div class="hbody"><span class="views">▸ 829</span><h3>Čo je opakom strachu?</h3></div></div>
+      <div class="hcard"><img src="assets/short-6.jpg" alt=""><div class="hbody"><span class="views">▸ 2 078</span><h3>Ako kupovať Bitcoin, keď je na trhu strach</h3></div></div>
+      <div class="hcard"><img src="assets/short-7.jpg" alt=""><div class="hbody"><span class="views">▸ 918</span><h3>Bitcoin a Olympiáda v Miláne</h3></div></div>
+      <div class="hcard"><img src="assets/short-8.jpg" alt=""><div class="hbody"><span class="views">▸ 344</span><h3>Čo má spoločné Bitcoin a cestovanie?</h3></div></div>
     </div>
+    <div class="hprog"><i id="hprogfill"></i></div>
+  </div>
+</div>
+
+<!-- ======== KOMUNITA ======== -->
+<section class="light" id="komunita">
+  <div class="narrow center rv">
+    <h2>Vzdelávanie je len prvý krok. <span style="color:var(--gray);font-weight:600">Komunita ľudí, ktorí chcú mať kapitál vo vlastných rukách.</span></h2>
+    <p class="lead">Hodlypodly nie je len online kurz. Je to dlhodobá cesta k pochopeniu a zodpovednému vlastníctvu kapitálu. Budujeme prostredie pre ľudí, ktorí chcú premýšľať strategicky, zdieľať skúsenosti a rásť v porozumení Bitcoinu.</p>
+    <p class="lead" style="margin-top:1em"><b style="color:var(--ink)">Bez tlaku, bez špekulácií.</b> S dôrazom na pokoj, bezpečnosť a dlhodobý pohľad.</p>
+    <a class="btn btn-ghost rv rv-d1" href="#" style="margin-top:2.2rem">Preskúmať komunitu</a>
+  </div>
+  <div class="narrow community-photo rv rv-d1">
+    <img src="assets/robert-profil.jpg" alt="Robert Molnár — Hodlypodly" loading="lazy" style="object-position:center 12%">
   </div>
 </section>
 
-<!-- ============ FINAL CTA ============ -->
-<section class="final" id="registracia">
-  <div class="wrap rv">
+<!-- ======== FINAL CTA ======== -->
+<section class="light" id="registracia" style="padding-top:0">
+  <div class="narrow contact on-dark rv">
     <h2>Začnite s Bitcoinom správne.</h2>
-    <p class="lead" style="margin:1em auto 2em">Získajte porozumenie, istotu a kontrolu nad svojím kapitálom.</p>
+    <p class="lead">Získajte porozumenie, istotu a kontrolu nad svojím kapitálom.</p>
     <a class="btn" href="#">Začať kurz — Bitcoin od nuly *</a>
-    <small>*) Prvá edícia pre obmedzený počet účastníkov za zvýhodnených podmienok.</small>
+    <p class="btn-note">*) Prvá edícia pre obmedzený počet účastníkov za zvýhodnených podmienok.</p>
   </div>
 </section>
 
-<!-- ============ FOOTER ============ -->
-<footer id="kontakt">
-  <div class="wrap">
-    <div class="foot-grid">
-      <div class="foot-brand">
-        <img src="assets/logo-white.png" alt="Hodlypodly">
-        <p class="claim">Bitcoin v mojich rukách.<br>Súkromne. Bezpečne. Suverénne.</p>
-        <p style="margin-top:10px">Porozumejte Bitcoinu a spravujte svoj kapitál s istotou.</p>
-      </div>
-      <div class="foot-col">
-        <h4>Vzdelávanie</h4>
-        <a href="#kurz">Bitcoin od nuly</a>
-        <a href="#">Rozšírená bezpečnosť</a>
-        <a href="#">Pôžičky oproti Bitcoinu</a>
-        <a href="#">Konzultácie</a>
-      </div>
-      <div class="foot-col">
-        <h4>Komunita</h4>
-        <a href="#komunita">Hodler</a>
-        <a href="#komunita">Sovereign</a>
-        <a href="#komunita">Citadel</a>
-        <a href="#komunita">O komunite</a>
-      </div>
-      <div class="foot-col">
-        <h4>Kontakt</h4>
-        <a href="#">Polarwox s. r. o.</a>
-        <a href="#">Plynárenská 3D<br>821 09 Bratislava</a>
-        <a href="mailto:hello@hodlypodly.com">hello@hodlypodly.com</a>
-        <a href="tel:+421917796556">+421 917 796 556</a>
-      </div>
-    </div>
-    <div class="foot-legal">
-      <p style="max-width:640px">Upozornenie: Informácie poskytované na tejto webovej stránke slúžia výlučne na vzdelávacie účely a nepredstavujú investičné poradenstvo, finančné služby ani odporúčania na nákup alebo predaj finančných nástrojov. Bitcoin a digitálne aktíva sú spojené s rizikom volatility a straty hodnoty.</p>
-      <p><a href="#">Obchodné podmienky</a><a href="#">Ochrana osobných údajov</a><a href="#">Disclaimer</a><br><br>
-      Copyright © 2026 Polarwox s. r. o., IČO: 47 815 426, SR<br>
-      Hodlypodly je značka patriaca do skupiny Polarwox. Všetky práva vyhradené.</p>
-    </div>
+<!-- ======== FOOTER ======== -->
+<footer id="kontakt" class="section-pad">
+  <div class="fnote">
+    <img src="assets/logo-orange.png" alt="Hodlypodly" style="height:22px;margin-bottom:.8rem">
+    <p>Bitcoin v mojich rukách. Súkromne. Bezpečne. Suverénne.</p>
+    <p style="margin-top:1rem;font-size:.76rem;opacity:.85">Upozornenie: Informácie na tejto stránke slúžia výlučne na vzdelávacie účely a nepredstavujú investičné poradenstvo ani finančné služby. Bitcoin a digitálne aktíva sú spojené s rizikom volatility a straty hodnoty.</p>
+  </div>
+  <div>
+    <p class="flinks"><a href="#">Obchodné podmienky</a><a href="#">Ochrana osobných údajov</a><a href="#">Disclaimer</a></p>
+    <p style="margin-top:.8rem">Polarwox s. r. o. · Plynárenská 3D, 821 09 Bratislava<br>
+    <a href="mailto:hello@hodlypodly.com" style="text-decoration:underline">hello@hodlypodly.com</a> · +421 917 796 556</p>
+    <p style="margin-top:.8rem">© 2026 Polarwox s. r. o., IČO: 47 815 426, SR</p>
   </div>
 </footer>
 
 <script>
 (function(){
-  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var isMobile = matchMedia("(max-width:640px)").matches;
 
-  /* ---- Header state (biele logo len nad hero) ---- */
-  const header = document.getElementById('header');
-  const hero = document.getElementById('hero');
-  function headerState(){
-    header.classList.toggle('solid', window.scrollY > hero.offsetHeight - window.innerHeight*0.5);
-  }
+  /* ---- nav state ---- */
+  var nav=document.getElementById("nav"), top=document.getElementById("top");
+  function navState(){ nav.classList.toggle("solid", scrollY > innerHeight*0.5); }
 
-  /* ---- Reveal on scroll ---- */
-  const io = new IntersectionObserver(es=>{
-    es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
-  },{threshold:0.15, rootMargin:'0px 0px -8% 0px'});
-  document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+  /* ---- reveal on scroll ---- */
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target);} });
+  },{threshold:.15, rootMargin:"0px 0px -8% 0px"});
+  document.querySelectorAll(".rv").forEach(function(el){io.observe(el);});
 
-  /* ==================================================
-     MULTI-SCRUB ENGINE
-     Každá sekcia [data-scrub] má:
-       data-video   – cesta k mp4 (načíta sa ako blob pri priblížení)
-       .sc-phase[data-t="start,peakIn,peakOut,end"] – choreografia textov
-     ================================================== */
-  const clamp = (v,a,b)=>Math.min(b,Math.max(a,v));
-
-  const sections = [...document.querySelectorAll('[data-scrub]')].map(sec=>{
-    const video = sec.querySelector('video');
-    const phases = [...sec.querySelectorAll('.sc-phase')].map(el=>({
-      el, t: el.dataset.t.split(',').map(Number)
-    }));
-    return {sec, video, phases, hint: sec.querySelector('.sc-hint'),
-            duration:0, current:0, ready:false, loading:false};
+  /* ===== scrub engine: blob-backed video + coalesced seeks (no jank) ===== */
+  var scrubs=[];
+  document.querySelectorAll("[data-scrub]").forEach(function(sec){
+    var len=+sec.dataset.len||360;
+    sec.style.height=len+"vh";
+    var v=sec.querySelector("video");
+    var s={sec:sec,v:v,msgs:sec.querySelectorAll(".msg"),cur:0,src:sec.dataset.src,
+           fetching:false,ready:false,seekBusy:false,pending:-1};
+    v.addEventListener("seeked",function(){
+      s.seekBusy=false;
+      if(s.pending>=0){ var t=s.pending; s.pending=-1; s.seekBusy=true; try{v.currentTime=t;}catch(e){s.seekBusy=false;} }
+    });
+    scrubs.push(s);
   });
-
   function loadVideo(s){
-    if(s.loading || reduced) return;
-    s.loading = true;
-    fetch(s.sec.dataset.video)
-      .then(r=>{ if(!r.ok) throw 0; return r.blob(); })
-      .then(b=>{
-        s.video.src = URL.createObjectURL(b);
-        s.video.addEventListener('loadedmetadata', ()=>{
-          s.duration = s.video.duration; s.ready = true; s.video.classList.add('on');
-        }, {once:true});
-        s.video.load();
-      })
-      .catch(()=>{}); // poster fallback
-  }
-
-  // lazy-load videí keď sa sekcia blíži
-  const vio = new IntersectionObserver(es=>{
-    es.forEach(e=>{
-      if(e.isIntersecting){
-        const s = sections.find(x=>x.sec===e.target);
-        if(s) loadVideo(s);
-        vio.unobserve(e.target);
-      }
+    if(s.fetching||reduced) return; s.fetching=true;
+    fetch(s.src).then(function(r){return r.blob();}).then(function(b){
+      var url=URL.createObjectURL(b);
+      s.v.src=url; s.v.load();
+      s.v.addEventListener("loadedmetadata",function(){ this.pause(); s.ready=true; s.v.classList.add("on"); },{once:true});
+    }).catch(function(){
+      s.v.src=s.src; s.v.load();
+      s.v.addEventListener("loadedmetadata",function(){ this.pause(); s.ready=true; s.v.classList.add("on"); },{once:true});
     });
-  },{rootMargin:'120% 0px'});
-  sections.forEach(s=>vio.observe(s.sec));
+  }
+  if(scrubs[0]) loadVideo(scrubs[0]);
+  var prime=function(){ scrubs.forEach(function(s){ if(s.ready) s.v.play().then(function(){s.v.pause();}).catch(function(){}); }); removeEventListener("touchstart",prime); };
+  addEventListener("touchstart",prime,{passive:true});
 
-  function phaseOpacity(p,c){
-    if(p < c[0] || p > c[3]) return 0;
-    if(p < c[1]) return (p-c[0])/(c[1]-c[0]);
-    if(p > c[2]) return 1-(p-c[2])/(c[3]-c[2]);
-    return 1;
+  function seekTo(s,t){
+    if(s.seekBusy){ s.pending=t; return; }
+    if(Math.abs(s.v.currentTime-t)<0.006) return;
+    s.seekBusy=true;
+    try{ s.v.currentTime=t; }catch(e){ s.seekBusy=false; }
   }
 
-  function frame(){
-    const vh = window.innerHeight;
-    sections.forEach(s=>{
-      const r = s.sec.getBoundingClientRect();
-      if(r.bottom < -vh || r.top > vh*2) return;      // mimo obrazu → nič
-      const total = r.height - vh;
-      const p = clamp(-r.top/total, 0, 1);
-      if(s.ready && s.duration){
-        s.current += (p - s.current) * 0.14;
-        const t = s.current * (s.duration - 0.05);
-        if(Math.abs(s.video.currentTime - t) > 0.01){ s.video.currentTime = t; }
-      }
-      s.phases.forEach(ph=>{
-        const o = phaseOpacity(p, ph.t);
-        ph.el.style.opacity = o;
-        ph.el.style.transform = 'translateY(' + (26*(1-o)) + 'px)';
-        ph.el.style.pointerEvents = o > 0.6 ? 'auto' : 'none';
+  function tick(){
+    var vh=innerHeight;
+    scrubs.forEach(function(s){
+      var r=s.sec.getBoundingClientRect();
+      if(!s.fetching && r.top<vh*2.5) loadVideo(s);
+      if(r.bottom<-vh||r.top>vh*2) return;
+      var p=Math.min(1,Math.max(0,-r.top/(r.height-vh)));
+      s.cur+=(p-s.cur)*0.16;
+      if(Math.abs(p-s.cur)<0.0004) s.cur=p;
+      var d=s.v.duration;
+      if(s.ready&&d&&!reduced) seekTo(s, s.cur*(d-0.05));
+      var n=s.msgs.length;
+      s.msgs.forEach(function(m,j){
+        var a=j/n,b=(j+1)/n,lp=(s.cur-a)/(b-a);
+        var o=0,y=40;
+        if(j===0 && lp<0){ o=1; y=0; } // first message default visible until scroll starts
+        if(lp>0&&lp<1){
+          var fi=Math.min(1,lp/0.3), fo=(j===n-1)?1:Math.min(1,(1-lp)/0.3);
+          o=Math.min(fi,fo); y=(1-fi)*40-(1-fo)*46;
+        } else if(j===0 && s.cur<a){ o=1; y=0; }
+          else if(j===n-1 && lp>=1){ o=1; y=0; }
+        m.style.opacity=o;
+        m.style.transform="translate3d(0,"+y+"px,0)";
       });
-      if(s.hint) s.hint.style.opacity = p < 0.03 ? 1 : 0;
     });
-    headerState();
-    requestAnimationFrame(frame);
+    navState();
+    requestAnimationFrame(tick);
   }
+  if(!reduced) requestAnimationFrame(tick);
+  else scrubs.forEach(function(s){ s.sec.style.height="auto"; loadVideo(s); });
+  navState();
 
-  if(!reduced){
-    requestAnimationFrame(frame);
-  } else {
-    // reduced motion: sekcie sú statické, videá sa len jemne prehrávajú
-    sections.forEach(s=>{
-      s.video.src = s.sec.dataset.video;
-      s.video.loop = true; s.video.autoplay = true; s.video.muted = true;
-      s.video.classList.add('on');
-      s.video.play && s.video.play().catch(()=>{});
-    });
-    window.addEventListener('scroll', headerState, {passive:true});
-    headerState();
+  /* ===== horizontal scrub rail ===== */
+  var hs=document.querySelector("[data-hscrub]");
+  if(hs){
+    var hlen=+hs.dataset.hlen||320;
+    hs.style.height=hlen+"vh";
+    var rail=document.getElementById("hrail"), fill=document.getElementById("hprogfill");
+    var hcur=0;
+    function htick(){
+      var vh=innerHeight, r=hs.getBoundingClientRect();
+      if(r.bottom>=-vh && r.top<=vh*2){
+        var p=Math.min(1,Math.max(0,-r.top/(r.height-vh)));
+        hcur+=(p-hcur)*0.16;
+        if(Math.abs(p-hcur)<0.0004) hcur=p;
+        var max=Math.max(0, rail.scrollWidth-innerWidth+innerWidth*0.2);
+        rail.style.transform="translate3d(-"+(hcur*max)+"px,0,0)";
+        if(fill) fill.style.transform="scaleX("+hcur+")";
+      }
+      requestAnimationFrame(htick);
+    }
+    if(!reduced) requestAnimationFrame(htick);
   }
 })();
 </script>
