@@ -6,11 +6,16 @@
 
   /* ---- nav state ---- */
   var nav = document.getElementById("nav");
-  var darkHero = nav && nav.classList.contains("on-dark");
+  var darkSecs = document.querySelectorAll(".scrub");
   function navState(){
     if(!nav) return;
-    var solidAt = darkHero ? innerHeight*0.5 : 40;
-    nav.classList.toggle("solid", scrollY > solidAt);
+    var overDark = false, y = 70;
+    darkSecs.forEach(function(s){
+      var r = s.getBoundingClientRect();
+      if(r.top < y && r.bottom > 0) overDark = true;
+    });
+    nav.classList.toggle("on-dark", overDark);
+    nav.classList.toggle("solid", !overDark && scrollY > 40);
   }
 
   /* ---- reveal on scroll ---- */
