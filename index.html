@@ -6,283 +6,33 @@
 <title>Hodlypodly — Bitcoin v mojich rukách</title>
 <meta name="description" content="Porozumejte Bitcoinu a spravujte svoj kapitál s istotou. Súkromne. Bezpečne. Suverénne.">
 <meta name="theme-color" content="#fbfbfd">
-<link rel="icon" type="image/png" href="assets/logo-orange.png">
+<link rel="icon" type="image/png" href="assets/turtle-orange.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<style>
-:root{
-  --canvas:#fbfbfd; --paper:#f5f5f7; --ink:#1d1d1f; --gray:#6e6e73; --hair:#d2d2d7;
-  --night:#0b0c0d; --ivorydk:#f5f5f7;
-  --vermilion:#F04E23; --amber:#F0A23A;
-  --grad:linear-gradient(92deg,var(--vermilion) 0%,#F17A2C 55%,var(--amber) 100%);
-  --sans:"Manrope",-apple-system,"SF Pro Display","Helvetica Neue",system-ui,sans-serif;
-  --r:1.75rem;
-}
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{background:var(--canvas);color:var(--ink);font-family:var(--sans);font-weight:400;line-height:1.55;overflow-x:hidden;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
-::selection{background:#fcd9c9;color:#5a2210}
-img,video{display:block;max-width:100%}
-a{color:inherit}
-.grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
-
-/* ---------- buttons ---------- */
-.btn{display:inline-flex;align-items:center;gap:.4em;background:var(--grad);color:#2a0e02;font-weight:700;
-  font-size:.98rem;padding:.9em 1.8em;border-radius:999px;border:none;cursor:pointer;text-decoration:none;
-  transition:transform .3s cubic-bezier(.2,.7,.2,1),box-shadow .3s}
-.btn:hover{transform:scale(1.045);box-shadow:0 12px 30px rgba(240,78,35,.32)}
-.btn:focus-visible{outline:3px solid var(--vermilion);outline-offset:3px}
-.btn-ghost{background:transparent;color:var(--ink);border:1.5px solid var(--hair);box-shadow:none}
-.btn-ghost:hover{background:rgba(0,0,0,.04);transform:none;box-shadow:none}
-.on-dark .btn-ghost{color:#fff;border-color:rgba(255,255,255,.3)}
-.on-dark .btn-ghost:hover{background:rgba(255,255,255,.08)}
-.btn-note{display:block;font-size:.83rem;color:var(--gray);margin-top:.8em}
-.on-dark .btn-note{color:rgba(245,245,247,.65)}
-
-/* ---------- nav: glass pill ---------- */
-nav{position:fixed;top:0;left:0;right:0;z-index:60;display:flex;align-items:center;justify-content:space-between;
-  gap:1rem;padding:.9rem clamp(1.2rem,4vw,3rem);transition:background .45s ease}
-nav::before{content:"";position:absolute;inset:0;backdrop-filter:saturate(1.8) blur(18px);-webkit-backdrop-filter:saturate(1.8) blur(18px);
-  background:rgba(251,251,253,0);transition:background .45s ease;pointer-events:none}
-nav.solid::before{background:rgba(251,251,253,.72)}
-nav.on-dark.solid::before{background:rgba(11,12,13,.55)}
-nav>*{position:relative}
-.brand{display:flex;align-items:center;gap:.5rem;text-decoration:none}
-.brand img{height:26px;transition:opacity .3s}
-.brand .lw{position:absolute}
-nav.solid .lw{opacity:0}
-nav:not(.solid) .lo{opacity:0}
-.navlinks{display:flex;gap:.2rem;align-items:center;border:1px solid rgba(0,0,0,.08);background:rgba(251,251,253,.55);
-  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-radius:999px;padding:.3rem;transition:background .45s,border-color .45s}
-nav.on-dark .navlinks{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.14)}
-.navlinks a{font-size:.8rem;font-weight:600;color:#424245;text-decoration:none;padding:.42rem .95rem;border-radius:999px;transition:color .3s,background .3s}
-.navlinks a:hover{background:rgba(0,0,0,.06);color:var(--ink)}
-nav.on-dark .navlinks a{color:rgba(245,245,247,.8)}
-nav.on-dark .navlinks a:hover{background:rgba(255,255,255,.12);color:#fff}
-.nav-cta{display:inline-flex;align-items:center;background:var(--grad);color:#2a0e02!important;border-radius:999px;
-  padding:.55rem 1.15rem;font-weight:700;font-size:.8rem;text-decoration:none;transition:transform .25s,box-shadow .25s}
-.nav-cta:hover{transform:scale(1.05);box-shadow:0 8px 26px rgba(240,78,35,.35)}
-@media(max-width:820px){.navlinks{display:none}}
-
-/* ---------- scrub sections ---------- */
-.scrub{position:relative;background:var(--night)}
-.scrub-sticky{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
-.scrub-sticky video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .6s}
-.scrub-sticky video.on{opacity:1}
-.scrub-poster{position:absolute;inset:0}
-.poster-hero{background:radial-gradient(120% 90% at 70% 0%,rgba(240,120,35,.28),transparent 55%),radial-gradient(90% 80% at 20% 100%,rgba(6,60,72,.85),transparent 60%),linear-gradient(180deg,#0c2b33 0%,#0b1618 55%,#050708 100%)}
-.poster-coin{background:radial-gradient(70% 60% at 50% 55%,rgba(240,110,35,.26),transparent 60%),linear-gradient(180deg,#111213 0%,#050506 100%)}
-.poster-ascent{background:radial-gradient(120% 80% at 50% 0%,rgba(250,160,60,.34),transparent 55%),linear-gradient(180deg,#123038 0%,#0b1618 70%,#050708 100%)}
-.scrub-veil{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(5,7,8,.4),rgba(5,7,8,0) 28%,rgba(5,7,8,.1) 55%,rgba(5,7,8,.72) 82%);pointer-events:none}
-.msg{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;
-  text-align:center;padding:0 clamp(1.4rem,6vw,6rem) clamp(5.5rem,14vh,9.5rem);color:var(--ivorydk);opacity:0;
-  will-change:transform,opacity;pointer-events:none}
-.msg .tag{font-size:.78rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(245,245,247,.72);margin-bottom:1.2rem}
-.msg h1,.msg .big{font-weight:800;letter-spacing:-.035em;line-height:1.04;font-size:clamp(2.2rem,6.2vw,4.6rem);max-width:17ch;text-wrap:balance;text-shadow:0 2px 34px rgba(0,0,0,.5)}
-.msg p{margin-top:1.1rem;max-width:52ch;font-size:clamp(.98rem,1.4vw,1.2rem);color:rgba(245,245,247,.9);text-wrap:balance;text-shadow:0 1px 20px rgba(0,0,0,.55)}
-.msg .accent{color:var(--amber)}
-.scroll-hint{position:absolute;left:50%;bottom:1.7rem;transform:translateX(-50%);z-index:5;font-size:.72rem;
-  font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:rgba(245,245,247,.65);animation:bob 2.4s ease-in-out infinite}
-@keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,8px)}}
-
-/* ---------- light sections ---------- */
-section.light{padding:clamp(5.5rem,11vw,9rem) clamp(1.4rem,6vw,6rem)}
-.narrow{max-width:1120px;margin:0 auto}
-.center{text-align:center}
-.eyebrow{font-size:.8rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--vermilion);margin-bottom:1.2rem}
-h2{font-weight:800;letter-spacing:-.03em;line-height:1.08;font-size:clamp(1.9rem,5vw,3.4rem);max-width:24ch;text-wrap:balance;margin:0 auto .9rem}
-.lead{color:var(--gray);font-size:clamp(1.02rem,1.5vw,1.22rem);max-width:62ch;margin:0 auto;text-wrap:balance}
-.lead b{color:var(--ink);font-weight:600}
-
-/* problem card */
-.problem-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:2.6rem;align-items:center;margin-top:3.6rem;text-align:left}
-.card-orange{background:var(--grad);color:#fff;border-radius:var(--r);padding:2.6rem 2.4rem;box-shadow:0 24px 60px rgba(240,78,35,.26)}
-.card-orange p{margin-bottom:1.3em}
-.card-orange p:last-child{margin-bottom:0}
-.card-orange strong{display:block;font-weight:800;font-size:1.04rem;margin-bottom:.2em}
-.card-orange span{color:rgba(255,255,255,.9)}
-.problem-side{font-size:clamp(1.25rem,2.1vw,1.6rem);font-weight:700;line-height:1.35;letter-spacing:-.01em}
-@media(max-width:880px){.problem-grid{grid-template-columns:1fr;gap:2rem}}
-
-/* ---------- bento tiles ---------- */
-.bento{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:200px;gap:1rem;margin-top:3.6rem;text-align:left}
-.tile{position:relative;border-radius:var(--r);overflow:hidden;background:var(--paper);
-  transition:transform .4s cubic-bezier(.2,.7,.2,1),box-shadow .4s;text-decoration:none;color:inherit;display:block}
-.tile:hover{transform:scale(1.015);box-shadow:0 24px 60px rgba(0,0,0,.12);z-index:2}
-.tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
-.tile-badge{position:absolute;top:1.3rem;right:1.3rem;z-index:2;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.28);
-  color:#fff;font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.4em .9em;border-radius:999px}
-.tile .shade{position:absolute;inset:0;z-index:1;background:linear-gradient(to top,rgba(0,0,0,.65),transparent 55%)}
-.tile-cap{position:relative;z-index:2;padding:1.6rem;height:100%;display:flex;flex-direction:column;justify-content:flex-end}
-.tile-cap .tv{font-weight:800;letter-spacing:-.03em;font-size:clamp(1.5rem,2.2vw,2rem);line-height:1.05}
-.tile-cap h3{font-size:1.05rem;font-weight:800;letter-spacing:-.015em;line-height:1.25}
-.tile-cap p{font-size:.86rem;margin-top:.35rem;opacity:.85}
-.tile.img h3,.tile.img p{color:#fff}
-.tile.plain{padding:1.7rem;display:flex;flex-direction:column;justify-content:flex-end}
-.tile.plain h3{color:var(--ink)}
-.tile.plain p{color:var(--gray)}
-.tile.dark{background:var(--night)}
-.tile.dark .tile-cap h3,.tile.dark .tv{color:#fff}
-.tile.dark .tile-cap p{color:rgba(245,245,247,.68)}
-.tile.grad{background:var(--grad)}
-.tile.grad .tile-cap h3,.tile.grad .tv{color:#fff}
-.tile.grad .tile-cap p{color:rgba(255,255,255,.88)}
-.tile.t-2x2{grid-column:span 2;grid-row:span 2}
-.tile.t-2x1{grid-column:span 2}
-.t-link{margin-top:.9rem;font-weight:700;font-size:.86rem}
-.t-link::after{content:" →";transition:margin .2s}
-.tile:hover .t-link::after{margin-left:5px}
-.socials{display:flex;gap:.6rem;margin-top:.9rem}
-.socials a{width:2.2rem;height:2.2rem;border-radius:50%;border:1.5px solid rgba(255,255,255,.4);display:flex;
-  align-items:center;justify-content:center;font-size:.66rem;font-weight:800;color:#fff;text-decoration:none;transition:background .2s,border-color .2s}
-.socials a:hover{background:var(--vermilion);border-color:var(--vermilion)}
-@media(max-width:980px){.bento{grid-template-columns:repeat(2,1fr);grid-auto-rows:190px}}
-@media(max-width:540px){.bento{grid-template-columns:1fr;grid-auto-rows:210px}.tile.t-2x2,.tile.t-2x1{grid-column:span 1}.tile.t-2x2{grid-row:span 2}}
-
-/* ---------- about ---------- */
-.about{background:var(--paper);border-radius:calc(var(--r)*1.25);overflow:hidden}
-.about-grid{display:grid;grid-template-columns:1fr 1fr;align-items:stretch}
-.about-text{padding:4.6rem 4rem;display:flex;flex-direction:column;justify-content:center;text-align:left}
-.about-text p{margin-bottom:1.1em;color:var(--gray)}
-.about-text p strong{color:var(--ink)}
-.about-sign{margin-top:1.1em;font-weight:700;line-height:1.45;color:var(--ink)!important}
-.about-sign small{display:block;font-weight:600;color:var(--gray)}
-.about-photo{position:relative;min-height:480px}
-.about-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 18%}
-@media(max-width:880px){.about-grid{grid-template-columns:1fr}.about-text{padding:3rem 2rem}.about-photo{min-height:380px}}
-
-/* ---------- story video ---------- */
-.story-frame{position:relative;border-radius:calc(var(--r)*1.25);overflow:hidden;margin-top:3.6rem;aspect-ratio:16/9;
-  box-shadow:0 30px 80px rgba(0,0,0,.18);background:#111;display:block}
-.story-frame img{width:100%;height:100%;object-fit:cover;object-position:center 30%;opacity:.9}
-.story-play{position:absolute;inset:0;display:flex;align-items:flex-end;justify-content:center;padding-bottom:9%;
-  background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,.4))}
-.story-badge{background:var(--grad);color:#fff;font-weight:700;font-size:clamp(1rem,2vw,1.4rem);padding:.75em 1.6em;
-  border-radius:999px;box-shadow:0 12px 36px rgba(0,0,0,.3)}
-
-/* ---------- webinár ---------- */
-.webinar{background:var(--night);color:#fff;position:relative;overflow:hidden;border-radius:calc(var(--r)*1.25)}
-.webinar::before{content:'';position:absolute;inset:0;background:radial-gradient(110% 80% at 85% 8%,rgba(240,110,35,.2),transparent 55%),radial-gradient(80% 70% at 8% 95%,rgba(240,162,58,.14),transparent 60%);pointer-events:none}
-.webinar-in{position:relative;padding:4.2rem clamp(1.8rem,4vw,4.5rem)}
-.webinar h2{color:#fff}
-.webinar .lead{color:rgba(245,245,247,.78)}
-.web-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:3.2rem;margin-top:3rem;align-items:center;text-align:left}
-.web-list{list-style:none;display:flex;flex-direction:column;gap:1rem}
-.web-list li{display:flex;gap:.9rem;align-items:flex-start;font-size:1.02rem;color:rgba(245,245,247,.92)}
-.web-list li::before{content:'';flex:0 0 9px;height:9px;border-radius:50%;background:var(--grad);margin-top:.5em;box-shadow:0 0 0 4px rgba(240,78,35,.18)}
-.web-cta{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:var(--r);padding:2.2rem 2rem;backdrop-filter:blur(6px);text-align:center}
-.web-cta p{color:rgba(245,245,247,.75);margin-bottom:1.5em}
-@media(max-width:880px){.web-grid{grid-template-columns:1fr;gap:2.4rem}}
-
-/* ---------- kurz ---------- */
-.course-card{background:var(--paper);border-radius:calc(var(--r)*1.25);padding:3.6rem;margin-top:3.6rem;
-  display:grid;grid-template-columns:1.4fr .8fr;gap:3rem;align-items:center;text-align:left}
-.course-card h3{font-size:clamp(1.35rem,2.4vw,1.8rem);font-weight:800;letter-spacing:-.015em;line-height:1.25}
-.course-card .sub{color:var(--gray);margin-top:.5em}
-.course-points{margin-top:1.8em;display:flex;flex-direction:column;gap:1em}
-.course-points strong{display:block}
-.course-points span{color:var(--gray)}
-.price-box{text-align:center;background:#fff;border-radius:var(--r);padding:2.2rem 1.8rem;box-shadow:0 16px 44px rgba(0,0,0,.07)}
-.price-old{color:var(--gray);text-decoration:line-through;font-size:1.15rem;font-weight:600}
-.price-now{font-weight:800;letter-spacing:-.03em;font-size:2.8rem;line-height:1.1}
-.price-dph{font-size:.83rem;color:var(--gray);margin:.4em 0 1.5em}
-.price-note{font-size:.82rem;color:var(--gray);margin-top:1.3em;line-height:1.5}
-@media(max-width:880px){.course-card{grid-template-columns:1fr;padding:2.6rem 2rem}}
-
-/* ---------- testimonials ---------- */
-.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:3.6rem;text-align:left}
-.testi{background:var(--paper);border-radius:var(--r);padding:1.9rem 1.7rem;display:flex;flex-direction:column;gap:1.2rem;
-  transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s}
-.testi:hover{transform:translateY(-5px);box-shadow:0 20px 46px rgba(0,0,0,.08)}
-.testi p{color:var(--gray);font-size:.96rem}
-.testi strong{font-weight:700}
-.testi strong small{display:block;font-weight:600;color:var(--gray);font-size:.83rem}
-@media(max-width:880px){.testi-grid{grid-template-columns:1fr}}
-
-/* ---------- FAQ ---------- */
-.faq{max-width:760px;margin:3.4rem auto 0;text-align:left}
-.faq details{border-bottom:1px solid var(--hair);padding:.4rem 0}
-.faq summary{cursor:pointer;font-weight:700;font-size:1.03rem;padding:1.1rem 2.4rem 1.1rem 0;position:relative;list-style:none}
-.faq summary::-webkit-details-marker{display:none}
-.faq summary::after{content:'+';position:absolute;right:.2rem;top:50%;transform:translateY(-50%);
-  font-size:1.5rem;font-weight:400;color:var(--vermilion);transition:transform .3s}
-.faq details[open] summary::after{transform:translateY(-50%) rotate(45deg)}
-.faq .a{padding:0 0 1.3rem;color:var(--gray)}
-
-/* ---------- manifest ---------- */
-.claim{font-weight:700;letter-spacing:-.025em;line-height:1.22;font-size:clamp(1.5rem,3.2vw,2.4rem);max-width:26ch;margin:0 auto;color:rgba(245,245,247,.65);text-wrap:balance}
-.claim b{color:#fff;font-weight:700}
-
-/* ---------- horizontal rail: krátke pohľady ---------- */
-.hscroll{position:relative;background:var(--canvas)}
-.hs-sticky{position:sticky;top:0;height:100vh;height:100svh;display:flex;flex-direction:column;justify-content:center;
-  gap:clamp(1.6rem,3.5vh,2.4rem);overflow:hidden;padding:4rem 0 2.2rem}
-.hs-head{text-align:center;padding:0 clamp(1.4rem,6vw,6rem)}
-.hrail{display:flex;gap:1.1rem;padding:0 10vw;align-items:stretch;will-change:transform}
-.hcard{flex:0 0 clamp(230px,24vw,290px);background:#fff;border:1px solid var(--hair);border-radius:var(--r);
-  overflow:hidden;box-shadow:0 14px 36px rgba(0,0,0,.05);display:flex;flex-direction:column;text-align:left}
-.hcard img{width:100%;aspect-ratio:4/3;object-fit:cover}
-.hcard .hbody{padding:1.3rem 1.3rem 1.5rem}
-.hcard .views{display:inline-block;background:var(--grad);color:#fff;font-size:.7rem;font-weight:700;padding:.3em .8em;border-radius:999px;margin-bottom:.7em}
-.hcard h3{font-size:.98rem;font-weight:700;letter-spacing:-.01em;line-height:1.35}
-.hprog{height:3px;width:min(420px,60vw);margin:0 auto;background:var(--hair);border-radius:2px;overflow:hidden}
-.hprog i{display:block;height:100%;background:var(--grad);transform:scaleX(0);transform-origin:left}
-@media (prefers-reduced-motion: reduce){
-  .hscroll{height:auto!important}
-  .hs-sticky{position:static;height:auto}
-  .hrail{overflow-x:auto;transform:none!important;-webkit-overflow-scrolling:touch;padding-bottom:1rem}
-  .hprog{display:none}
-}
-@media(max-width:640px){.hcard{flex-basis:74vw}}
-
-/* ---------- komunita ---------- */
-.community-photo{margin-top:3.6rem;border-radius:calc(var(--r)*1.25);overflow:hidden;box-shadow:0 30px 70px rgba(0,0,0,.14)}
-.community-photo img{width:100%;height:440px;object-fit:cover;object-position:center 30%}
-@media(max-width:700px){.community-photo img{height:300px}}
-
-/* ---------- final cta + contact ---------- */
-.contact{background:var(--night);color:var(--ivorydk);padding:clamp(5rem,10vw,8rem) clamp(1.4rem,6vw,6rem);text-align:center;border-radius:calc(var(--r)*1.25)}
-.contact h2{color:#fff}
-.contact .lead{color:rgba(245,245,247,.72)}
-.contact .btn{margin-top:2rem}
-
-footer{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;padding:3rem clamp(1.4rem,6vw,6rem) 2rem;color:var(--gray);font-size:.82rem}
-footer .fnote{max-width:640px;line-height:1.6}
-footer .flinks a{text-decoration:underline;margin-right:.9rem}
-
-/* ---------- reveal ---------- */
-.rv{opacity:0;transform:translateY(26px);transition:opacity .9s cubic-bezier(.2,.65,.2,1),transform .9s cubic-bezier(.2,.65,.2,1)}
-.rv.in{opacity:1;transform:none}
-.rv-d1{transition-delay:.1s}.rv-d2{transition-delay:.2s}.rv-d3{transition-delay:.3s}
-
-section+section{margin-top:0}
-.section-pad{padding:0 clamp(1.4rem,6vw,6rem)}
-
-@media (prefers-reduced-motion: reduce){
-  .rv{opacity:1;transform:none;transition:none}
-  .scroll-hint{animation:none}
-  html{scroll-behavior:auto}
-  .msg{position:static;opacity:1;transform:none;padding:4rem clamp(1.4rem,6vw,6rem)}
-  .scrub-sticky{height:auto;position:static}
-}
-</style>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;300;400;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
 
 <nav id="nav" class="on-dark">
-  <a class="brand" href="#top">
-    <img class="lw" src="assets/logo-white.png" alt="Hodlypodly">
-    <img class="lo" src="assets/logo-orange.png" alt="">
+  <a class="brand" href="index.html">
+    <span style="position:relative;display:inline-flex">
+      <img class="turtle w" src="assets/turtle-white.png" alt="">
+      <img class="turtle o" src="assets/turtle-orange.png" alt="">
+    </span>
+    <span style="position:relative;display:inline-flex">
+      <img class="wordmark w" src="assets/wordmark-white.png" alt="Hodlypodly">
+      <img class="wordmark o" src="assets/wordmark-orange.png" alt="">
+    </span>
   </a>
   <div class="navlinks">
-    <a href="#ekosystem">Kurzy</a>
-    <a href="#webinar">Webinár</a>
+    <a href="kurz.html">Kurz</a>
+    <a href="webinar.html">Webinár</a>
     <a href="#pohlady">Obsah</a>
     <a href="#robert">O nás</a>
     <a href="#kontakt">Kontakt</a>
   </div>
-  <a class="nav-cta" href="#webinar">Začať zadarmo</a>
+  <a class="nav-cta" href="#" data-modal-open>Začať zadarmo</a>
 </nav>
 
 <!-- ======== SCRUB 1 · HERO ======== -->
@@ -296,11 +46,11 @@ section+section{margin-top:0}
       <p class="big">Bitcoin v mojich rukách.</p>
     </div>
     <div class="msg">
-      <p class="big">Súkromne. Bezpečne.<br>Suverénne.</p>
+      <p class="big">Súkromne. Bezpečne.<br><span class="thin">Suverénne.</span></p>
     </div>
     <div class="msg">
-      <p class="big" style="font-size:clamp(1.7rem,3.6vw,2.9rem)">Porozumejte Bitcoinu a spravujte<br>svoj kapitál s istotou.</p>
-      <a class="btn" href="#webinar" style="margin-top:1.8rem">Začať správne s Bitcoinom</a>
+      <p class="big" style="font-size:clamp(1.7rem,3.6vw,2.9rem)">Porozumejte Bitcoinu<br><span class="thin">a spravujte svoj kapitál s istotou.</span></p>
+      <a class="btn" href="#" data-modal-open style="margin-top:1.8rem">Začať správne s Bitcoinom</a>
       <span class="btn-note">Bezplatný úvodný webinár.</span>
     </div>
 
@@ -309,10 +59,10 @@ section+section{margin-top:0}
 </div>
 
 <!-- ======== PROBLÉM ======== -->
-<section class="light">
+<section class="sec">
   <div class="narrow center rv">
     <span class="eyebrow">Prečo teraz</span>
-    <h2>Dnešný finančný systém mení pravidlá. <span style="color:var(--gray);font-weight:600">Nie vždy vo váš prospech.</span></h2>
+    <h2>Dnešný finančný systém mení pravidlá. <span class="thin">Nie vždy vo váš prospech.</span></h2>
   </div>
   <div class="narrow problem-grid">
     <div class="card-orange rv">
@@ -323,7 +73,7 @@ section+section{margin-top:0}
       <p><strong>Skutočné vlastníctvo znamená kontrolu.</strong>
       <span>Nie každý majetok dnes poskytuje slobodu rozhodovať.</span></p>
     </div>
-    <p class="problem-side rv rv-d1">Rastie záujem o kapitál, ktorý môže byť skutočne vo vašich rukách.</p>
+    <p class="problem-side rv rv-d1">Rastie záujem o kapitál, ktorý môže byť <b>skutočne vo vašich rukách.</b></p>
   </div>
 </section>
 
@@ -334,7 +84,7 @@ section+section{margin-top:0}
     <video muted playsinline preload="none"></video>
     <div class="scrub-veil"></div>
 
-    <div class="msg"><p class="big">Nákup Bitcoinu je len začiatok.</p></div>
+    <div class="msg"><p class="big"><span class="thin">Nákup Bitcoinu</span><br>je len začiatok.</p></div>
     <div class="msg"><p class="big">Rozhoduje spôsob,<br>akým ho <span class="accent">držíte</span>.</p></div>
     <div class="msg">
       <p class="big">Skutočné vlastníctvo<br>znamená kontrolu.</p>
@@ -344,77 +94,83 @@ section+section{margin-top:0}
 </div>
 
 <!-- ======== BENTO · EKOSYSTÉM ======== -->
-<section class="light" id="ekosystem">
+<section class="sec sec--paper" id="ekosystem">
   <div class="narrow center rv">
     <span class="eyebrow">Čo je Hodlypodly</span>
-    <h2>Jedna cesta. Všetko, čo na ňu potrebujete.</h2>
+    <h2>Jedna cesta. <span class="thin">Všetko, čo na ňu potrebujete.</span></h2>
     <p class="lead">Od prvého porozumenia až po dlhodobú istotu — vzdelávanie, nástroje a komunita v jednom prostredí.</p>
   </div>
 
   <div class="narrow bento">
-    <a class="tile dark t-2x1 rv" href="#webinar">
+    <!-- riadok 1-2 -->
+    <a class="tile dark t-2x2 rv" href="webinar.html">
       <div class="tile-cap">
-        <span class="t-link" style="color:var(--amber);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700">Začnite tu · Zadarmo</span>
-        <h3 style="margin-top:.5rem">Ako mať kapitál skutočne vo vlastných rukách v ére Bitcoinu.</h3>
-        <p>60 minút, priestor na otázky.</p>
+        <span class="teyebrow">Začnite tu · Zadarmo</span>
+        <h3 style="font-size:clamp(1.2rem,2vw,1.6rem)">Ako mať kapitál skutočne vo vlastných rukách v ére Bitcoinu.</h3>
+        <p>Bezplatný online webinár. 60 minút, menšia skupina, priestor na otázky.</p>
+        <span class="t-link" style="color:var(--amber)">Viac o webinári</span>
       </div>
     </a>
 
-    <a class="tile plain t-2x2 rv rv-d1" href="#kurz">
-      <span style="font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--vermilion)">Prvý kurz</span>
-      <div class="tv" style="margin-top:.6rem">Bitcoin od nuly</div>
-      <p style="color:var(--gray);margin-top:.4rem">Začnite bez chaosu a chýb. Bezpečný nákup a držanie, krok za krokom.</p>
-      <p style="margin-top:1rem"><span style="color:var(--gray);text-decoration:line-through;font-weight:600">197 €</span> <strong style="font-size:1.5rem;font-weight:800">147 €</strong></p>
-      <span class="t-link" style="color:var(--vermilion)">Viac o kurze</span>
-    </a>
+    <div class="tile plain rv rv-d1">
+      <div class="tile-cap">
+        <span class="teyebrow">Skúsenosť</span>
+        <div class="tv">2019</div>
+        <p>Bitcoinu sa venujeme dlhodobo a strategicky.</p>
+      </div>
+    </div>
 
-    <a class="tile img rv rv-d2" href="#robert">
+    <a class="tile img rv rv-d2" href="kurz.html">
       <img src="assets/tile-wallet.jpg" alt="">
       <div class="shade"></div>
       <div class="tile-cap"><h3>Bezpečné držanie</h3><p>Hardvérové peňaženky prakticky.</p></div>
     </a>
 
-    <a class="tile grad rv rv-d1" href="#pohlady">
+    <a class="tile gradbg t-2x1 rv rv-d1" href="#komunita">
       <div class="tile-cap">
-        <span style="font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;opacity:.9">Komunita</span>
-        <h3 style="margin-top:.5rem">Hodler · Sovereign · Citadel</h3>
-        <span class="t-link">Preskúmať</span>
+        <span class="teyebrow">Komunita</span>
+        <h3>Hodler · Sovereign · Citadel</h3>
+        <span class="t-link" style="color:#fff">Preskúmať</span>
       </div>
     </a>
 
-    <a class="tile img t-2x2 rv rv-d2" href="#robert">
+    <!-- riadok 3-4 -->
+    <a class="tile plain t-2x1 rv" href="kurz.html">
+      <div class="tile-cap">
+        <span class="teyebrow">Prvý kurz</span>
+        <h3>Bitcoin od nuly</h3>
+        <p><span style="text-decoration:line-through">197 €</span> <b style="font-weight:800;font-size:1.25rem;color:var(--ink)">147 €</b> — začnite bez chaosu a chýb.</p>
+        <span class="t-link" style="color:var(--vermilion)">Viac o kurze</span>
+      </div>
+    </a>
+
+    <a class="tile img t-2x2 rv rv-d1" href="#robert">
       <img src="assets/robert-kosela.jpg" alt="Robert Molnár" style="object-position:center 15%">
       <div class="shade"></div>
       <div class="tile-cap"><h3>Robert Molnár</h3><p>Konzultant a zakladateľ. Bitcoinu sa venuje od roku 2019.</p></div>
     </a>
 
-    <div class="tile plain rv">
-      <span style="font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--vermilion)">1:1</span>
-      <h3 style="margin-top:.6rem">Konzultácie</h3>
-      <p style="color:var(--gray);margin-top:.3rem">Individuálny pohľad na vašu situáciu.</p>
-    </div>
-
-    <div class="tile dark t-2x1 rv rv-d1">
-      <div class="tile-cap">
-        <span style="font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--amber)">Krátke pohľady na Bitcoin</span>
-        <h3 style="margin-top:.5rem">Vzdelávanie pokračuje aj mimo kurzu.</h3>
-        <div class="socials">
-          <a href="#" aria-label="YouTube">YT</a><a href="#" aria-label="Instagram">IG</a>
-          <a href="#" aria-label="TikTok">TT</a><a href="#" aria-label="Facebook">FB</a><a href="#" aria-label="LinkedIn">IN</a>
-        </div>
-      </div>
-    </div>
-
-    <a class="tile img rv rv-d2" href="#robert">
+    <a class="tile img rv rv-d2" href="#pohlady">
       <img src="assets/tile-shell.jpg" alt="">
       <div class="shade"></div>
       <div class="tile-cap"><h3>Pokoj. Trpezlivosť.<br>Dlhý horizont.</h3></div>
     </a>
+
+    <div class="tile dark rv rv-d2">
+      <div class="tile-cap">
+        <span class="teyebrow">Sledujte nás</span>
+        <h3>Obsah priebežne.</h3>
+        <div class="socials">
+          <a href="#" aria-label="YouTube">YT</a><a href="#" aria-label="Instagram">IG</a>
+          <a href="#" aria-label="TikTok">TT</a><a href="#" aria-label="Facebook">FB</a>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
 <!-- ======== O ROBERTOVI ======== -->
-<section class="light" id="robert">
+<section class="sec" id="robert">
   <div class="narrow about rv">
     <div class="about-grid">
       <div class="about-text">
@@ -434,9 +190,9 @@ section+section{margin-top:0}
 </section>
 
 <!-- ======== STORY VIDEO ======== -->
-<section class="light" style="padding-top:0">
+<section class="sec sec--paper">
   <div class="narrow center rv">
-    <h2>Prečo som založil Hodlypodly? <span style="color:var(--gray);font-weight:600">Moja cesta k finančnej suverenite.</span></h2>
+    <h2>Prečo som založil Hodlypodly? <span class="thin">Moja cesta k finančnej suverenite.</span></h2>
   </div>
   <a class="narrow story-frame rv rv-d1" href="#" aria-label="Prehrať video: Moja cesta k finančnej suverenite">
     <img src="assets/robert-zem.jpg" alt="" loading="lazy">
@@ -445,11 +201,11 @@ section+section{margin-top:0}
 </section>
 
 <!-- ======== WEBINÁR ======== -->
-<section class="light" id="webinar">
-  <div class="narrow webinar rv">
-    <div class="webinar-in">
+<section class="sec" id="webinar">
+  <div class="narrow darkcard rv">
+    <div class="darkcard-in">
       <span class="eyebrow">Bezplatný online webinár</span>
-      <h2 style="max-width:none">Ako mať kapitál skutočne vo vlastných rukách v ére digitálnych peňazí.</h2>
+      <h2 style="max-width:none">Ako mať kapitál skutočne vo vlastných rukách <span class="thin" style="color:rgba(245,245,247,.7)">v ére digitálnych peňazí.</span></h2>
       <p class="lead" style="margin:0">Bezplatný online webinár o tom, ako správne držať Bitcoin, vyhnúť sa chybám a premýšľať v dlhodobom horizonte.</p>
       <div class="web-grid">
         <div>
@@ -460,10 +216,11 @@ section+section{margin-top:0}
             <li>Ako premýšľať o bezpečnom držaní kapitálu</li>
             <li>Čo znamená mať Bitcoin skutočne vo vlastných rukách</li>
           </ul>
+          <a class="btn btn-ghost" href="webinar.html" style="margin-top:1.8rem">Viac o webinári</a>
         </div>
         <div class="web-cta">
           <p>Webinár prebieha v menšej skupine, aby bol zachovaný priestor pre otázky a diskusiu.</p>
-          <a class="btn" href="#registracia">Zaregistrovať sa na webinár</a>
+          <a class="btn" href="#" data-modal-open>Zaregistrovať sa na webinár</a>
           <span class="btn-note">Kapacita je limitovaná.</span>
         </div>
       </div>
@@ -472,11 +229,11 @@ section+section{margin-top:0}
 </section>
 
 <!-- ======== KURZ ======== -->
-<section class="light" id="kurz" style="padding-top:0">
+<section class="sec sec--paper" id="kurz">
   <div class="narrow center rv"><span class="eyebrow">Prvý kurz</span></div>
   <div class="narrow course-card rv">
     <div>
-      <h3>Bitcoin od nuly — Začnite bez chaosu a chýb.</h3>
+      <h3>Bitcoin od nuly — <span class="thin">Začnite bez chaosu a chýb.</span></h3>
       <p class="sub">Online kurz pre ľudí, ktorí chcú pochopiť Bitcoin a naučiť sa ho bezpečne kúpiť a držať.</p>
       <div class="course-points">
         <p><strong>Pochopíte, čo Bitcoin skutočne je</strong><span>bez technického balastu a zbytočného hypu.</span></p>
@@ -488,17 +245,17 @@ section+section{margin-top:0}
       <span class="price-old">197 €</span>
       <div class="price-now">147 €</div>
       <p class="price-dph">Ceny sú s DPH.</p>
-      <a class="btn" href="#" style="width:100%;justify-content:center">Kúpiť kurz</a>
-      <a class="btn btn-ghost" href="#" style="width:100%;justify-content:center;margin-top:.7rem">Viac o kurze</a>
+      <a class="btn" href="kurz.html" style="width:100%;justify-content:center">Kúpiť kurz</a>
+      <a class="btn btn-ghost" href="kurz.html" style="width:100%;justify-content:center;margin-top:.7rem">Viac o kurze</a>
       <p class="price-note">Prvá edícia v zvýhodnenej cene je určená pre obmedzený počet účastníkov.</p>
     </div>
   </div>
 </section>
 
 <!-- ======== TESTIMONIALS ======== -->
-<section class="light" style="padding-top:0">
+<section class="sec">
   <div class="narrow center rv">
-    <h2>Dôvera tých, čo už začali</h2>
+    <h2>Dôvera tých, <span class="thin">čo už začali.</span></h2>
     <p class="lead">Reálne skúsenosti ľudí, ktorí sa rozhodli pochopiť Bitcoin a prevziať kontrolu nad svojím kapitálom.</p>
   </div>
   <div class="narrow testi-grid">
@@ -509,8 +266,8 @@ section+section{margin-top:0}
 </section>
 
 <!-- ======== FAQ ======== -->
-<section class="light" style="padding-top:0">
-  <div class="narrow center rv"><h2>Otázky pred prvým krokom</h2></div>
+<section class="sec sec--paper">
+  <div class="narrow center rv"><h2>Otázky <span class="thin">pred prvým krokom.</span></h2></div>
   <div class="faq rv">
     <details><summary>Je kurz vhodný pre úplných začiatočníkov?</summary><p class="a">Áno. Kurz je navrhnutý pre ľudí, ktorí s Bitcoinom ešte nemajú skúsenosť alebo si nie sú istí, či postupujú správne.</p></details>
     <details><summary>Potrebujem technické znalosti?</summary><p class="a">Nie. Všetko je vysvetlené zrozumiteľne a prakticky.</p></details>
@@ -531,8 +288,8 @@ section+section{margin-top:0}
     <div class="scrub-veil"></div>
 
     <div class="msg">
-      <img src="assets/logo-white.png" alt="" style="height:34px;margin-bottom:1.6rem">
-      <p class="big">Bitcoin nie je len investícia.</p>
+      <img src="assets/turtle-white.png" alt="" style="height:38px;margin-bottom:1.6rem">
+      <p class="big">Bitcoin nie je <span class="thin">len investícia.</span></p>
     </div>
     <div class="msg">
       <p class="big">Je to zmena spôsobu<br>vlastníctva kapitálu.</p>
@@ -540,7 +297,7 @@ section+section{margin-top:0}
     </div>
     <div class="msg">
       <p class="big">Bitcoin <span class="accent">v mojich</span> rukách.</p>
-      <a class="btn" href="#registracia" style="margin-top:1.8rem">Začať správne s Bitcoinom</a>
+      <a class="btn" href="#" data-modal-open style="margin-top:1.8rem">Začať správne s Bitcoinom</a>
     </div>
   </div>
 </div>
@@ -550,10 +307,10 @@ section+section{margin-top:0}
   <div class="hs-sticky">
     <div class="hs-head rv">
       <span class="eyebrow">Krátke pohľady na Bitcoin</span>
-      <h2>Vzdelávanie pokračuje aj mimo kurzu.</h2>
+      <h2>Vzdelávanie pokračuje <span class="thin">aj mimo kurzu.</span></h2>
       <p class="lead">Obsah publikujeme priebežne.</p>
     </div>
-    <div class="hrail" id="hrail">
+    <div class="hrail">
       <div class="hcard"><img src="assets/short-1.jpg" alt=""><div class="hbody"><span class="views">▸ 5 421</span><h3>3 veci, ktoré odhalia investičný podvod</h3></div></div>
       <div class="hcard"><img src="assets/short-2.jpg" alt=""><div class="hbody"><span class="views">▸ 538</span><h3>Súkromie je vzácnejšie od januára 2026</h3></div></div>
       <div class="hcard"><img src="assets/short-3.jpg" alt=""><div class="hbody"><span class="views">▸ 8 268</span><h3>Podvod, ktorý môjho známeho pripravil o desiatky tisíc</h3></div></div>
@@ -563,16 +320,16 @@ section+section{margin-top:0}
       <div class="hcard"><img src="assets/short-7.jpg" alt=""><div class="hbody"><span class="views">▸ 918</span><h3>Bitcoin a Olympiáda v Miláne</h3></div></div>
       <div class="hcard"><img src="assets/short-8.jpg" alt=""><div class="hbody"><span class="views">▸ 344</span><h3>Čo má spoločné Bitcoin a cestovanie?</h3></div></div>
     </div>
-    <div class="hprog"><i id="hprogfill"></i></div>
+    <div class="hprog"><i></i></div>
   </div>
 </div>
 
 <!-- ======== KOMUNITA ======== -->
-<section class="light" id="komunita">
+<section class="sec" id="komunita">
   <div class="narrow center rv">
-    <h2>Vzdelávanie je len prvý krok. <span style="color:var(--gray);font-weight:600">Komunita ľudí, ktorí chcú mať kapitál vo vlastných rukách.</span></h2>
+    <h2>Vzdelávanie je len prvý krok. <span class="thin">Komunita ľudí, ktorí chcú mať kapitál vo vlastných rukách.</span></h2>
     <p class="lead">Hodlypodly nie je len online kurz. Je to dlhodobá cesta k pochopeniu a zodpovednému vlastníctvu kapitálu. Budujeme prostredie pre ľudí, ktorí chcú premýšľať strategicky, zdieľať skúsenosti a rásť v porozumení Bitcoinu.</p>
-    <p class="lead" style="margin-top:1em"><b style="color:var(--ink)">Bez tlaku, bez špekulácií.</b> S dôrazom na pokoj, bezpečnosť a dlhodobý pohľad.</p>
+    <p class="lead" style="margin-top:1em"><b>Bez tlaku, bez špekulácií.</b> S dôrazom na pokoj, bezpečnosť a dlhodobý pohľad.</p>
     <a class="btn btn-ghost rv rv-d1" href="#" style="margin-top:2.2rem">Preskúmať komunitu</a>
   </div>
   <div class="narrow community-photo rv rv-d1">
@@ -581,20 +338,20 @@ section+section{margin-top:0}
 </section>
 
 <!-- ======== FINAL CTA ======== -->
-<section class="light" id="registracia" style="padding-top:0">
+<section class="sec sec--paper" id="registracia">
   <div class="narrow contact on-dark rv">
-    <h2>Začnite s Bitcoinom správne.</h2>
+    <h2>Začnite s Bitcoinom <span class="thin" style="color:rgba(245,245,247,.75)">správne.</span></h2>
     <p class="lead">Získajte porozumenie, istotu a kontrolu nad svojím kapitálom.</p>
-    <a class="btn" href="#">Začať kurz — Bitcoin od nuly *</a>
+    <a class="btn" href="kurz.html">Začať kurz — Bitcoin od nuly *</a>
     <p class="btn-note">*) Prvá edícia pre obmedzený počet účastníkov za zvýhodnených podmienok.</p>
   </div>
 </section>
 
 <!-- ======== FOOTER ======== -->
-<footer id="kontakt" class="section-pad">
+<footer id="kontakt">
   <div class="fnote">
     <img src="assets/logo-orange.png" alt="Hodlypodly" style="height:22px;margin-bottom:.8rem">
-    <p>Bitcoin v mojich rukách. Súkromne. Bezpečne. Suverénne.</p>
+    <p><strong>Bitcoin v mojich rukách.</strong> Súkromne. Bezpečne. Suverénne.</p>
     <p style="margin-top:1rem;font-size:.76rem;opacity:.85">Upozornenie: Informácie na tejto stránke slúžia výlučne na vzdelávacie účely a nepredstavujú investičné poradenstvo ani finančné služby. Bitcoin a digitálne aktíva sú spojené s rizikom volatility a straty hodnoty.</p>
   </div>
   <div>
@@ -605,111 +362,47 @@ section+section{margin-top:0}
   </div>
 </footer>
 
-<script>
-(function(){
-  var reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var isMobile = matchMedia("(max-width:640px)").matches;
+<!-- ======== MODAL · REGISTRÁCIA ======== -->
+<div class="modal-back" id="modalBack" role="dialog" aria-modal="true" aria-label="Registrácia na webinár">
+  <div class="modal">
+    <button class="modal-x" aria-label="Zavrieť">✕</button>
+    <form>
+      <h3><span class="grad">Zadarmo</span> sa zaregistrujte<br>na živé vysielanie</h3>
+      <p class="mnote">Ak zadáte aj telefón, systém vám automaticky pošle <b>SMS pripomienku 15 minút pred začiatkom</b>. Je to zadarmo.</p>
 
-  /* ---- nav state ---- */
-  var nav=document.getElementById("nav"), top=document.getElementById("top");
-  function navState(){ nav.classList.toggle("solid", scrollY > innerHeight*0.5); }
+      <label for="m-date">Termín vysielania</label>
+      <select id="m-date" required>
+        <option value="">Vyberte termín…</option>
+        <option>Streda 12. jún · 19:00</option>
+        <option>Piatok 14. jún · 9:00</option>
+        <option>Pondelok 17. jún · 18:00</option>
+      </select>
 
-  /* ---- reveal on scroll ---- */
-  var io=new IntersectionObserver(function(es){
-    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target);} });
-  },{threshold:.15, rootMargin:"0px 0px -8% 0px"});
-  document.querySelectorAll(".rv").forEach(function(el){io.observe(el);});
+      <label for="m-name">Meno</label>
+      <input id="m-name" type="text" placeholder="Vaše meno" required>
 
-  /* ===== scrub engine: blob-backed video + coalesced seeks (no jank) ===== */
-  var scrubs=[];
-  document.querySelectorAll("[data-scrub]").forEach(function(sec){
-    var len=+sec.dataset.len||360;
-    sec.style.height=len+"vh";
-    var v=sec.querySelector("video");
-    var s={sec:sec,v:v,msgs:sec.querySelectorAll(".msg"),cur:0,src:sec.dataset.src,
-           fetching:false,ready:false,seekBusy:false,pending:-1};
-    v.addEventListener("seeked",function(){
-      s.seekBusy=false;
-      if(s.pending>=0){ var t=s.pending; s.pending=-1; s.seekBusy=true; try{v.currentTime=t;}catch(e){s.seekBusy=false;} }
-    });
-    scrubs.push(s);
-  });
-  function loadVideo(s){
-    if(s.fetching||reduced) return; s.fetching=true;
-    fetch(s.src).then(function(r){return r.blob();}).then(function(b){
-      var url=URL.createObjectURL(b);
-      s.v.src=url; s.v.load();
-      s.v.addEventListener("loadedmetadata",function(){ this.pause(); s.ready=true; s.v.classList.add("on"); },{once:true});
-    }).catch(function(){
-      s.v.src=s.src; s.v.load();
-      s.v.addEventListener("loadedmetadata",function(){ this.pause(); s.ready=true; s.v.classList.add("on"); },{once:true});
-    });
-  }
-  if(scrubs[0]) loadVideo(scrubs[0]);
-  var prime=function(){ scrubs.forEach(function(s){ if(s.ready) s.v.play().then(function(){s.v.pause();}).catch(function(){}); }); removeEventListener("touchstart",prime); };
-  addEventListener("touchstart",prime,{passive:true});
+      <label for="m-mail">E-mail</label>
+      <input id="m-mail" type="email" placeholder="vas@email.sk" required>
 
-  function seekTo(s,t){
-    if(s.seekBusy){ s.pending=t; return; }
-    if(Math.abs(s.v.currentTime-t)<0.006) return;
-    s.seekBusy=true;
-    try{ s.v.currentTime=t; }catch(e){ s.seekBusy=false; }
-  }
+      <label for="m-tel">Telefón <span style="font-weight:400;color:var(--gray)">(nepovinné)</span></label>
+      <input id="m-tel" type="tel" placeholder="+421 …">
 
-  function tick(){
-    var vh=innerHeight;
-    scrubs.forEach(function(s){
-      var r=s.sec.getBoundingClientRect();
-      if(!s.fetching && r.top<vh*2.5) loadVideo(s);
-      if(r.bottom<-vh||r.top>vh*2) return;
-      var p=Math.min(1,Math.max(0,-r.top/(r.height-vh)));
-      s.cur+=(p-s.cur)*0.16;
-      if(Math.abs(p-s.cur)<0.0004) s.cur=p;
-      var d=s.v.duration;
-      if(s.ready&&d&&!reduced) seekTo(s, s.cur*(d-0.05));
-      var n=s.msgs.length;
-      s.msgs.forEach(function(m,j){
-        var a=j/n,b=(j+1)/n,lp=(s.cur-a)/(b-a);
-        var o=0,y=40;
-        if(j===0 && lp<0){ o=1; y=0; } // first message default visible until scroll starts
-        if(lp>0&&lp<1){
-          var fi=Math.min(1,lp/0.3), fo=(j===n-1)?1:Math.min(1,(1-lp)/0.3);
-          o=Math.min(fi,fo); y=(1-fi)*40-(1-fo)*46;
-        } else if(j===0 && s.cur<a){ o=1; y=0; }
-          else if(j===n-1 && lp>=1){ o=1; y=0; }
-        m.style.opacity=o;
-        m.style.transform="translate3d(0,"+y+"px,0)";
-      });
-    });
-    navState();
-    requestAnimationFrame(tick);
-  }
-  if(!reduced) requestAnimationFrame(tick);
-  else scrubs.forEach(function(s){ s.sec.style.height="auto"; loadVideo(s); });
-  navState();
+      <label class="consent"><input type="checkbox" checked>
+        <span>Súhlasím s obdržaním bezplatnej SMS pripomienky 15 minút pred začiatkom vysielania (len ak zadáte telefón).</span>
+      </label>
 
-  /* ===== horizontal scrub rail ===== */
-  var hs=document.querySelector("[data-hscrub]");
-  if(hs){
-    var hlen=+hs.dataset.hlen||320;
-    hs.style.height=hlen+"vh";
-    var rail=document.getElementById("hrail"), fill=document.getElementById("hprogfill");
-    var hcur=0;
-    function htick(){
-      var vh=innerHeight, r=hs.getBoundingClientRect();
-      if(r.bottom>=-vh && r.top<=vh*2){
-        var p=Math.min(1,Math.max(0,-r.top/(r.height-vh)));
-        hcur+=(p-hcur)*0.16;
-        if(Math.abs(p-hcur)<0.0004) hcur=p;
-        var max=Math.max(0, rail.scrollWidth-innerWidth+innerWidth*0.2);
-        rail.style.transform="translate3d(-"+(hcur*max)+"px,0,0)";
-        if(fill) fill.style.transform="scaleX("+hcur+")";
-      }
-      requestAnimationFrame(htick);
-    }
-    if(!reduced) requestAnimationFrame(htick);
-  }
-})();
-</script>
+      <button class="btn" type="submit">Prihlásiť sa zadarmo →</button>
+
+      <p class="gdpr">Registráciou na webinár súhlasíte so zaslaním osobných údajov organizátorovi webinára, ktorý vám môže zaslať dodatočné informácie alebo ďalšie ponuky. Svoj súhlas môžete kedykoľvek odvolať.</p>
+    </form>
+    <div class="success">
+      <div class="big-check">✓</div>
+      <h3>Ste zaregistrovaní!</h3>
+      <p class="mnote" style="margin-bottom:0">Potvrdenie a odkaz na vysielanie vám prídu e-mailom.</p>
+    </div>
+  </div>
+</div>
+
+<script src="assets/app.js"></script>
 </body>
 </html>
