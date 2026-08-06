@@ -312,6 +312,15 @@ h2 .thin,h1 .thin{}
 .community-photo img{width:100%;height:440px;object-fit:cover;object-position:center 30%}
 @media(max-width:700px){.community-photo img{height:300px}}
 
+/* ---------- full-bleed band predely ---------- */
+.band{position:relative;height:clamp(340px,52vh,540px);overflow:hidden}
+.band img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.band .veil{position:absolute;inset:0;background:linear-gradient(to top,rgba(5,10,12,.55),transparent 55%)}
+.band .bcap{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;
+  text-align:center;padding:0 var(--pad) clamp(2.2rem,5vw,3.6rem);color:#fff}
+.band .bcap .bt{font-size:var(--fs-display-sm);font-weight:400;letter-spacing:-.02em;text-shadow:0 2px 24px rgba(0,0,0,.45);text-wrap:balance}
+.band .bcap .bs{margin-top:.5rem;font-size:var(--fs-lead);color:rgba(255,255,255,.85);text-shadow:0 1px 16px rgba(0,0,0,.5)}
+
 /* ---------- contact / final ---------- */
 .contact{background:var(--night);color:var(--ivorydk);padding:clamp(5rem,10vw,8rem) var(--pad);text-align:center;border-radius:calc(var(--r)*1.25);position:relative;overflow:hidden}
 .contact::before{content:'';position:absolute;inset:0;background:radial-gradient(90% 70% at 50% 110%,rgba(255,64,0,.25),transparent 65%);pointer-events:none}
