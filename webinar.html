@@ -30,7 +30,7 @@
     <a href="webinar.html">Webinár</a>
     <a href="index.html#pohlady">Obsah</a>
     <a href="index.html#robert">O nás</a>
-    <a href="index.html#kontakt">Kontakt</a>
+    <a href="#" data-modal-open="#contactBack">Kontakt</a>
   </div>
   <a class="nav-cta" href="#" data-modal-open>Registrovať sa</a>
 </nav>
@@ -200,7 +200,7 @@
   <div>
     <p class="flinks"><a href="#">Obchodné podmienky</a><a href="#">Ochrana osobných údajov</a><a href="#">Disclaimer</a></p>
     <p style="margin-top:.8rem">Polarwox s. r. o. · Plynárenská 3D, 821 09 Bratislava<br>
-    <a href="mailto:hello@hodlypodly.com" style="text-decoration:underline">hello@hodlypodly.com</a> · +421 917 796 556</p>
+    <a href="mailto:hello@hodlypodly.com" style="text-decoration:underline">hello@hodlypodly.com</a> · +421 917 796 556<br><a href="#" data-modal-open="#contactBack" style="text-decoration:underline;font-weight:700;color:var(--vermilion)">Napíšte nám →</a></p>
     <p style="margin-top:.8rem">© 2026 Polarwox s. r. o., IČO: 47 815 426, SR</p>
   </div>
 </footer>
@@ -242,6 +242,52 @@
       <div class="big-check">✓</div>
       <h3>Ste zaregistrovaní!</h3>
       <p class="mnote" style="margin-bottom:0">Potvrdenie a odkaz na vysielanie vám prídu e-mailom.</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- ======== MODAL · KONTAKT ======== -->
+<div class="modal-back" id="contactBack" role="dialog" aria-modal="true" aria-label="Kontaktujte nás">
+  <div class="modal">
+    <button class="modal-x" aria-label="Zavrieť">✕</button>
+    <form name="kontakt" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="kontakt">
+      <p style="display:none"><label>Nevypĺňajte: <input name="bot-field"></label></p>
+      <h3>Napíšte nám.</h3>
+      <p class="mnote">Odpovedáme zvyčajne do 1–2 pracovných dní.</p>
+
+      <div class="mrow">
+        <div>
+          <label for="c-name">Meno</label>
+          <input id="c-name" name="meno" type="text" placeholder="Vaše meno" required>
+        </div>
+        <div>
+          <label for="c-mail">E-mail</label>
+          <input id="c-mail" name="email" type="email" placeholder="vas@email.sk" required>
+        </div>
+      </div>
+
+      <label for="c-topic">Téma</label>
+      <select id="c-topic" name="tema" required>
+        <option value="">Vyberte tému…</option>
+        <option>Otázka ku kurzu</option>
+        <option>Webinár</option>
+        <option>Konzultácia 1:1</option>
+        <option>Komunita</option>
+        <option>Iné</option>
+      </select>
+
+      <label for="c-msg">Správa</label>
+      <textarea id="c-msg" name="sprava" placeholder="S čím vám vieme pomôcť?" required></textarea>
+
+      <button class="btn" type="submit">Odoslať správu →</button>
+      <p class="gdpr">Odoslaním súhlasíte so spracovaním údajov na účel odpovede na vašu správu.</p>
+    </form>
+    <div class="success">
+      <div class="big-check">✓</div>
+      <h3>Správa odoslaná!</h3>
+      <p class="mnote" style="margin-bottom:0">Ďakujeme, ozveme sa vám čo najskôr.</p>
     </div>
   </div>
 </div>

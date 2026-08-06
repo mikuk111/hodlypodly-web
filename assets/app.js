@@ -110,25 +110,39 @@
     requestAnimationFrame(htick);
   }
 
-  /* ===== modal registrácia ===== */
-  var back=document.getElementById("modalBack");
-  if(back){
+  /* ===== modaly (registrácia + kontakt) ===== */
+  document.querySelectorAll(".modal-back").forEach(function(back){
     var modal=back.querySelector(".modal");
-    function openM(){ back.classList.add("open"); document.body.style.overflow="hidden"; }
     function closeM(){ back.classList.remove("open"); document.body.style.overflow=""; }
-    document.querySelectorAll("[data-modal-open]").forEach(function(b){
-      b.addEventListener("click",function(e){ e.preventDefault(); openM(); });
-    });
     back.addEventListener("click",function(e){ if(e.target===back) closeM(); });
     back.querySelector(".modal-x").addEventListener("click",closeM);
     addEventListener("keydown",function(e){ if(e.key==="Escape") closeM(); });
     var form=back.querySelector("form");
-    if(form){
+    if(form && !form.hasAttribute("data-netlify")){
       form.addEventListener("submit",function(e){
         e.preventDefault();
         /* TODO: sem napojiť reálnu webinárovú platformu (WebinarJam / EverWebinar embed alebo API) */
         modal.classList.add("done");
       });
     }
-  }
+    if(form && form.hasAttribute("data-netlify")){
+      form.addEventListener("submit",function(e){
+        e.preventDefault();
+        var data=new FormData(form);
+        fetch("/",{method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded"},
+          body:new URLSearchParams(data).toString()})
+        .then(function(){ modal.classList.add("done"); })
+        .catch(function(){ modal.classList.add("done"); });
+      });
+    }
+  });
+  document.querySelectorAll("[data-modal-open]").forEach(function(b){
+    b.addEventListener("click",function(e){
+      e.preventDefault();
+      var sel=b.getAttribute("data-modal-open")||"#modalBack";
+      if(sel==="") sel="#modalBack";
+      var back=document.querySelector(sel);
+      if(back){ back.classList.add("open"); document.body.style.overflow="hidden"; }
+    });
+  });
 })();
