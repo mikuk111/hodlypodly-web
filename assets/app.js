@@ -200,6 +200,7 @@
 
   /* ===== modaly (registrácia + kontakt) ===== */
   document.querySelectorAll(".modal-back").forEach(function(back){
+    back.style.display="";  /* do inicializacie bol display:none — ziadny flash pri page load */
     var modal=back.querySelector(".modal");
     function closeM(){ back.classList.remove("open"); document.body.style.overflow=""; }
     back.addEventListener("click",function(e){ if(e.target===back) closeM(); });
