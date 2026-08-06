@@ -49,7 +49,7 @@ nav::before{content:"";position:absolute;inset:0;background:transparent;transiti
 nav.solid::before{background:rgba(251,251,253,.88);box-shadow:0 1px 0 rgba(0,0,0,.06);backdrop-filter:saturate(1.8) blur(16px);-webkit-backdrop-filter:saturate(1.8) blur(16px)}
 nav.on-dark:not(.solid)::before{background:transparent}
 nav>*{position:relative}
-.brand{display:flex;align-items:center;gap:.55rem;text-decoration:none}
+.brand{display:flex;align-items:center;gap:.55rem;text-decoration:none;cursor:pointer}
 .brand .turtle{height:22px;position:relative;animation:waddle 20s ease-in-out infinite}
 .brand .wordmark{height:19px}
 .brand img{transition:opacity .35s}
