@@ -152,6 +152,47 @@
   if(minis.length && !reduced) requestAnimationFrame(miniTick);
   else minis.forEach(function(m){ loadMini(m); });
 
+
+  /* ===== ping-pong idle video: plynula sluka tam a spat, bez strihu ===== */
+  var pongs=[];
+  document.querySelectorAll("video[data-pingpong]").forEach(function(v){
+    var m={v:v,src:v.dataset.src,t:0,dir:1,last:0,fetching:false,ready:false,seekBusy:false,pending:-1};
+    v.addEventListener("seeked",function(){
+      m.seekBusy=false;
+      if(m.pending>=0){ var t=m.pending; m.pending=-1; m.seekBusy=true; try{v.currentTime=t;}catch(e){m.seekBusy=false;} }
+    });
+    pongs.push(m);
+  });
+  function loadPong(m){
+    if(m.fetching) return; m.fetching=true;
+    fetch(m.src).then(function(r){return r.blob();}).then(function(b){
+      m.v.src=URL.createObjectURL(b); m.v.load();
+      m.v.addEventListener("loadedmetadata",function(){ this.pause(); m.ready=true; m.v.classList.add("on"); },{once:true});
+    }).catch(function(){});
+  }
+  function pongSeek(m,t){
+    if(m.seekBusy){ m.pending=t; return; }
+    m.seekBusy=true;
+    try{ m.v.currentTime=t; }catch(e){ m.seekBusy=false; }
+  }
+  function pongTick(now){
+    var vh=innerHeight;
+    pongs.forEach(function(m){
+      var r=m.v.getBoundingClientRect();
+      if(!m.fetching && r.top<vh*1.8 && r.bottom>-vh) loadPong(m);
+      if(!m.ready || r.bottom<0 || r.top>vh){ m.last=now; return; }
+      var dt=Math.min((now-m.last)/1000, .05); m.last=now;
+      var d=m.v.duration-0.08;
+      m.t += m.dir*dt*0.8;               /* 0.8x rychlost = este jemnejsie */
+      if(m.t>=d){ m.t=d; m.dir=-1; }
+      if(m.t<=0){ m.t=0; m.dir=1; }
+      pongSeek(m, m.t);
+    });
+    requestAnimationFrame(pongTick);
+  }
+  if(pongs.length && !reduced) requestAnimationFrame(pongTick);
+  else pongs.forEach(function(m){ loadPong(m); });
+
   /* ===== modaly (registrácia + kontakt) ===== */
   document.querySelectorAll(".modal-back").forEach(function(back){
     var modal=back.querySelector(".modal");
