@@ -110,6 +110,48 @@
     requestAnimationFrame(htick);
   }
 
+
+  /* ===== mini-scrub: video reaguje na poziciu vo viewporte (bez sticky) ===== */
+  var minis=[];
+  document.querySelectorAll("video[data-miniscrub]").forEach(function(v){
+    var m={v:v,src:v.dataset.src,cur:0,fetching:false,ready:false,seekBusy:false,pending:-1};
+    v.addEventListener("seeked",function(){
+      m.seekBusy=false;
+      if(m.pending>=0){ var t=m.pending; m.pending=-1; m.seekBusy=true; try{v.currentTime=t;}catch(e){m.seekBusy=false;} }
+    });
+    minis.push(m);
+  });
+  function loadMini(m){
+    if(m.fetching) return; m.fetching=true;
+    fetch(m.src).then(function(r){return r.blob();}).then(function(b){
+      m.v.src=URL.createObjectURL(b); m.v.load();
+      m.v.addEventListener("loadedmetadata",function(){ this.pause(); m.ready=true; m.v.classList.add("on"); },{once:true});
+    }).catch(function(){});
+  }
+  function miniSeek(m,t){
+    if(m.seekBusy){ m.pending=t; return; }
+    if(Math.abs(m.v.currentTime-t)<0.006) return;
+    m.seekBusy=true;
+    try{ m.v.currentTime=t; }catch(e){ m.seekBusy=false; }
+  }
+  function miniTick(){
+    var vh=innerHeight;
+    minis.forEach(function(m){
+      var r=m.v.getBoundingClientRect();
+      if(!m.fetching && r.top<vh*1.8 && r.bottom>-vh) loadMini(m);
+      if(r.bottom<0||r.top>vh) return;
+      // progres: 0 ked vchadza zospodu, 1 ked odchadza hore
+      var p=Math.min(1,Math.max(0,(vh-r.top)/(vh+r.height)));
+      m.cur+=(p-m.cur)*0.12;
+      if(Math.abs(p-m.cur)<0.0004) m.cur=p;
+      var d=m.v.duration;
+      if(m.ready&&d) miniSeek(m, m.cur*(d-0.05));
+    });
+    requestAnimationFrame(miniTick);
+  }
+  if(minis.length && !reduced) requestAnimationFrame(miniTick);
+  else minis.forEach(function(m){ loadMini(m); });
+
   /* ===== modaly (registrácia + kontakt) ===== */
   document.querySelectorAll(".modal-back").forEach(function(back){
     var modal=back.querySelector(".modal");
