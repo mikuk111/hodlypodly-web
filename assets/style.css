@@ -99,9 +99,15 @@ nav.on-dark:not(.solid) .navlinks a:hover{background:rgba(255,255,255,.12);color
 .msg p{margin-top:1.1rem;max-width:52ch;font-weight:400;font-size:var(--fs-lead);color:rgba(245,245,247,.92);text-wrap:balance;text-shadow:0 1px 20px rgba(0,0,0,.55)}
 .msg .accent{color:var(--vermilion)}
 .msg .btn,.msg a{pointer-events:auto}
-.scroll-hint{position:absolute;left:50%;bottom:1.7rem;transform:translateX(-50%);z-index:5;font-size:var(--fs-tiny);
+.scroll-hint{position:absolute;left:50%;bottom:1.1rem;transform:translateX(-50%);z-index:5;font-size:var(--fs-tiny);
   font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(245,245,247,.65);animation:bob 2.4s ease-in-out infinite}
 @keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,8px)}}
+
+.v-clean{filter:saturate(.82) contrast(1.03) brightness(1.02)}
+.hero-cta{position:absolute;left:50%;bottom:4.4rem;transform:translateX(-50%);z-index:6;
+  display:flex;flex-direction:column;align-items:center;text-align:center}
+.hero-cta .btn-note{color:rgba(245,245,247,.85);text-shadow:0 1px 12px rgba(0,0,0,.5)}
+@media(max-height:640px){.hero-cta{bottom:3.4rem}}
 
 /* ---------- sections & rhythm ---------- */
 .sec{padding:clamp(5.5rem,11vw,9rem) var(--pad)}
