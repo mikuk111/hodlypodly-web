@@ -78,7 +78,35 @@ nav.on-dark:not(.solid) .navlinks a:hover{background:rgba(255,255,255,.12);color
 .nav-cta{display:inline-flex;align-items:center;background:var(--vermilion);color:#fff!important;border-radius:999px;
   padding:.55rem 1.15rem;font-weight:700;font-size:var(--fs-small);text-decoration:none;transition:transform .25s,box-shadow .25s}
 .nav-cta:hover{transform:scale(1.05);box-shadow:0 8px 26px rgba(255,64,0,.35)}
-@media(max-width:820px){.navlinks{display:none}}
+.burger{display:none;width:2.6rem;height:2.6rem;border:none;background:rgba(251,251,253,.7);
+  border-radius:50%;cursor:pointer;position:relative;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.burger span{position:absolute;left:.7rem;right:.7rem;height:2px;background:var(--ink);border-radius:2px;
+  transition:transform .3s,opacity .3s,top .3s}
+.burger span:nth-child(1){top:.92rem}
+.burger span:nth-child(2){top:1.28rem}
+.burger span:nth-child(3){top:1.64rem}
+nav.on-dark:not(.solid) .burger{background:rgba(255,255,255,.14)}
+nav.on-dark:not(.solid) .burger span{background:#fff}
+body.menu-open .burger span:nth-child(1){top:1.28rem;transform:rotate(45deg)}
+body.menu-open .burger span:nth-child(2){opacity:0}
+body.menu-open .burger span:nth-child(3){top:1.28rem;transform:rotate(-45deg)}
+body.menu-open .burger{background:var(--paper)}
+body.menu-open .burger span{background:var(--ink)}
+.mobile-menu{position:fixed;inset:0;z-index:55;background:rgba(251,251,253,.96);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.4rem;
+  opacity:0;visibility:hidden;transition:opacity .35s,visibility .35s}
+body.menu-open .mobile-menu{opacity:1;visibility:visible}
+.mobile-menu a{font-size:1.5rem;font-weight:700;color:var(--ink);text-decoration:none;padding:.7rem 1.4rem;
+  border-radius:999px;transition:background .25s}
+.mobile-menu a:active{background:rgba(0,0,0,.06)}
+.mobile-menu .mm-cta{margin-top:1.4rem;background:var(--vermilion);color:#fff;font-size:1.05rem}
+body.menu-open{overflow:hidden}
+@media(max-width:820px){
+  .navlinks{display:none}
+  .burger{display:block}
+  .nav-cta{display:none}
+}
 
 /* ---------- scrub sections ---------- */
 .scrub{position:relative;background:var(--night)}

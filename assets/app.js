@@ -198,6 +198,19 @@
   if(pongs.length && !reduced) requestAnimationFrame(pongTick);
   else pongs.forEach(function(m){ loadPong(m); });
 
+  /* ===== mobilne menu ===== */
+  var burger=document.querySelector(".burger");
+  if(burger){
+    burger.addEventListener("click",function(){
+      var open=document.body.classList.toggle("menu-open");
+      burger.setAttribute("aria-expanded", open);
+    });
+    document.querySelectorAll("[data-mm]").forEach(function(a){
+      a.addEventListener("click",function(){ document.body.classList.remove("menu-open"); });
+    });
+    addEventListener("keydown",function(e){ if(e.key==="Escape") document.body.classList.remove("menu-open"); });
+  }
+
   /* ===== drag-to-scroll pre volny rail ===== */
   document.querySelectorAll(".hrail-free").forEach(function(rail){
     var down=false,sx=0,sl=0;
