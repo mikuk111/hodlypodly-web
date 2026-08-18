@@ -42,7 +42,7 @@ nav#nav{position:fixed;top:0;left:0;right:0;z-index:60}
     <a href="#robert">O nás</a>
     <a href="#" data-modal-open="#contactBack">Kontakt</a>
   </div>
-  <a class="nav-cta" href="#" data-modal-open>Začať zadarmo</a>
+  <a class="nav-cta" href="#" data-modal-open="#consultBack">Konzultácia zadarmo</a>
 </nav>
 
 <!-- ======== SCRUB 1 · HERO ======== -->
@@ -447,6 +447,45 @@ nav#nav{position:fixed;top:0;left:0;right:0;z-index:60}
   </div>
 </div>
 
+
+
+<!-- ======== MODAL · KONZULTÁCIA ======== -->
+<div class="modal-back" id="consultBack" style="display:none" role="dialog" aria-modal="true" aria-label="Bezplatná konzultácia">
+  <div class="modal">
+    <button class="modal-x" aria-label="Zavrieť">✕</button>
+    <form name="konzultacia" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="konzultacia">
+      <p style="display:none"><label>Nevypĺňajte: <input name="bot-field"></label></p>
+      <h3>Úvodná konzultácia <span class="grad">zadarmo</span></h3>
+      <p class="mnote">20 minút, telefonicky alebo online. <b>Zorientujeme sa vo vašej situácii</b> a poviete si, či vám vieme pomôcť. Nezáväzne.</p>
+
+      <div class="mrow">
+        <div>
+          <label for="k-name">Meno</label>
+          <input id="k-name" name="meno" type="text" placeholder="Vaše meno" required>
+        </div>
+        <div>
+          <label for="k-tel">Telefón</label>
+          <input id="k-tel" name="telefon" type="tel" placeholder="+421 …" required>
+        </div>
+      </div>
+
+      <label for="k-mail">E-mail</label>
+      <input id="k-mail" name="email" type="email" placeholder="vas@email.sk" required>
+
+      <label for="k-msg">Čomu sa chcete venovať? <span style="font-weight:400;color:var(--gray)">(nepovinné)</span></label>
+      <textarea id="k-msg" name="poznamka" placeholder="Napr. mám Bitcoin na burze a neviem, či je to bezpečné…" style="min-height:80px"></textarea>
+
+      <button class="btn" type="submit">Mám záujem o konzultáciu →</button>
+      <p class="gdpr">Odoslaním súhlasíte so spracovaním údajov na účel dohodnutia konzultácie. Ozveme sa vám a dohodneme termín.</p>
+    </form>
+    <div class="success">
+      <div class="big-check">✓</div>
+      <h3>Ďakujeme!</h3>
+      <p class="mnote" style="margin-bottom:0">Ozveme sa vám čo najskôr a dohodneme termín konzultácie.</p>
+    </div>
+  </div>
+</div>
 
 <!-- ======== MODAL · KONTAKT ======== -->
 <div class="modal-back" id="contactBack" style="display:none" role="dialog" aria-modal="true" aria-label="Kontaktujte nás">
