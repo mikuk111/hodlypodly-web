@@ -30,7 +30,7 @@ a{color:inherit}
 .thin{color:var(--gray)}
 
 /* ---------- buttons ---------- */
-.btn{display:inline-flex;align-items:center;gap:.4em;background:var(--vermilion);color:#fff;font-weight:700;
+.btn{display:inline-flex;align-items:center;gap:.4em;white-space:nowrap;background:var(--vermilion);color:#fff;font-weight:700;
   font-size:var(--fs-body);padding:.9em 1.8em;border-radius:999px;border:none;cursor:pointer;text-decoration:none;
   transition:transform .3s cubic-bezier(.2,.7,.2,1),box-shadow .3s;font-family:var(--sans)}
 .btn:hover{transform:scale(1.045);box-shadow:0 12px 30px rgba(255,64,0,.32)}
@@ -428,3 +428,18 @@ footer{background:var(--paper);text-align:center;padding:clamp(3rem,5.5vw,4.2rem
 /* type helpers */
 .big--sm{font-size:var(--fs-display-sm)!important}
 .hero-sub{font-size:var(--fs-pull);font-weight:400;color:var(--gray);letter-spacing:-.015em}
+
+/* ---------- mobile hero fixy ---------- */
+@media(max-width:880px){
+  .hero-photo{display:none}
+}
+@media(max-width:640px){
+  .msg{padding-bottom:clamp(10.5rem,30vh,13rem)}
+  .hero-cta{bottom:3.4rem;width:calc(100% - 2rem)}
+  .hero-cta .btn{font-size:.9rem;padding:.85em 1.4em}
+  .scroll-hint{display:none}
+  .btn{font-size:.9rem;padding:.85em 1.5em}
+}
+@media(max-width:380px){
+  .hero-cta .btn,.btn{font-size:.84rem;padding:.8em 1.2em}
+}
