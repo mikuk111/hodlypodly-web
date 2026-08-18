@@ -198,6 +198,14 @@
   if(pongs.length && !reduced) requestAnimationFrame(pongTick);
   else pongs.forEach(function(m){ loadPong(m); });
 
+  /* ===== drag-to-scroll pre volny rail ===== */
+  document.querySelectorAll(".hrail-free").forEach(function(rail){
+    var down=false,sx=0,sl=0;
+    rail.addEventListener("mousedown",function(e){down=true;sx=e.pageX;sl=rail.scrollLeft;});
+    addEventListener("mouseup",function(){down=false;});
+    addEventListener("mousemove",function(e){ if(!down) return; e.preventDefault(); rail.scrollLeft=sl-(e.pageX-sx); });
+  });
+
   /* ===== modaly (registrácia + kontakt) ===== */
   document.querySelectorAll(".modal-back").forEach(function(back){
     back.style.display="";  /* do inicializacie bol display:none — ziadny flash pri page load */

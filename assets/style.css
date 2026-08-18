@@ -305,6 +305,16 @@ h2 .thin,h1 .thin{}
 .hprog i{display:block;height:100%;background:var(--grad);transform:scaleX(0);transform-origin:left}
 @media(max-width:640px){.hcard{flex-basis:52vw}}
 
+/* ---------- volny horizontalny rail ---------- */
+.hrail-free{display:flex;gap:1.1rem;overflow-x:auto;padding:2.6rem var(--pad) 1.4rem;
+  scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;scrollbar-width:none;cursor:grab}
+.hrail-free::-webkit-scrollbar{display:none}
+.hrail-free:active{cursor:grabbing}
+.hrail-free .hcard{scroll-snap-align:start;flex:0 0 clamp(180px,16vw,215px)}
+.socials--row{justify-content:center;gap:.9rem}
+.socials--row a{width:3.2rem;height:3.2rem;font-size:.86rem;border:2px solid var(--hair);color:var(--ink)}
+.socials--row a:hover{color:#fff}
+
 /* ---------- community photo ---------- */
 .community-grid{display:grid;grid-template-columns:1.05fr .85fr;gap:3.4rem;align-items:center;text-align:left}
 .community-grid h2{margin-left:0}
