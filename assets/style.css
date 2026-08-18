@@ -170,6 +170,8 @@ h2 .thin,h1 .thin{}
 .socials a{width:2.2rem;height:2.2rem;border-radius:50%;border:1.5px solid rgba(255,255,255,.4);display:flex;
   align-items:center;justify-content:center;font-size:var(--fs-tiny);font-weight:700;color:#fff;text-decoration:none;transition:background .2s,border-color .2s}
 .socials a:hover{background:var(--vermilion);border-color:var(--vermilion)}
+.socials--big{gap:.8rem;margin-top:1.1rem}
+.socials--big a{width:3rem;height:3rem;font-size:.82rem;border-width:2px}
 @media(max-width:980px){.bento{--cell:calc((100vw - 2*var(--pad) - var(--gap))/2);grid-template-columns:repeat(2,1fr)}}
 @media(max-width:540px){.bento{--cell:auto;grid-template-columns:1fr;grid-auto-rows:220px}
   .tile.t-2x2,.tile.t-2x1{grid-column:span 1}.tile.t-2x2{grid-row:span 2}}
