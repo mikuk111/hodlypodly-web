@@ -109,10 +109,11 @@ body.menu-open{overflow:hidden}
 .poster-ascent{background:radial-gradient(120% 80% at 50% 0%,rgba(255,64,0,.34),transparent 55%),linear-gradient(180deg,#123038 0%,#0b1618 70%,#050708 100%)}
 .scrub-veil{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(5,7,8,.4),rgba(5,7,8,0) 28%,rgba(5,7,8,.1) 55%,rgba(5,7,8,.72) 82%);pointer-events:none}
 .msg{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;
-  text-align:center;padding:0 var(--pad) clamp(5.5rem,14vh,9.5rem);color:var(--ivorydk);opacity:0;
+  text-align:center;padding:0 var(--pad) clamp(9rem,22vh,13rem);color:var(--ivorydk);opacity:0;
   will-change:transform,opacity;pointer-events:none}
 .msg .tag{font-size:var(--fs-tiny);font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(245,245,247,.72);margin-bottom:1.2rem}
-.msg .big{font-weight:400;letter-spacing:-.03em;line-height:1.06;font-size:var(--fs-display);max-width:17ch;text-wrap:balance;text-shadow:0 2px 34px rgba(0,0,0,.5)}
+.msg .big{font-weight:400;letter-spacing:-.03em;line-height:1.08;font-size:var(--fs-h2);max-width:20ch;text-wrap:balance;text-shadow:0 2px 34px rgba(0,0,0,.5)}
+.msg .big.big--sm{font-size:var(--fs-h2)!important}
 .msg .big .thin{color:rgba(245,245,247,.82)}
 .msg p{margin-top:1.1rem;max-width:52ch;font-weight:400;font-size:var(--fs-lead);color:rgba(245,245,247,.92);text-wrap:balance;text-shadow:0 1px 20px rgba(0,0,0,.55)}
 .msg .accent{color:var(--vermilion)}
