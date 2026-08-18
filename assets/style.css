@@ -236,14 +236,18 @@ h2 .thin,h1 .thin{}
 @media(max-width:880px){.course-card{grid-template-columns:1fr;padding:2.6rem 2rem}}
 
 /* ---------- testimonials ---------- */
-.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:3.6rem;text-align:left}
+.testi-grid{display:grid;grid-auto-flow:column;grid-auto-columns:clamp(280px,31%,380px);gap:1.2rem;
+  margin-top:3.6rem;text-align:left;overflow-x:auto;padding-bottom:.6rem;scroll-snap-type:x proximity;
+  scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.testi-grid::-webkit-scrollbar{display:none}
+.testi{scroll-snap-align:start}
 .testi{background:#fff;border-radius:var(--r);padding:1.9rem 1.7rem;display:flex;flex-direction:column;gap:1.2rem;
   transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s;box-shadow:0 10px 30px rgba(0,0,0,.04)}
 .testi:hover{transform:translateY(-5px);box-shadow:0 20px 46px rgba(0,0,0,.09)}
 .testi p{color:var(--gray);font-weight:400;font-size:var(--fs-body)}
 .testi strong{font-weight:700}
 .testi strong small{display:block;font-weight:400;color:var(--gray);font-size:var(--fs-small)}
-@media(max-width:880px){.testi-grid{grid-template-columns:1fr}}
+@media(max-width:880px){.testi-grid{grid-auto-columns:82vw}}
 
 /* ---------- FAQ ---------- */
 .faq{max-width:760px;margin:3.4rem auto 0;text-align:left}
@@ -272,7 +276,7 @@ h2 .thin,h1 .thin{}
 .topics{max-width:680px;margin:3.2rem auto 0;text-align:left;display:flex;flex-direction:column;gap:1.2rem}
 .topic{display:grid;grid-template-columns:auto 1fr;gap:1.2rem;align-items:baseline}
 .topic .num{font-weight:700;font-size:var(--fs-pull);letter-spacing:-.03em;color:var(--vermilion)}
-.topic p{font-weight:400;color:var(--ink);font-size:var(--fs-body)}
+.topic p{font-weight:400;color:var(--ink);font-size:var(--fs-lead)}
 
 /* two-col who lists */
 .who-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-top:3.2rem;text-align:left}
