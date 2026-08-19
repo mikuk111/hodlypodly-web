@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Kontakt — Hodlypodly</title>
+<meta name="description" content="Kontakt na Hodlypodly. Hodlypodly je značka vlastnená firmou Wisible s. r. o., Plynárenská 3D, 821 09 Bratislava.">
+<meta name="theme-color" content="#f0f0f3">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="64x64" href="assets/favicon-64.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<style>
+/* critical: okamzity paint bez FOUC */
+html{background:#fbfbfd}
+body{margin:0;background:#fbfbfd;color:#1d1d1f;font-family:"Avenir Next","Avenir","Nunito Sans",-apple-system,"Helvetica Neue",system-ui,sans-serif}
+a{color:inherit;text-decoration:none}
+img,video{display:block;max-width:100%}
+nav#nav{position:fixed;top:0;left:0;right:0;z-index:60}
+</style>
+<link rel="stylesheet" href="assets/style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<nav id="nav">
+  <a class="brand" href="index.html">
+    <span style="position:relative;display:inline-flex">
+      <img class="turtle w" src="assets/turtle-white.png" alt="">
+      <img class="turtle o" src="assets/turtle-orange.png" alt="">
+    </span>
+    <span style="position:relative;display:inline-flex">
+      <img class="wordmark w" src="assets/wordmark-white.png" alt="Hodlypodly">
+      <img class="wordmark o" src="assets/wordmark-orange.png" alt="">
+    </span>
+  </a>
+  <div class="navlinks">
+    <a href="index.html">Úvod</a>
+    <a href="kurz.html">Kurz</a>
+    <a href="webinar.html">Webinár</a>
+    <a href="index.html#komunita">Komunita</a>
+    <a href="index.html#robert">O nás</a>
+    <a href="kontakt.html">Kontakt</a>
+  </div>
+  <a class="nav-cta" href="#" data-modal-open="#consultBack">Konzultácia zadarmo</a>
+  <button class="burger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+    <a href="index.html" data-mm>Úvod</a>
+    <a href="kurz.html" data-mm>Kurz</a>
+    <a href="webinar.html" data-mm>Webinár</a>
+    <a href="index.html#komunita" data-mm>Komunita</a>
+    <a href="index.html#robert" data-mm>O nás</a>
+    <a href="kontakt.html" data-mm>Kontakt</a>
+    <a class="mm-cta" href="#" data-modal-open="#consultBack" data-mm>Konzultácia zadarmo</a>
+</div>
+
+<!-- ======== HERO ======== -->
+<section class="sec sec--paper" style="padding-top:clamp(8rem,14vw,10rem);padding-bottom:clamp(3rem,6vw,4.5rem)">
+  <div class="narrow center">
+    <span class="eyebrow rv">Kontakt</span>
+    <h1 class="rv" style="max-width:22ch">Ozvite sa nám.</h1>
+    <p class="lead rv rv-d1">Napíšte nám správu alebo si rezervujte bezplatnú úvodnú konzultáciu. Ozveme sa spravidla do jedného až dvoch pracovných dní.</p>
+    <div class="rv rv-d2" style="margin-top:2.2rem;display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap">
+      <a class="btn" href="#" data-modal-open="#consultBack">Konzultácia zadarmo</a>
+      <a class="btn btn-ghost" href="#napiste">Napísať správu</a>
+    </div>
+  </div>
+</section>
+
+<!-- ======== ÚDAJE + FOTKA ======== -->
+<section class="sec">
+  <div class="narrow community-grid" style="align-items:center">
+    <div class="rv">
+      <p class="lead" style="margin:0 0 2rem;max-width:44ch"><b>Hodlypodly</b> je značka vlastnená firmou <b>Wisible s. r. o.</b></p>
+
+      <div class="cinfo">
+        <div class="cinfo-row">
+          <span class="cinfo-l">Spoločnosť</span>
+          <span class="cinfo-v">Wisible s. r. o.<br>Plynárenská 3D<br>821 09 Bratislava<br>Slovenská republika</span>
+        </div>
+        <div class="cinfo-row">
+          <span class="cinfo-l">IČO</span>
+          <span class="cinfo-v">45 554 480</span>
+        </div>
+        <div class="cinfo-row">
+          <span class="cinfo-l">IČ DPH</span>
+          <span class="cinfo-v">SK2023048225</span>
+        </div>
+        <div class="cinfo-row">
+          <span class="cinfo-l">Zápis</span>
+          <span class="cinfo-v">Obchodný register Mestského súdu Bratislava III</span>
+        </div>
+        <div class="cinfo-row">
+          <span class="cinfo-l">E-mail</span>
+          <span class="cinfo-v"><a href="mailto:hello@hodlypodly.com" class="clink">hello@hodlypodly.com</a></span>
+        </div>
+        <div class="cinfo-row">
+          <span class="cinfo-l">Telefón</span>
+          <span class="cinfo-v"><a href="tel:+421917796556" class="clink">+421 917 796 556</a></span>
+        </div>
+      </div>
+
+      <div class="socials socials--row" style="justify-content:flex-start;margin-top:2.2rem">
+        <a href="https://www.youtube.com/@hodlypodly" target="_blank" rel="noopener" aria-label="YouTube">YT</a>
+        <a href="https://www.instagram.com/hodlypodly/" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
+        <a href="https://www.tiktok.com/@hodlypodly" target="_blank" rel="noopener" aria-label="TikTok">TT</a>
+        <a href="https://www.facebook.com/hodlypodly" target="_blank" rel="noopener" aria-label="Facebook">FB</a>
+        <a href="https://www.linkedin.com/in/molnar-robert/" target="_blank" rel="noopener" aria-label="LinkedIn">IN</a>
+      </div>
+    </div>
+
+    <div class="community-card rv rv-d1" style="aspect-ratio:3/4">
+      <img src="assets/budova-detail.jpg" alt="Budova Plynárenská 3D, Bratislava" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<!-- ======== BAND · BUDOVA ======== -->
+<div class="band rv">
+  <img src="assets/budova.jpg" alt="Plynárenská 3D, Bratislava" loading="lazy">
+  <div class="veil"></div>
+  <div class="bcap">
+    <p class="bt">Plynárenská 3D, Bratislava</p>
+    <p class="bs">Nájdete nás v areáli BBC na Plynárenskej.</p>
+  </div>
+</div>
+
+<!-- ======== FORMULÁR ======== -->
+<section class="sec sec--paper" id="napiste">
+  <div class="narrow center rv">
+    <h2>Napíšte nám.</h2>
+    <p class="lead">Radi odpovieme na vaše otázky ku kurzu, webináru aj komunite.</p>
+  </div>
+  <div class="cform rv rv-d1">
+    <form name="kontakt" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="kontakt">
+      <p style="display:none"><label>Nevypĺňajte: <input name="bot-field"></label></p>
+      <div class="mrow">
+        <div>
+          <label for="p-name">Meno</label>
+          <input id="p-name" name="meno" type="text" placeholder="Vaše meno" required>
+        </div>
+        <div>
+          <label for="p-mail">E-mail</label>
+          <input id="p-mail" name="email" type="email" placeholder="vas@email.sk" required>
+        </div>
+      </div>
+      <label for="p-topic">Téma</label>
+      <select id="p-topic" name="tema" required>
+        <option value="">Vyberte tému…</option>
+        <option>Otázka ku kurzu</option>
+        <option>Webinár</option>
+        <option>Konzultácia 1:1</option>
+        <option>Komunita</option>
+        <option>Iné</option>
+      </select>
+      <label for="p-msg">Správa</label>
+      <textarea id="p-msg" name="sprava" placeholder="S čím vám vieme pomôcť?" required></textarea>
+      <button class="btn" type="submit">Odoslať správu →</button>
+      <p class="gdpr">Odoslaním súhlasíte so spracovaním údajov na účel odpovede na vašu správu.</p>
+    </form>
+    <div class="success">
+      <div class="big-check">✓</div>
+      <h3>Správa odoslaná!</h3>
+      <p class="mnote" style="margin-bottom:0">Ďakujeme, ozveme sa vám čo najskôr.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ======== MAPA ======== -->
+<div class="mapwrap rv">
+  <iframe title="Mapa: Plynárenská 3D, Bratislava" loading="lazy"
+    src="https://www.openstreetmap.org/export/embed.html?bbox=17.1366%2C48.1425%2C17.1487%2C48.1505&amp;layer=mapnik&amp;marker=48.1464541%2C17.1426349"></iframe>
+  <a class="maplink" href="https://www.openstreetmap.org/?mlat=48.1464541&amp;mlon=17.1426349#map=17/48.14645/17.14263" target="_blank" rel="noopener">Otvoriť väčšiu mapu →</a>
+</div>
+
+<!-- ======== FOOTER ======== -->
+<footer id="kontakt">
+  <div class="foot-logo">
+    <img class="turtle" src="assets/turtle-orange.png" alt="">
+    <img class="wordmark" src="assets/wordmark-orange.png" alt="Hodlypodly">
+  </div>
+  <p class="foot-claim">Bitcoin v mojich rukách.<br><span class="thin">Súkromne. Bezpečne. Suverénne.</span></p>
+  <div class="foot-nav">
+    <a href="kurz.html">Kurz</a>
+    <a href="webinar.html">Webinár</a>
+    <a href="index.html#pohlady">Krátke pohľady</a>
+    <a href="index.html#komunita">Komunita</a>
+    <a href="kontakt.html">Kontakt</a>
+  </div>
+  <p class="foot-contact">
+    <a href="mailto:hello@hodlypodly.com">hello@hodlypodly.com</a> · <a href="tel:+421917796556">+421 917 796 556</a><br>
+    <a class="cta" href="kontakt.html">Napíšte nám →</a>
+  </p>
+  <div class="foot-legal">
+    <p class="disc">Informácie na tejto stránke slúžia výlučne na vzdelávacie účely a nepredstavujú investičné poradenstvo ani finančné služby. Bitcoin a digitálne aktíva sú spojené s rizikom volatility a straty hodnoty.</p>
+    <p class="flinks"><a href="#">Obchodné podmienky</a><a href="#">Ochrana osobných údajov</a><a href="#">Disclaimer</a></p>
+    <p>© 2026 Wisible s. r. o., IČO: 45 554 480 · Plynárenská 3D, 821 09 Bratislava</p>
+  </div>
+</footer>
+
+<script src="assets/app.js"></script>
+</body>
+</html>

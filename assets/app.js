@@ -198,6 +198,20 @@
   if(pongs.length && !reduced) requestAnimationFrame(pongTick);
   else pongs.forEach(function(m){ loadPong(m); });
 
+  /* ===== kontakt formular na podstranke ===== */
+  var cf = document.querySelector(".cform");
+  if(cf){
+    var cform = cf.querySelector("form");
+    cform.addEventListener("submit", function(e){
+      e.preventDefault();
+      var data = new FormData(cform);
+      fetch("/", {method:"POST", headers:{"Content-Type":"application/x-www-form-urlencoded"},
+        body:new URLSearchParams(data).toString()})
+        .then(function(){ cf.classList.add("done"); })
+        .catch(function(){ cf.classList.add("done"); });
+    });
+  }
+
   /* ===== Vimeo facade: iframe az po kliku ===== */
   document.querySelectorAll("[data-vimeo]").forEach(function(f){
     function play(){
