@@ -202,7 +202,9 @@
   document.querySelectorAll("[data-vimeo]").forEach(function(f){
     function play(){
       var id=f.dataset.vimeo;
-      f.innerHTML='<iframe src="https://player.vimeo.com/video/'+id+'?autoplay=1&title=0&byline=0&portrait=0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>';
+      if(f.classList.contains("playing")) return;
+      f.classList.add("playing");
+      f.insertAdjacentHTML("beforeend",'<iframe src="https://player.vimeo.com/video/'+id+'?app_id=122963&autoplay=1&title=0&byline=0&portrait=0&dnt=1" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>');
     }
     f.addEventListener("click",play);
     f.addEventListener("keydown",function(e){ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); play(); } });
