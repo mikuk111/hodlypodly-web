@@ -557,8 +557,11 @@ footer{background:var(--paper);text-align:center;padding:clamp(3rem,5.5vw,4.2rem
     text-transform:uppercase;letter-spacing:.1em;color:var(--ink);margin-bottom:.15rem}
 }
 
-.signal-note{margin-top:3.4rem;padding-top:2.8rem;border-top:1px solid var(--hair);max-width:640px}
+.signal-note{margin-top:3.2rem;padding-top:2.6rem;border-top:1px solid var(--hair);max-width:640px}
 .signal-note h3{font-size:var(--fs-pull);font-weight:400;letter-spacing:-.015em;margin-bottom:.7rem}
 .tiers{align-items:stretch}
 .tier{justify-content:flex-start}
 .tier .tier-soon{margin-top:auto}
+
+#komunita{padding-bottom:clamp(3rem,5vw,4rem)}
+#registracia{padding-top:clamp(2rem,4vw,3rem)}
