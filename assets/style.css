@@ -161,7 +161,7 @@ h2 .thin,h1 .thin{}
 .tile:hover{transform:scale(1.015);box-shadow:0 24px 60px rgba(0,0,0,.12);z-index:2}
 .tile>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
 .tile:hover>img{transform:scale(1.06)}
-.tile .shade{position:absolute;inset:0;z-index:1;background:linear-gradient(to top,rgba(0,0,0,.66),transparent 52%)}
+.tile .shade{position:absolute;inset:0;z-index:1;background:linear-gradient(to top,rgba(0,0,0,.82),rgba(0,0,0,.35) 45%,transparent 72%)}
 .tile-cap{position:relative;z-index:2;padding:1.8rem;height:100%;display:flex;flex-direction:column;justify-content:flex-end}
 .tile-cap .teyebrow{font-size:var(--fs-tiny);letter-spacing:.16em;text-transform:uppercase;font-weight:700;margin-bottom:auto}
 .tile-cap .tv{font-weight:700;letter-spacing:-.03em;font-size:var(--fs-pull);line-height:1.05}
@@ -169,6 +169,8 @@ h2 .thin,h1 .thin{}
 .t-2x2 .tile-cap h3,.t-2x1 .tile-cap h3{font-size:var(--fs-pull);line-height:1.2}
 .tile-cap p{font-size:var(--fs-small);font-weight:400;margin-top:.45rem;opacity:.9;max-width:34ch}
 .tile.img h3,.tile.img p,.tile.img .tv{color:#fff}
+.tile.img .t-link{color:#fff!important}
+.tile.img .teyebrow{color:#fff;opacity:.9}
 .tile.plain .tile-cap h3,.tile.plain .tv{color:var(--ink)}
 .tile.plain .tile-cap p{color:var(--gray)}
 .tile.plain .teyebrow{color:var(--vermilion)}
