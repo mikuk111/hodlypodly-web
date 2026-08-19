@@ -254,14 +254,7 @@
     back.querySelector(".modal-x").addEventListener("click",closeM);
     addEventListener("keydown",function(e){ if(e.key==="Escape") closeM(); });
     var form=back.querySelector("form");
-    if(form && !form.hasAttribute("data-netlify")){
-      form.addEventListener("submit",function(e){
-        e.preventDefault();
-        /* TODO: sem napojiť reálnu webinárovú platformu (WebinarJam / EverWebinar embed alebo API) */
-        modal.classList.add("done");
-      });
-    }
-    if(form && form.hasAttribute("data-netlify")){
+    if(form){
       form.addEventListener("submit",function(e){
         e.preventDefault();
         var data=new FormData(form);
