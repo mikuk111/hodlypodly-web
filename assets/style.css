@@ -563,5 +563,5 @@ footer{background:var(--paper);text-align:center;padding:clamp(3rem,5.5vw,4.2rem
 .tier{justify-content:flex-start}
 .tier .tier-soon{margin-top:auto}
 
-#komunita{padding-bottom:clamp(3rem,5vw,4rem)}
-#registracia{padding-top:clamp(2rem,4vw,3rem)}
+#komunita{padding-bottom:clamp(2rem,3.5vw,3rem)}
+#registracia{padding-top:0}
