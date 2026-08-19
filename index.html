@@ -65,17 +65,14 @@ nav#nav{position:fixed;top:0;left:0;right:0;z-index:60}
     <div class="scrub-veil"></div>
 
     <div class="msg">
-      <p class="big">Bitcoin v mojich rukách.</p>
-    </div>
-    <div class="msg">
-      <p class="big">Súkromne. Bezpečne. Suverénne.</p>
+      <p class="big">Bitcoin v mojich rukách.<br><span class="thin-light">Súkromne. Bezpečne. Suverénne.</span></p>
     </div>
     <div class="msg">
       <p class="big big--sm">Porozumejte Bitcoinu<br>a spravujte svoj kapitál s istotou.</p>
     </div>
 
     <div class="hero-cta">
-      <a class="btn" href="#" data-modal-open>Začať správne s Bitcoinom</a>
+      <a class="btn" href="webinar.html">Začať správne s Bitcoinom</a>
       <span class="btn-note">Bezplatný úvodný webinár</span>
     </div>
     <div class="scroll-hint">Skrolujte</div>
@@ -127,11 +124,11 @@ nav#nav{position:fixed;top:0;left:0;right:0;z-index:60}
 
   <div class="narrow bento">
     <!-- riadok 1-2 -->
-    <a class="tile dark img t-2x2 rv" href="webinar.html">
+    <a class="tile dark img t-2x2 rv tile--deep" href="webinar.html">
       <img src="assets/tile-webinar-2.jpg" alt="">
       <div class="shade"></div>
       <div class="tile-cap">
-        <span class="teyebrow">Začnite tu · Zadarmo</span>
+        <span class="teyebrow">Webinár zdarma</span>
         <h3>Ako mať kapitál skutočne vo vlastných rukách v ére Bitcoinu.</h3>
         <p>Bezplatný online webinár. 60 minút, menšia skupina, priestor na otázky.</p>
         <span class="t-link" style="color:var(--vermilion)">Viac o webinári</span>
@@ -147,11 +144,11 @@ nav#nav{position:fixed;top:0;left:0;right:0;z-index:60}
       </div>
     </a>
 
-    <a class="tile img rv rv-d2" href="#pohlady">
+    <div class="tile img rv rv-d2">
       <img src="assets/tile-shell.jpg" alt="">
       <div class="shade"></div>
       <div class="tile-cap"><h3>Pokoj. Trpezlivosť.<br>Dlhý horizont.</h3></div>
-    </a>
+    </div>
 
     <a class="tile gradbg t-2x1 rv rv-d1" href="#komunita">
       <div class="tile-cap">
@@ -454,7 +451,7 @@ nav#nav{position:fixed;top:0;left:0;right:0;z-index:60}
     <button class="modal-x" aria-label="Zavrieť">✕</button>
     <form name="registracia" method="POST" data-netlify="true" netlify-honeypot="bot-field">
       <input type="hidden" name="form-name" value="registracia">
-      <input type="hidden" name="subject" value="Hodlypodly web - Registrácia na webinár - Form">
+      <input type="hidden" name="subject" value="Hodlypodly web - Registrácia na webinár &quot;Ako mať kapitál vo vlastných rukách&quot; - Form">
       <p style="display:none"><label>Nevypĺňajte: <input name="bot-field"></label></p>
       <h3><span class="grad">Zadarmo</span> sa zaregistrujte<br>na živé vysielanie</h3>
       <p class="mnote">Ak zadáte aj telefón, systém vám automaticky pošle <b>SMS pripomienku 15 minút pred začiatkom</b>. Je to zadarmo.</p>
@@ -499,7 +496,7 @@ nav#nav{position:fixed;top:0;left:0;right:0;z-index:60}
     <button class="modal-x" aria-label="Zavrieť">✕</button>
     <form name="objednavka" method="POST" data-netlify="true" netlify-honeypot="bot-field">
       <input type="hidden" name="form-name" value="objednavka">
-      <input type="hidden" name="subject" value="Hodlypodly web - Objednávka kurzu - Form">
+      <input type="hidden" name="subject" value="Hodlypodly web - Objednávka kurzu &quot;Bitcoin od nuly&quot; - Form">
       <p style="display:none"><label>Nevypĺňajte: <input name="bot-field"></label></p>
       <h3>Kurz <span class="grad">Bitcoin od nuly</span><br>v predpredaji</h3>
       <p class="mnote">Zvýhodnená cena <b>147 €</b> namiesto 197 €. Zašleme vám faktúru a prístup získate hneď po dokončení kurzu.</p>
@@ -549,8 +546,8 @@ nav#nav{position:fixed;top:0;left:0;right:0;z-index:60}
           <input id="k-name" name="meno" type="text" placeholder="Vaše meno" required>
         </div>
         <div>
-          <label for="k-tel">Telefón</label>
-          <input id="k-tel" name="telefon" type="tel" placeholder="+421 …" required>
+          <label for="k-tel">Telefón <span style="font-weight:400;color:var(--gray)">(nepovinné)</span></label>
+          <input id="k-tel" name="telefon" type="tel" placeholder="+421 …">
         </div>
       </div>
 

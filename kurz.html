@@ -201,7 +201,7 @@ nav#nav{position:fixed;top:0;left:0;right:0;z-index:60}
     <button class="modal-x" aria-label="Zavrieť">✕</button>
     <form name="objednavka" method="POST" data-netlify="true" netlify-honeypot="bot-field">
       <input type="hidden" name="form-name" value="objednavka">
-      <input type="hidden" name="subject" value="Hodlypodly web - Objednávka kurzu - Form">
+      <input type="hidden" name="subject" value="Hodlypodly web - Objednávka kurzu &quot;Bitcoin od nuly&quot; - Form">
       <p style="display:none"><label>Nevypĺňajte: <input name="bot-field"></label></p>
       <h3>Kurz <span class="grad">Bitcoin od nuly</span><br>v predpredaji</h3>
       <p class="mnote">Zvýhodnená cena <b>147 €</b> namiesto 197 €. Zašleme vám faktúru a prístup získate hneď po dokončení kurzu.</p>
@@ -251,8 +251,8 @@ nav#nav{position:fixed;top:0;left:0;right:0;z-index:60}
           <input id="k-name" name="meno" type="text" placeholder="Vaše meno" required>
         </div>
         <div>
-          <label for="k-tel">Telefón</label>
-          <input id="k-tel" name="telefon" type="tel" placeholder="+421 …" required>
+          <label for="k-tel">Telefón <span style="font-weight:400;color:var(--gray)">(nepovinné)</span></label>
+          <input id="k-tel" name="telefon" type="tel" placeholder="+421 …">
         </div>
       </div>
 
