@@ -525,3 +525,32 @@ footer{background:var(--paper);text-align:center;padding:clamp(3rem,5.5vw,4.2rem
 .maplink{position:absolute;right:1.2rem;bottom:1.2rem;background:#fff;color:var(--ink);font-weight:700;
   font-size:var(--fs-small);padding:.7em 1.2em;border-radius:999px;box-shadow:0 8px 26px rgba(0,0,0,.16);transition:transform .25s}
 .maplink:hover{transform:scale(1.04);color:var(--vermilion)}
+
+/* ---------- legal stranky ---------- */
+.legal{max-width:760px;margin:0 auto}
+.legal h1{margin-bottom:1rem}
+.legal .legal-date{margin-top:1.4rem;font-size:var(--fs-tiny);font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--gray)}
+.legal h2{font-size:var(--fs-pull);text-align:left;margin:2.8rem 0 .9rem;max-width:none;letter-spacing:-.02em}
+.legal h2:first-child{margin-top:0}
+.legal p{margin-bottom:1rem;color:var(--gray);line-height:1.65}
+.legal p b,.legal li b{color:var(--ink);font-weight:700}
+.legal a{text-decoration:underline;text-underline-offset:2px}
+.legal a:hover{color:var(--vermilion)}
+.legal ul{margin:0 0 1.2rem 1.1rem;color:var(--gray);line-height:1.65}
+.legal li{margin-bottom:.45rem;padding-left:.25rem}
+.legal li::marker{color:var(--vermilion)}
+.legal-table{width:100%;border-collapse:collapse;margin:1.2rem 0 1.6rem;font-size:var(--fs-small)}
+.legal-table th{text-align:left;font-weight:700;color:var(--ink);padding:.75rem .7rem;border-bottom:2px solid var(--hair);
+  font-size:var(--fs-tiny);letter-spacing:.08em;text-transform:uppercase}
+.legal-table td{padding:.75rem .7rem;border-bottom:1px solid var(--hair);color:var(--gray);vertical-align:top}
+.legal-note{background:var(--paper);border-radius:var(--r);padding:1.5rem 1.6rem;margin-top:3rem}
+.legal-note p{margin:0;font-size:var(--fs-small)}
+@media(max-width:620px){
+  .legal-table,.legal-table tbody,.legal-table tr,.legal-table td{display:block;width:100%}
+  .legal-table thead{display:none}
+  .legal-table tr{border-bottom:1px solid var(--hair);padding:.6rem 0}
+  .legal-table td{border:0;padding:.25rem 0}
+  .legal-table td::before{content:attr(data-l);display:block;font-size:var(--fs-tiny);font-weight:700;
+    text-transform:uppercase;letter-spacing:.1em;color:var(--ink);margin-bottom:.15rem}
+}
