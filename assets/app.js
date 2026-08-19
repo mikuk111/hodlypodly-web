@@ -198,6 +198,16 @@
   if(pongs.length && !reduced) requestAnimationFrame(pongTick);
   else pongs.forEach(function(m){ loadPong(m); });
 
+  /* ===== Vimeo facade: iframe az po kliku ===== */
+  document.querySelectorAll("[data-vimeo]").forEach(function(f){
+    function play(){
+      var id=f.dataset.vimeo;
+      f.innerHTML='<iframe src="https://player.vimeo.com/video/'+id+'?autoplay=1&title=0&byline=0&portrait=0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>';
+    }
+    f.addEventListener("click",play);
+    f.addEventListener("keydown",function(e){ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); play(); } });
+  });
+
   /* ===== mobilne menu ===== */
   var burger=document.querySelector(".burger");
   if(burger){

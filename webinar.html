@@ -166,11 +166,9 @@ nav#nav{position:fixed;top:0;left:0;right:0;z-index:60}
 <section class="sec sec--paper">
   <div class="narrow center">
     <h2 class="rv">Termíny webinára.</h2>
-    <p class="lead rv rv-d1">Účasť na webinári je bezplatná. Počet miest je limitovaný, aby bol zachovaný priestor na otázky a diskusiu.</p>
+    <p class="lead rv rv-d1">Najbližší webinár sa koná v utorok 15. septembra o 19:00. Účasť je bezplatná, počet miest je limitovaný.</p>
     <div class="dates rv rv-d1">
-      <span class="date-pill">📅 <b>Streda 12. jún</b> · 19:00</span>
-      <span class="date-pill">📅 <b>Piatok 14. jún</b> · 9:00</span>
-      <span class="date-pill">📅 <b>Pondelok 17. jún</b> · 18:00</span>
+      <span class="date-pill">📅 <b>Utorok 15. september · 19:00</b></span>
     </div>
     <div class="rv rv-d2" style="margin-top:2.2rem">
       <a class="btn" href="#" data-modal-open>Zaregistrovať sa na bezplatný webinár</a>
@@ -213,7 +211,7 @@ nav#nav{position:fixed;top:0;left:0;right:0;z-index:60}
     <h2>Porozumenie kapitálu je proces, nie jednorazové rozhodnutie.</h2>
     <p class="lead" style="margin-top:1.2rem">Hodlypodly je projekt zameraný na pochopenie princípov správy kapitálu v digitálnej ére, so zameraním na Bitcoin ako nástroj dlhodobého vlastníctva.</p>
     <p class="lead" style="margin-top:.8rem">Naším cieľom nie je ponúkať rýchle riešenia ani investičné tipy, ale vytvárať priestor pre zodpovedné a strategické rozhodovanie o kapitále.</p>
-    <a class="btn" href="#" data-modal-open>Vybrať si termín webinára</a>
+    <a class="btn" href="#" data-modal-open>Zaregistrovať sa na webinár</a>
   </div>
 </section>
 
@@ -251,11 +249,9 @@ nav#nav{position:fixed;top:0;left:0;right:0;z-index:60}
       <p class="mnote">Ak zadáte aj telefón, systém vám automaticky pošle <b>SMS pripomienku 15 minút pred začiatkom</b>. Je to zadarmo.</p>
 
       <label for="m-date">Termín vysielania</label>
-      <select id="m-date" required>
+      <select id="m-date" name="termin" required>
         <option value="">Vyberte termín…</option>
-        <option>Streda 12. jún · 19:00</option>
-        <option>Piatok 14. jún · 9:00</option>
-        <option>Pondelok 17. jún · 18:00</option>
+        <option>Utorok 15. september · 19:00</option>
       </select>
 
       <label for="m-name">Meno</label>
@@ -284,6 +280,45 @@ nav#nav{position:fixed;top:0;left:0;right:0;z-index:60}
 </div>
 
 
+
+
+<!-- ======== MODAL · OBJEDNÁVKA KURZU ======== -->
+<div class="modal-back" id="orderBack" style="display:none" role="dialog" aria-modal="true" aria-label="Objednávka kurzu">
+  <div class="modal">
+    <button class="modal-x" aria-label="Zavrieť">✕</button>
+    <form name="objednavka" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="objednavka">
+      <p style="display:none"><label>Nevypĺňajte: <input name="bot-field"></label></p>
+      <h3>Kurz <span class="grad">Bitcoin od nuly</span><br>v predpredaji</h3>
+      <p class="mnote">Zvýhodnená cena <b>147 €</b> namiesto 197 €. Zašleme vám faktúru a prístup získate hneď po dokončení kurzu.</p>
+
+      <div class="mrow">
+        <div>
+          <label for="o-name">Meno a priezvisko</label>
+          <input id="o-name" name="meno" type="text" placeholder="Vaše meno" required>
+        </div>
+        <div>
+          <label for="o-mail">E-mail</label>
+          <input id="o-mail" name="email" type="email" placeholder="vas@email.sk" required>
+        </div>
+      </div>
+
+      <label for="o-tel">Telefón <span style="font-weight:400;color:var(--gray)">(nepovinné)</span></label>
+      <input id="o-tel" name="telefon" type="tel" placeholder="+421 …">
+
+      <label for="o-note">Fakturačné údaje alebo poznámka <span style="font-weight:400;color:var(--gray)">(nepovinné)</span></label>
+      <textarea id="o-note" name="poznamka" placeholder="Ak chcete faktúru na firmu, uveďte údaje…" style="min-height:80px"></textarea>
+
+      <button class="btn" type="submit">Záväzne objednať za 147 €</button>
+      <p class="gdpr">Po odoslaní vám zašleme faktúru e-mailom. Prístup ku kurzu získate hneď po jeho dokončení.</p>
+    </form>
+    <div class="success">
+      <div class="big-check">✓</div>
+      <h3>Ďakujeme za objednávku!</h3>
+      <p class="mnote" style="margin-bottom:0">Faktúru a ďalšie informácie vám pošleme e-mailom.</p>
+    </div>
+  </div>
+</div>
 
 <!-- ======== MODAL · KONZULTÁCIA ======== -->
 <div class="modal-back" id="consultBack" style="display:none" role="dialog" aria-modal="true" aria-label="Bezplatná konzultácia">

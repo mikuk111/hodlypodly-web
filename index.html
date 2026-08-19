@@ -185,7 +185,7 @@ nav#nav{position:fixed;top:0;left:0;right:0;z-index:60}
         <div class="socials socials--big">
           <a href="https://www.youtube.com/@hodlypodly" target="_blank" rel="noopener" aria-label="YouTube">YT</a><a href="https://www.instagram.com/hodlypodly/" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
           <a href="https://www.tiktok.com/@hodlypodly" target="_blank" rel="noopener" aria-label="TikTok">TT</a><a href="https://www.facebook.com/hodlypodly" target="_blank" rel="noopener" aria-label="Facebook">FB</a>
-          <a href="#" aria-label="LinkedIn">IN</a>
+          <a href="https://www.linkedin.com/in/molnar-robert/" target="_blank" rel="noopener" aria-label="LinkedIn">IN</a>
         </div>
       </div>
     </div>
@@ -217,10 +217,10 @@ nav#nav{position:fixed;top:0;left:0;right:0;z-index:60}
   <div class="narrow center rv">
     <h2>Prečo som založil Hodlypodly? <span class="thin">Moja cesta k finančnej suverenite.</span></h2>
   </div>
-  <a class="narrow story-frame rv rv-d1" href="#" aria-label="Prehrať video: Moja cesta k finančnej suverenite">
+  <div class="narrow story-frame rv rv-d1" data-vimeo="1194654522" role="button" tabindex="0" aria-label="Prehrať video: Moja cesta k finančnej suverenite">
     <img src="assets/robert-zem.jpg" alt="" loading="lazy">
     <div class="story-play"><span class="story-badge">Moja cesta k finančnej suverenite ▸</span></div>
-  </a>
+  </div>
 </section>
 
 <!-- ======== WEBINÁR ======== -->
@@ -268,7 +268,7 @@ nav#nav{position:fixed;top:0;left:0;right:0;z-index:60}
       <span class="price-old">197 €</span>
       <div class="price-now">147 €</div>
       <p class="price-dph">Ceny sú s DPH.</p>
-      <a class="btn" href="kurz.html" style="width:100%;justify-content:center">Kúpiť v predpredaji</a>
+      <a class="btn" href="#" data-modal-open="#orderBack" style="width:100%;justify-content:center">Kúpiť v predpredaji</a>
       <a class="btn btn-ghost" href="kurz.html" style="width:100%;justify-content:center;margin-top:.7rem">Viac o kurze</a>
       <p class="price-note">Kurz je v príprave. Kúpou v predpredaji získate prístup hneď po jeho dokončení.</p>
     </div>
@@ -358,20 +358,45 @@ nav#nav{position:fixed;top:0;left:0;right:0;z-index:60}
     <div class="socials socials--row">
       <a href="https://www.youtube.com/@hodlypodly" target="_blank" rel="noopener" aria-label="YouTube">YT</a><a href="https://www.instagram.com/hodlypodly/" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
       <a href="https://www.tiktok.com/@hodlypodly" target="_blank" rel="noopener" aria-label="TikTok">TT</a><a href="https://www.facebook.com/hodlypodly" target="_blank" rel="noopener" aria-label="Facebook">FB</a>
-      <a href="#" aria-label="LinkedIn">IN</a>
+      <a href="https://www.linkedin.com/in/molnar-robert/" target="_blank" rel="noopener" aria-label="LinkedIn">IN</a>
     </div>
   </div>
 </section>
 
 <!-- ======== KOMUNITA ======== -->
 <section class="sec sec--paper" id="komunita">
-  <div class="narrow community-grid">
+  <div class="narrow center rv">
+    <span class="eyebrow">Komunita</span>
+    <h2>Vzdelávanie je len prvý krok. <span class="thin">Ďalej ideme spolu.</span></h2>
+    <p class="lead">Budujeme prostredie pre ľudí, ktorí chcú premýšľať strategicky, zdieľať skúsenosti a rásť v porozumení Bitcoinu. Bez tlaku, bez špekulácií.</p>
+  </div>
+
+  <div class="narrow tiers">
+    <div class="tier rv">
+      <span class="tier-name">Hodler</span>
+      <p class="tier-desc">Vstupná úroveň pre tých, ktorí začínajú a chcú zostať v obraze.</p>
+      <span class="tier-soon">Pripravujeme</span>
+    </div>
+
+    <div class="tier tier--active rv rv-d1">
+      <span class="tier-badge">Otvorená úroveň</span>
+      <span class="tier-name">Suverén</span>
+      <p class="tier-desc">Pre ľudí, ktorí Bitcoin držia samostatne a chcú rásť v komunite s prístupom k Robertovi.</p>
+      <a class="btn" href="#" data-modal-open="#contactBack">Požiadať o registráciu</a>
+      <span class="btn-note">Prvé dva mesiace zadarmo.</span>
+    </div>
+
+    <div class="tier rv rv-d2">
+      <span class="tier-name">Kráľ</span>
+      <p class="tier-desc">Najvyššia úroveň s individuálnym prístupom a konzultáciami.</p>
+      <span class="tier-soon">Pripravujeme</span>
+    </div>
+  </div>
+
+  <div class="narrow community-grid" style="margin-top:3.6rem">
     <div class="rv">
-      <span class="eyebrow">Komunita</span>
-      <h2>Vzdelávanie je len prvý krok. <span class="thin">Ďalej ideme spolu.</span></h2>
-      <p class="lead" style="margin-top:1rem">Hodlypodly nie je len online kurz. Budujeme prostredie pre ľudí, ktorí chcú premýšľať strategicky, zdieľať skúsenosti a rásť v porozumení Bitcoinu.</p>
-      <p class="lead" style="margin-top:.9em"><b>Bez tlaku, bez špekulácií.</b> S dôrazom na pokoj, bezpečnosť a dlhodobý pohľad.</p>
-      <a class="btn btn-ghost" href="#" style="margin-top:1.8rem">Preskúmať komunitu</a>
+      <h3 style="font-size:var(--fs-pull);font-weight:400;letter-spacing:-.015em">Komunita beží na Signale.</h3>
+      <p class="lead" style="margin-top:.8rem">Súkromne a nezávisle. Bez sledovania, bez algoritmov, bez tretích strán, ktoré by nám prístup mohli zobrať.</p>
     </div>
     <div class="community-card rv rv-d1">
       <img src="assets/community.jpg" alt="Komunita Hodlypodly" loading="lazy">
@@ -423,11 +448,9 @@ nav#nav{position:fixed;top:0;left:0;right:0;z-index:60}
       <p class="mnote">Ak zadáte aj telefón, systém vám automaticky pošle <b>SMS pripomienku 15 minút pred začiatkom</b>. Je to zadarmo.</p>
 
       <label for="m-date">Termín vysielania</label>
-      <select id="m-date" required>
+      <select id="m-date" name="termin" required>
         <option value="">Vyberte termín…</option>
-        <option>Streda 12. jún · 19:00</option>
-        <option>Piatok 14. jún · 9:00</option>
-        <option>Pondelok 17. jún · 18:00</option>
+        <option>Utorok 15. september · 19:00</option>
       </select>
 
       <label for="m-name">Meno</label>
@@ -456,6 +479,45 @@ nav#nav{position:fixed;top:0;left:0;right:0;z-index:60}
 </div>
 
 
+
+
+<!-- ======== MODAL · OBJEDNÁVKA KURZU ======== -->
+<div class="modal-back" id="orderBack" style="display:none" role="dialog" aria-modal="true" aria-label="Objednávka kurzu">
+  <div class="modal">
+    <button class="modal-x" aria-label="Zavrieť">✕</button>
+    <form name="objednavka" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="objednavka">
+      <p style="display:none"><label>Nevypĺňajte: <input name="bot-field"></label></p>
+      <h3>Kurz <span class="grad">Bitcoin od nuly</span><br>v predpredaji</h3>
+      <p class="mnote">Zvýhodnená cena <b>147 €</b> namiesto 197 €. Zašleme vám faktúru a prístup získate hneď po dokončení kurzu.</p>
+
+      <div class="mrow">
+        <div>
+          <label for="o-name">Meno a priezvisko</label>
+          <input id="o-name" name="meno" type="text" placeholder="Vaše meno" required>
+        </div>
+        <div>
+          <label for="o-mail">E-mail</label>
+          <input id="o-mail" name="email" type="email" placeholder="vas@email.sk" required>
+        </div>
+      </div>
+
+      <label for="o-tel">Telefón <span style="font-weight:400;color:var(--gray)">(nepovinné)</span></label>
+      <input id="o-tel" name="telefon" type="tel" placeholder="+421 …">
+
+      <label for="o-note">Fakturačné údaje alebo poznámka <span style="font-weight:400;color:var(--gray)">(nepovinné)</span></label>
+      <textarea id="o-note" name="poznamka" placeholder="Ak chcete faktúru na firmu, uveďte údaje…" style="min-height:80px"></textarea>
+
+      <button class="btn" type="submit">Záväzne objednať za 147 €</button>
+      <p class="gdpr">Po odoslaní vám zašleme faktúru e-mailom. Prístup ku kurzu získate hneď po jeho dokončení.</p>
+    </form>
+    <div class="success">
+      <div class="big-check">✓</div>
+      <h3>Ďakujeme za objednávku!</h3>
+      <p class="mnote" style="margin-bottom:0">Faktúru a ďalšie informácie vám pošleme e-mailom.</p>
+    </div>
+  </div>
+</div>
 
 <!-- ======== MODAL · KONZULTÁCIA ======== -->
 <div class="modal-back" id="consultBack" style="display:none" role="dialog" aria-modal="true" aria-label="Bezplatná konzultácia">
