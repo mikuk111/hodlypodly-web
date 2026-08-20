@@ -618,3 +618,13 @@ footer{background:var(--paper);text-align:center;padding:clamp(3rem,5.5vw,4.2rem
 .cmp-row.is-locked{cursor:default}
 .cmp-row.is-locked .cmp-sw{background:#9a9aa0;opacity:.55}
 @media(max-width:560px){.cmp{left:.8rem;bottom:.8rem}}
+
+/* ---------- kurz: co ziskate ---------- */
+.gain-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:3.2rem;text-align:left}
+.gain{background:#fff;border-radius:var(--r);padding:1.9rem 1.7rem;box-shadow:0 10px 30px rgba(0,0,0,.05)}
+.gain-num{display:inline-block;font-size:var(--fs-tiny);font-weight:700;letter-spacing:.14em;color:var(--vermilion);
+  border:1.5px solid currentColor;border-radius:999px;padding:.35em .85em;margin-bottom:1rem}
+.gain h3{font-size:var(--fs-body);font-weight:700;letter-spacing:-.01em;margin-bottom:.5rem}
+.gain p{font-size:var(--fs-small);color:#4a4a50;line-height:1.6}
+@media(max-width:980px){.gain-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){.gain-grid{grid-template-columns:1fr}}
