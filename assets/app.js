@@ -76,7 +76,7 @@
         var a=j/n,b=(j+1)/n,lp=(s.cur-a)/(b-a);
         var o=0,y=40;
         if(lp>0&&lp<1){
-          var fi=Math.min(1,lp/0.22), fo=(j===n-1)?1:Math.min(1,(1-lp)/0.22);
+          var fi=(j===0)?1:Math.min(1,lp/0.22), fo=(j===n-1)?1:Math.min(1,(1-lp)/0.22);
           o=Math.min(fi,fo); y=(1-fi)*40-(1-fo)*46;
         } else if(j===0 && s.cur<=a){ o=1; y=0; }
           else if(j===n-1 && lp>=1){ o=1; y=0; }
