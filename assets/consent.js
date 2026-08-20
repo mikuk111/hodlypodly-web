@@ -83,39 +83,39 @@
   function ui(expanded, current){
     var c = current || {analytics:false, marketing:false};
     var el = document.createElement("div");
-    el.className = "consent";
+    el.className = "cmp";
     el.setAttribute("role","dialog");
     el.setAttribute("aria-label","Nastavenia cookies");
     el.innerHTML =
-      '<p class="consent-txt">Používame nevyhnutné cookies na fungovanie stránky. So súhlasom aj analytické a marketingové na meranie návštevnosti a kampaní. ' +
+      '<p class="cmp-txt">Používame nevyhnutné cookies na fungovanie stránky. So súhlasom aj analytické a marketingové na meranie návštevnosti a kampaní. ' +
       '<a href="ochrana-osobnych-udajov.html">Ako spracúvame údaje</a></p>' +
-      '<div class="consent-opts"' + (expanded ? '' : ' hidden') + '>' +
+      '<div class="cmp-opts"' + (expanded ? '' : ' hidden') + '>' +
         row("necessary","Nevyhnutné","Zabezpečujú základné fungovanie stránky.",true,true) +
         row("analytics","Analytika","Anonymné meranie návštevnosti (Google Analytics).",c.analytics,false) +
         row("marketing","Marketing","Meranie kampaní a remarketing (Meta).",c.marketing,false) +
       '</div>' +
-      '<div class="consent-btns">' +
-        '<button class="btn consent-accept" type="button">Prijať všetko</button>' +
-        '<button class="btn btn-ghost consent-reject" type="button">Odmietnuť</button>' +
+      '<div class="cmp-btns">' +
+        '<button class="btn cmp-accept" type="button">Prijať všetko</button>' +
+        '<button class="btn btn-ghost cmp-reject" type="button">Odmietnuť</button>' +
         (expanded
-          ? '<button class="btn btn-ghost consent-save" type="button">Uložiť výber</button>'
-          : '<button class="consent-more" type="button">Nastavenia</button>') +
+          ? '<button class="btn btn-ghost cmp-save" type="button">Uložiť výber</button>'
+          : '<button class="cmp-more" type="button">Nastavenia</button>') +
       '</div>';
     function row(id,label,desc,on,locked){
-      return '<label class="consent-row' + (locked ? ' is-locked' : '') + '">' +
+      return '<label class="cmp-row' + (locked ? ' is-locked' : '') + '">' +
         '<span><b>' + label + '</b><small>' + desc + '</small></span>' +
         '<input type="checkbox" data-c="' + id + '"' + (on ? ' checked' : '') + (locked ? ' disabled' : '') + '>' +
-        '<i class="consent-sw"></i></label>';
+        '<i class="cmp-sw"></i></label>';
     }
-    el.querySelector(".consent-accept").addEventListener("click", function(){
+    el.querySelector(".cmp-accept").addEventListener("click", function(){
       save({necessary:true, analytics:true, marketing:true, ts:Date.now()}); close();
     });
-    el.querySelector(".consent-reject").addEventListener("click", function(){
+    el.querySelector(".cmp-reject").addEventListener("click", function(){
       save({necessary:true, analytics:false, marketing:false, ts:Date.now()}); close();
     });
-    var more = el.querySelector(".consent-more");
+    var more = el.querySelector(".cmp-more");
     if (more) more.addEventListener("click", function(){ open(true); });
-    var saveBtn = el.querySelector(".consent-save");
+    var saveBtn = el.querySelector(".cmp-save");
     if (saveBtn) saveBtn.addEventListener("click", function(){
       save({
         necessary: true,
