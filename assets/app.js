@@ -198,6 +198,20 @@
   if(pongs.length && !reduced) requestAnimationFrame(pongTick);
   else pongs.forEach(function(m){ loadPong(m); });
 
+  /* ===== cookie lišta ===== */
+  var cb=document.getElementById("cookiebar");
+  if(cb){
+    var seen=false;
+    try{ seen=localStorage.getItem("hp-cookies-ok")==="1"; }catch(e){}
+    if(!seen){
+      cb.hidden=false;
+      document.getElementById("cookieOk").addEventListener("click",function(){
+        try{ localStorage.setItem("hp-cookies-ok","1"); }catch(e){}
+        cb.hidden=true;
+      });
+    }
+  }
+
   /* ===== kontakt formular na podstranke ===== */
   var cf = document.querySelector(".cform");
   if(cf){
